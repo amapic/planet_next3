@@ -2270,7 +2270,7 @@
     overflow-x:hidden;
     overflow-wrap:break-word;
     --tw-bg-opacity:1;
-    background-color:rgba(var(--color-black),var(--tw-bg-opacity));
+    /* background-color:rgba(var(--color-black),var(--tw-bg-opacity)); */
     font-family:var(--font-body);
     font-size:var(--text-base);
     line-height:calc(var(--text-base)*1.5);

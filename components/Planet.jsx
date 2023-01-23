@@ -27,7 +27,6 @@ export default function Planet({ compteur, image, ...args }) {
   const [hoveredd, hover] = useState(false);
 
   useEffect(() => {
-    console.log("xxx");
     var timer = setTimeout(function () {
       if (hover) {
         hover(false);

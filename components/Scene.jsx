@@ -1,9 +1,6 @@
 /* eslint-disable */
 
 import React, { useState } from "react";
-import { useFrame } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
-import * as three from "three";
 
 
 import { useSpring, animated, config } from "@react-spring/three";

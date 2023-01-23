@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { Text } from "@react-three/drei";
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import React, { useRef } from "react";
 
-import { useLoader, useFrame, extend } from "@react-three/fiber";
+import {  useFrame} from "@react-three/fiber";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
-import roboto from "./Roboto_Regular.json";
+import roboto from "../public/Roboto_Regular.json";
 
 import * as THREE from "three";
 
@@ -13,9 +13,6 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
   const myMesh = useRef();
   const myMesh2 = useRef();
 
-  const [boxGeo, setBoxGeo] = useState([2, 2, 2]);
-  const [hovered, hover] = useState(false);
-  const [texto, setTexto] = useState(text);
 
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));
@@ -24,13 +21,12 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
   points.push(new THREE.Vector3(1, 0, 0));
   points.push(new THREE.Vector3(0, 0, 0));
 
-  var lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
 
   // colorMap.needsUpdate = true;
 
   useFrame(({ gl, scene, camera }) => {
-    if (hoveredd && myMesh.current) {
-      // myMesh.current.parent.lookAt(0, camera.position[1], 0);
+    if (hoveredd && myMesh2.current && myMesh.current ) {
+      myMesh.current.parent.lookAt(0, camera.position[1], 0);
     }
   }, 1);
 
@@ -40,7 +36,6 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
     <group>
       <mesh
         position={[0, 2, 0.01]}
-        // lookAt={[0, 0, 0]}
         scale={[4, 5, 2]}
         ref={myMesh}
         // onPointerOver={(x) => {
@@ -62,35 +57,31 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
         // }}
         // onPointerOut={() => hover(false)}
       >
-        <Text
+        {/* <Text
           scale={[1, 1, 1]}
           anchorX="center" // default
           anchorY="middle" // default
           color="white"
           ref={myMesh2}
           fillOpacity={hoveredd ? 1 : 0}
-          // onUpdate={(x) => {}}
           toneMapped={false}
+          transparent={hoveredd ? 0 : 1}
         >
           {text}
           {hoveredd ? "1" : "0"}
-        </Text>
+        </Text> */}
       </mesh>
+      
       <mesh
         position={[0, 2, 0]}
-        // ref={myMesh2}
-        // onUpdate={(x) => {}}
-        // fillOpacity={hovered ? 1 : 0}
-        // onPointerOver={() => hover(true)}
-        // onPointerOut={() => hover(false)}
+
         ref={myMesh2}
       >
         <planeGeometry geometry={[10, 10]} />
         <meshBasicMaterial
           color="red"
-          // map={colorMap}
           opacity={hoveredd ? 1 : 0}
-          transparent
+          transparent={hoveredd ? false : true}
         />
       </mesh>
     </group>

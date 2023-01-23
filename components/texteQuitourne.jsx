@@ -80,14 +80,10 @@ export default function TextteQuiTourne({ margin = 0.5 }) {
         onPointerEnter={(e) => {
           e.stopPropagation()
           setHover(true)
-          // You may optionally capture the target
-          // e.target.object.rotation
         }}
         onPointerOut={(e) => {
           e.stopPropagation()
           setHover(false)
-          // You may optionally capture the target
-          // e.target.object.rotation
         }}>
         hello world!
       </Text>

@@ -15,7 +15,7 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 extend({ TextGeometry });
 
-import roboto from "../components/Roboto_Regular.json";
+import roboto from "../public/Roboto_Regular.json";
 
 const font = new FontLoader().parse(roboto);
 
