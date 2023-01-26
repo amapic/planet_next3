@@ -37,13 +37,13 @@ export default function Planet({ compteur, image, ...args }) {
   const [sphereRef, sphereApi] = useSphere(() => ({
     type: "Dynamic",
     mass: 0,
-    position: [0, 0, 0],
+    position: [1, 0, 0],
   }));
 
   const [cardRef, cardApi] = useSphere(() => ({
     type: "Dynamic",
     mass: 0,
-    position: [0, 0, 0],
+    position: [1, 0, 0],
   }));
 
   useFrame(() => {
@@ -64,7 +64,7 @@ export default function Planet({ compteur, image, ...args }) {
       0,
       radius * Math.sin((sphereX * 2 * Math.PI) / image.periode)
     );
-  }, 2);
+  });
 
   const debouncedHandleMouseLeave = debounce(() => hover(false), 500)
 
@@ -85,7 +85,6 @@ export default function Planet({ compteur, image, ...args }) {
           debouncedHandleMouseLeave.cancel()
           hover(true);
 
-          console.log("ttt");
 
         }}
         onPointerOut={(x) => {

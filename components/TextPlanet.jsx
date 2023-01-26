@@ -26,9 +26,11 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
 
   useFrame(({ gl, scene, camera }) => {
     if (hoveredd && myMesh2.current && myMesh.current ) {
-      myMesh.current.parent.lookAt(0, camera.position[1], 0);
+      myMesh.current.parent.lookAt(0, camera.position.x, 0); // <-- should work when uncomment
+      // console.log(myMesh.current.parent.lookAt(0, camera.position[1], 0))
+      console.log(camera.position)
     }
-  }, 1);
+  });
 
   const font = new FontLoader().parse(roboto);
 
@@ -38,6 +40,7 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
         position={[0, 2, 0.01]}
         scale={[4, 5, 2]}
         ref={myMesh}
+        transparent={hoveredd ? false : true}
         // onPointerOver={(x) => {
         //   x.stopPropagation(); //not to have 2 elements hovered in the same time
         //   hover(true);
@@ -57,7 +60,7 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
         // }}
         // onPointerOut={() => hover(false)}
       >
-        {/* <Text
+        <Text
           scale={[1, 1, 1]}
           anchorX="center" // default
           anchorY="middle" // default
@@ -65,11 +68,10 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
           ref={myMesh2}
           fillOpacity={hoveredd ? 1 : 0}
           toneMapped={false}
-          transparent={hoveredd ? 0 : 1}
+          transparent={hoveredd ? false : true}
         >
           {text}
-          {hoveredd ? "1" : "0"}
-        </Text> */}
+        </Text>
       </mesh>
       
       <mesh

@@ -7,6 +7,7 @@ import {
   createPortal,
 } from "@react-three/fiber";
 
+// import { Hook, Console } from "console-feed";
 
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 
@@ -35,6 +36,8 @@ import {
 
 import { Debug, Physics, usePlane, useSphere } from "@react-three/cannon";
 import * as three from "three";
+
+// import * as Demo from "../components/demo.js";
 // import "./styles.css";
 import { useSpring, animated, config } from "@react-spring/three";
 
@@ -50,7 +53,6 @@ import { Effects, Stars } from "@react-three/drei";
 
 import Scene from "../components/Scene";
 import Header from "../components/Header";
-
 
 import FrameLimiter, { FPSLimiter } from "../components/FrameLimiter";
 
@@ -71,8 +73,10 @@ const App2 = () => {
   // });
 
 
-  const intensity = 1
-  const radius =  0.4
+
+
+  const intensity = 1;
+  const radius = 0.4;
   return (
     <>
       <div
@@ -83,12 +87,16 @@ const App2 = () => {
       >
         <Header />
         <PanelGauche />
-
+        {/* <div style={{ backgroundColor: "#242424" }}>
+          <Console logs={logs} variant="dark" />
+        </div> */}
         <Canvas
           concurrent="true"
-          style={{
-            // display: "none",
-          }}
+          style={
+            {
+              // display: "none",
+            }
+          }
           camera={{
             near: 0.1,
             far: 1000,
@@ -96,10 +104,12 @@ const App2 = () => {
             position: [4, 4, 4],
           }}
           onCreated={({ gl, camera }) => {
-            gl.setClearColor("#252934",0);
+            gl.setClearColor("#252934", 0);
             // 252934
             camera.lookAt(0, 0, 0);
-            camera.position.set(4, 4, 4);
+            // camera.position.set(4, 4, 4);
+
+            camera.position.set(12, 12, 12);
           }}
         >
           <FrameLimiter />
@@ -147,8 +157,6 @@ const App2 = () => {
                 <meshPhysicalMaterial attach="material" color={"white"} />
               </mesh>
             </Physics>
-
-          
           </Suspense>
         </Canvas>
       </div>
@@ -157,4 +165,3 @@ const App2 = () => {
 };
 
 export default App2;
-

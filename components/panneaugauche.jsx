@@ -1,12 +1,14 @@
+import { getMiddlewareRouteMatcher } from "next/dist/shared/lib/router/utils/middleware-route-matcher";
 import React, { useEffect, useState } from "react";
 
 export default function PanelGauche() {
   const [text, setText] = useState("");
-  const [fullText, setFullText] = useState(
-    "AAA AAAA fxgdfg"
-  );
+  const [fullText, setFullText] = useState("AAA AAAA fxgdfg");
   const [index, setIndex] = useState(0);
 
+  const [glitch, setGlitch] = useState(true);
+
+  //afficahge des lettres
   useEffect(() => {
     if (index < fullText.length) {
       setTimeout(() => {
@@ -15,6 +17,13 @@ export default function PanelGauche() {
       }, 200);
     }
   }, [index]);
+
+  //effect glitch aléatoire
+  useEffect(() => {
+    setTimeout(() => {
+      setGlitch(!glitch);
+    }, 1000 * Math.random());
+  }, [glitch]);
 
   return (
     <div
@@ -34,19 +43,21 @@ export default function PanelGauche() {
       }}
       className="fixed"
     >
-      <div id="glitchbody">
+      <div id="">
         <div className="glitch">
-          <div className="line">
-            {text}
-          </div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
-          <div className="line">{text}</div>
+          <div className={glitch ? "line" : ""}>{text}</div>
+          {glitch ? (
+            <>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+              <div className="line">{text}</div>
+            </>
+          ) : null}
         </div>
       </div>
     </div>

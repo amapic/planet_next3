@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -29,7 +29,7 @@ export default function Entete() {
   const root = useRef(null);
   const titre = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let ctx = gsap.context((self) => {
       
       // use any arbitrary string as a name; it'll be added to the Context object, so in this case you can call ctx.onClick() later...

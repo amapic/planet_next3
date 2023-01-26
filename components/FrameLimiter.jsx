@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect} from "react";
 
 export default function FrameLimiter({ limit = 60 }) {
   const { invalidate, clock, advance } = useThree();
