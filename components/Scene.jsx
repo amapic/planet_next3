@@ -65,7 +65,7 @@ const Soleil = ({ infoEtoile, aa, ...args }) => {
   );
 };
 
-import Data from "public/data.json";
+import Data from "public/premierTri.json";
 
 export default function Scene() {
   // const [pos, setPos] = useState([
@@ -75,35 +75,40 @@ export default function Scene() {
   // ]);
 
   // console.log(Data())
-
+  var dataSysteme = [];
+  var star_name = "!";
+  var dataPlanetes = [];
+  var dataPlanete = {};
   Data.forEach((item, i) => {
-    if (
-      item.radius != "" &&
-      item.semi_major_axis != "" &&
-      item.name != "" &&
-      item.star_name != "" &&
-      item.orbital_period != "" &&
-      item.star_radius != ""
-    ) {
-      if (
-        item.radius != "" &&
-        item.semi_major_axis != null &&
-        item.name != "" &&
-        item.star_name != "" &&
-        item.orbital_period != ""
-      ) {
-        console.log(
-          item.star_name,
-          item.name,
-          item.radius,
-          item.semi_major_axis,
-          item.orbital_period,
-          item.temp,
-          item.star_radius
-        );
-      }
+    // console.log(
+    //   item.star_name,
+    //   item.name,
+    //   item.radius,
+    //   item.semi_major_axis,
+    //   item.orbital_period,
+    //   item.temp,
+    //   item.star_radius
+    // );
+
+    if (star_name != item.star_name && star_name != "!") {
+      dataSysteme.push(dataPlanete);
+      dataPlanete = {};
     }
+
+    star_name = item.star_name;
+
+    dataPlanete.star_name = item.star_name;
+    dataPlanete.name = item.name;
+    dataPlanete.radius = item.radius;
+    dataPlanete.semi_major_axis = item.semi_major_axis;
+    dataPlanete.orbital_period = item.orbital_period;
+    dataPlanete.star_radius = item.star_radius;
+
+    dataPlanetes.push(dataPlanete);
+
   });
+
+  console.log(dataSysteme)
 
   // var infos
 
