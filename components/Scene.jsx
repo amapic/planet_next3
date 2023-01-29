@@ -74,7 +74,7 @@ export default function Scene() {
   //   [20 * Math.cos(Math.PI / 4), 0, -20 * Math.sin(Math.PI / 4)],
   // ]);
 
-  // console.log(Data())
+  // console.log(Data)
   var dataSysteme = [];
   var star_name = "!";
   var dataPlanetes = [];
@@ -91,7 +91,7 @@ export default function Scene() {
     // );
 
     if (star_name != item.star_name && star_name != "!") {
-      dataSysteme.push(dataPlanete);
+      dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
       dataPlanete = {};
     }
 
@@ -101,35 +101,25 @@ export default function Scene() {
     dataPlanete.name = item.name;
     dataPlanete.radius = item.radius;
     dataPlanete.semi_major_axis = item.semi_major_axis;
-    dataPlanete.orbital_period = item.orbital_period;
+    dataPlanete.periode = item.orbital_period;
     dataPlanete.star_radius = item.star_radius;
+    dataPlanete.colorMap = "/earth.jpg";
+    dataPlanete.text = item.name;
 
-    dataPlanetes.push(dataPlanete);
+    dataPlanetes.push(JSON.parse(JSON.stringify(dataPlanete)));
 
+    // rotation: 700,
+    //     position: [-1, 1, 1],
+    //     radius: 2,
+    //     periode: 60,
+    //     text: "B",
+    //     colorMap: "/earth.jpg",
+    //     internalRadius: 0.2,
   });
 
-  console.log(dataSysteme)
+  dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
 
-  // var infos
-
-  // useRef(()=>{
-  //   Data[0].name
-
-  //   Data.forEach((item,i)=>{
-
-  //     let aarray
-  //     let ddict
-  //     ddict.radius
-  //     aarray.append(ddict)
-  //     infos.append(aarray)
-  //   })
-
-  //   // for (let pas = 0; pas < 5; pas++) {
-
-  //   // }
-
-  //   // infos.
-  // },[])
+  // console.log(dataSysteme[1]);
 
   const [pos, setPos] = useState([
     [-20, 0, 20],
@@ -238,49 +228,41 @@ export default function Scene() {
 
   // var theta = useRef(0.5);
   var cumulDecalage = useRef(0);
-  useFrame(() => {
-    if (droite) {
-      let theta = 0.5;
-      cumulDecalage.current += theta;
-      setPos([
-        [pos[0][0] + theta, 0, pos[0][2] - theta],
-        [pos[1][0] + theta, 0, pos[1][2] - theta],
-        [pos[2][0] + theta, 0, pos[2][2] - theta],
-      ]);
-      if (cumulDecalage.current >= 20) {
-        cumulDecalage.current = 0;
-        setDroite(false);
-        console.log("droite false");
-      }
-    }
+  // useFrame(() => {
+  //   if (droite) {
+  //     let theta = 0.5;
+  //     cumulDecalage.current += theta;
+  //     setPos([
+  //       [pos[0][0] + theta, 0, pos[0][2] - theta],
+  //       [pos[1][0] + theta, 0, pos[1][2] - theta],
+  //       [pos[2][0] + theta, 0, pos[2][2] - theta],
+  //     ]);
+  //     if (cumulDecalage.current >= 20) {
+  //       cumulDecalage.current = 0;
+  //       setDroite(false);
+  //       console.log("droite false");
+  //     }
+  //   }
 
-    if (gauche) {
-      let theta = -0.5;
+  //   if (gauche) {
+  //     let theta = -0.5;
 
-      cumulDecalage.current += theta;
-      setPos([
-        [pos[0][0] + theta, 0, pos[0][2] - theta],
-        [pos[1][0] + theta, 0, pos[1][2] - theta],
-        [pos[2][0] + theta, 0, pos[2][2] - theta],
-      ]);
+  //     cumulDecalage.current += theta;
+  //     setPos([
+  //       [pos[0][0] + theta, 0, pos[0][2] - theta],
+  //       [pos[1][0] + theta, 0, pos[1][2] - theta],
+  //       [pos[2][0] + theta, 0, pos[2][2] - theta],
+  //     ]);
 
-      if (cumulDecalage.current <= -20) {
-        cumulDecalage.current = 0;
-        setGauche(false);
-        console.log("droite false");
-      }
-    }
-  });
+  //     if (cumulDecalage.current <= -20) {
+  //       cumulDecalage.current = 0;
+  //       setGauche(false);
+  //       console.log("droite false");
+  //     }
+  //   }
+  // });
 
-  function setPosSysteme() {
-    if (nSystemevisible == 0) {
-      return [
-        [20 * Math.cos(Math.PI / 4), 0, -20 * Math.sin(Math.PI / 4)],
-        [0, 0, 0],
-        [20 * Math.cos(Math.PI / 4), 0, -20 * Math.sin(Math.PI / 4)],
-      ];
-    }
-  }
+
 
   return (
     <>
@@ -312,10 +294,10 @@ export default function Scene() {
           }}
         ></div>
       </Html>
-      {infos.map((info, i) => (
-        <>
-          <Systeme key={i} info={info} position={pos[i]} />
-        </>
+      {dataSysteme.slice(0, 1).map((systeme, i) => (
+      <>
+        <Systeme key={i} info={dataSysteme[i]} position={pos[i]} />
+      </>
       ))}
     </>
   );
@@ -334,44 +316,61 @@ function Systeme({ info, position }) {
     setCompteur(compteur + 1);
   }
 
-  // useEffect(() => {
-  //   // console.log("ref position",refGroup.current.position.x)
-  // });
+  // console.log(info)
 
-  // useFrame(() => {
-  //   if (false) {
-  //     setPos(pos + 0.05);
-  //   }
-  //   // if (sysVisible && refGroup.current){
-  //   //   refGroup.current.position.set(
-  //   //     [refGroup.current.position.x-0.001,0,0]
-  //   //   )
-  //   // }
-  //   // else{
-  //   //   refGroup.current.position.set(
-  //   //     [0,refGroup.current.position.x+0.01,0]
-  //   //   )
-  //   // }
+  // const result = Object.entries(info.radius).reduce((a, b) => a[1] > b[1] ? a : b)[0]
 
-  // })
+  var semi_major_axismax = 0;
+  var semi_major_axismin = 0;
+
+  var periodemax = 0;
+  var periodemin = 0;
+
+  info.forEach((x, i) => {
+
+    if (i==0){
+      semi_major_axismax = x.semi_major_axis
+      semi_major_axismin = x.semi_major_axis
+      periodemax = x.periode
+      periodemin = x.periode
+    }
+    if (x.semi_major_axis > semi_major_axismax) {
+      semi_major_axismax = x.semi_major_axis;
+    }
+
+    if (x.semi_major_axis < semi_major_axismin) {
+      semi_major_axismin = x.semi_major_axis;
+    }
+
+    if (x.periode > periodemax) {
+      periodemax = x.periode;
+    }
+
+    if (x.periode < periodemin) {
+      periodemin = x.periode;
+    }
+  });
+
+  //8 = valeur max , 1 valeur min
+  info.forEach((x, i) => {
+    x.semi_major_axis = 1+ (x.semi_major_axis - semi_major_axismin) * (8 - 1) / (semi_major_axismax - semi_major_axismin);
+  });
+
+  info.forEach((x, i) => {
+    x.periode = 20 + (x.periode  - periodemin)* (100 - 20) / (periodemax - periodemin);
+    // x.periode=50
+  });
+
+  console.log("rr", info);
 
   return (
-    <group
-      position={position}
-      // ref={refGroup}
-
-      // onMouseEnter={() => {
-      //   // x.set(0);
-      //   console.log("rrr")
-      //   setSysVisible(false)
-      // }}
-    >
+    <group position={position}>
       <gridHelper />
       <axesHelper />
       <pointLight intensity={1.0} position={[0, 0, 0]} />
       <Soleil infoEtoile={infoEtoile} aa={AA} position={[0, 0, 0]} />
 
-      {infoEtoile.map((image, i) => (
+      {info.map((image, i) => (
         <>
           <Planet compteur={compteur} key={i} image={image} />
         </>

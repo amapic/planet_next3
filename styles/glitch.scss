@@ -10,12 +10,34 @@
   
   opacity:1;
   background-size: 10px 10px;
+  position:relative;
   // height: 100vh;
   overflow: hidden;
   // display: flex;
   // font-family: "Barlow", sans-serif;
   // justify-content: center;
   // align-items: center;
+}
+
+#glitchbody2 {
+background: repeating-linear-gradient(
+      0deg,
+      #0E0D0E 25%,
+      #0E0D0E 50%,
+      #171819 50%,
+      #171819 75%
+    );
+  background-size: 10px 10px;
+  padding:1%;
+  // height: 100vh;
+  overflow: hidden;
+  display: flex;
+  // font-family: 'Barlow', sans-serif;
+  // justify-content: center;
+  // align-items: center;
+  z-index: 1;
+  height: 100%;
+  position:relative;
 }
 
 .glitch {

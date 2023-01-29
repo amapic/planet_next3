@@ -26,38 +26,53 @@ export default function PanelGauche() {
   }, [glitch]);
 
   return (
+    // l'image dez fond a un ratio de 5/7
     <div
       style={{
         top: "15vh",
         left: "5%",
-        zIndex: "10000",
-        height: "80%",
+        // height: "70%",
         width: "20%",
-        backgroundImage: "url('aa2.svg')",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain",
-        resize: "both",
-        fontFamily: "scifi",
-        padding: "3%",
-        lineHeight: "2.5",
+        aspectRatio:"5/7",
+        zIndex:"10000"
       }}
       className="fixed"
     >
-      <div id="">
-        <div className="glitch">
-          <div className={glitch ? "line" : ""}>{text}</div>
-          {glitch ? (
-            <>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-              <div className="line">{text}</div>
-            </>
-          ) : null}
+      <div
+        style={{
+          backgroundImage: "url('aa2.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "contain",
+          backgroundColor:"black",
+          // backgroundSize: "auto auto",
+          // backgroundSize: "100% 100%",
+          // resize: "both",
+          fontFamily: "scifi",
+          
+          lineHeight: "2.5",
+          padding: "25px",
+          // zIndex: "10000",
+          position:"absolute",
+          width:"100%",
+          height:"100%"
+        }}
+      >
+        <div id="glitchbody2">
+          <div className="glitch">
+            <div className={glitch ? "line" : ""}>{text}</div>
+            {glitch ? (
+              <>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+                <div className="line">{text}</div>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

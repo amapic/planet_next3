@@ -22,7 +22,7 @@ export default function Planet({ compteur, image, ...args }) {
   // colorMap.needsUpdate = true;
 
   const [sphereX, setSphereX] = useState(0);
-  const [radius, setRadius] = useState(0);
+  const [semi_major_axis, setSemi_major_axis] = useState(0);
 
   const [hoveredd, hover] = useState(false);
 
@@ -47,22 +47,22 @@ export default function Planet({ compteur, image, ...args }) {
   }));
 
   useFrame(() => {
-    if (image.radius > radius) {
-      setRadius(radius + 0.05);
+    if (image.semi_major_axis > semi_major_axis) {
+      setSemi_major_axis(semi_major_axis + 0.05);
     }
 
     setSphereX((sphereX) => sphereX + 0.05);
     sphereApi.position.set(
-      radius * Math.cos((sphereX * 2 * Math.PI) / image.periode),
+      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.periode),
       0,
-      radius * Math.sin((sphereX * 2 * Math.PI) / image.periode)
+      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.periode)
     );
 
     sphereApi.rotation.set(0, sphereX, 0);
     cardApi.position.set(
-      radius * Math.cos((sphereX * 2 * Math.PI) / image.periode),
+      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.periode),
       0,
-      radius * Math.sin((sphereX * 2 * Math.PI) / image.periode)
+      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.periode)
     );
   });
 
@@ -91,9 +91,10 @@ export default function Planet({ compteur, image, ...args }) {
           debouncedHandleMouseLeave();
         }}
       >
-        <sphereGeometry args={[image.internalRadius, 32, 32]} />
+        <sphereGeometry args={[image.radius, 32, 32]} />
         <meshStandardMaterial
           map={colorMap}
+          // color="red"
 
           // toneMapped={false}
         />

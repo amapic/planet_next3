@@ -72,9 +72,6 @@ const App2 = () => {
   //   radius: { value: 0.4, min: 0, max: 1, step: 0.01 },
   // });
 
-
-
-
   const intensity = 1;
   const radius = 0.4;
   return (
@@ -122,7 +119,7 @@ const App2 = () => {
             />
           </Effects>
 
-          {/* <Stats /> */}
+          <Stats />
           <OrbitControls />
           <Stars
             radius={100}
