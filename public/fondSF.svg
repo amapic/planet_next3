@@ -6,7 +6,7 @@
    fill="none"
    version="1.1"
    id="svg14"
-   sodipodi:docname="aa2.svg"
+   sodipodi:docname="fondSF.svg"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -71,6 +71,8 @@
     <path
        d="m 981.40123,1385.4216 -119.40559,-0.573 -9.62338,-9.3426 -297.54058,0.6663 -23.74568,23.7377 c -0.375,0.38 -0.884,0.59 -1.414,0.59 H 257.828 c -0.53,0 -1.039,-0.21 -1.414,-0.59 l -19.828,-19.82 c -0.375,-0.38 -0.884,-0.59 -1.414,-0.59 H 19 c -1.1046,0 -2,-0.9 -2,-2 V 576.828 c 0,-0.53 0.2107,-1.039 0.5858,-1.414 L 40.4142,552.586 C 40.7893,552.211 41,551.702 41,551.172 V 350.328 c 0,-0.53 -0.2107,-1.039 -0.5858,-1.414 L 17.5858,326.086 C 17.2107,325.711 17,325.202 17,324.672 V 54.3284 c 0,-0.5304 0.195873,-1.054537 0.5858,-1.4142 L 59.859378,13.921679 979.66124,12.043969 Z"
        stroke="#63f2f1"
+       fill="#000"
+       fill-opacity="0"
        stroke-width="2"
        id="path6"
        sodipodi:nodetypes="cccccssccssssccssccsssccc"

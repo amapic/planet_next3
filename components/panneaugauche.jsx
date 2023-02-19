@@ -31,30 +31,26 @@ export default function PanelGauche() {
       style={{
         top: "15vh",
         left: "5%",
-        // height: "70%",
         width: "20%",
         aspectRatio:"5/7",
-        zIndex:"10000"
+        zIndex:"5"
       }}
       className="fixed"
     >
       <div
         style={{
-          backgroundImage: "url('aa2.svg')",
+          backgroundImage: "url('fondSF.svg')",
           backgroundRepeat: "no-repeat",
           backgroundSize: "contain",
           backgroundColor:"black",
-          // backgroundSize: "auto auto",
-          // backgroundSize: "100% 100%",
-          // resize: "both",
           fontFamily: "scifi",
-          
           lineHeight: "2.5",
           padding: "25px",
-          // zIndex: "10000",
           position:"absolute",
           width:"100%",
-          height:"100%"
+          height:"100%",
+          zIndex:1000,
+          backgroundClip: "border-box"
         }}
       >
         <div id="glitchbody2">

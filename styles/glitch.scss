@@ -28,7 +28,7 @@ background: repeating-linear-gradient(
       #171819 75%
     );
   background-size: 10px 10px;
-  padding:1%;
+  background-clip: padding-box;
   // height: 100vh;
   overflow: hidden;
   display: flex;

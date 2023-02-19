@@ -14,6 +14,7 @@ import { animated } from "@react-spring/three";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 
 import Planet from "./Planet";
+import Echelle from "./Echelleeee";
 
 import { Html } from "@react-three/drei";
 
@@ -228,39 +229,46 @@ export default function Scene() {
 
   // var theta = useRef(0.5);
   var cumulDecalage = useRef(0);
-  // useFrame(() => {
-  //   if (droite) {
-  //     let theta = 0.5;
-  //     cumulDecalage.current += theta;
-  //     setPos([
-  //       [pos[0][0] + theta, 0, pos[0][2] - theta],
-  //       [pos[1][0] + theta, 0, pos[1][2] - theta],
-  //       [pos[2][0] + theta, 0, pos[2][2] - theta],
-  //     ]);
-  //     if (cumulDecalage.current >= 20) {
-  //       cumulDecalage.current = 0;
-  //       setDroite(false);
-  //       console.log("droite false");
-  //     }
-  //   }
+  var gachette = useRef(false);
+  useFrame(() => {
+    if (droite && (gachette || cumulDecalage.current!=0)) {
 
-  //   if (gauche) {
-  //     let theta = -0.5;
+      gachette.current = false;
+      let theta = 0.5;
+      cumulDecalage.current += theta;
 
-  //     cumulDecalage.current += theta;
-  //     setPos([
-  //       [pos[0][0] + theta, 0, pos[0][2] - theta],
-  //       [pos[1][0] + theta, 0, pos[1][2] - theta],
-  //       [pos[2][0] + theta, 0, pos[2][2] - theta],
-  //     ]);
+      setPos([
+        [pos[0][0] + theta, 0, pos[0][2] - theta],
+        [pos[1][0] + theta, 0, pos[1][2] - theta],
+        [pos[2][0] + theta, 0, pos[2][2] - theta],
+      ]);
+      if (cumulDecalage.current >= 20) {
+        cumulDecalage.current = 0;
+        setDroite(false);
+        console.log("droite false");
+      }
+    }
 
-  //     if (cumulDecalage.current <= -20) {
-  //       cumulDecalage.current = 0;
-  //       setGauche(false);
-  //       console.log("droite false");
-  //     }
-  //   }
-  // });
+    if (gauche && (gachette || cumulDecalage.current!=0)) {
+      let theta = -0.5;
+
+      cumulDecalage.current += theta;
+      gachette.current = false;
+
+      setPos([
+        [pos[0][0] + theta, 0, pos[0][2] - theta],
+        [pos[1][0] + theta, 0, pos[1][2] - theta],
+        [pos[2][0] + theta, 0, pos[2][2] - theta],
+      ]);
+
+      if (cumulDecalage.current <= -20 ) {
+        cumulDecalage.current = 0;
+        
+        setGauche(false);
+        console.log("droite false");
+      }
+    }
+  });
 
 
 
@@ -269,6 +277,7 @@ export default function Scene() {
       <Html>
         <div
           onClick={() => {
+            gachette.current = true;
             setDroite(!droite);
           }}
           style={{
@@ -282,6 +291,7 @@ export default function Scene() {
         ></div>
         <div
           onClick={() => {
+            gachette.current = true;
             setGauche(!gauche);
           }}
           style={{
@@ -294,7 +304,7 @@ export default function Scene() {
           }}
         ></div>
       </Html>
-      {dataSysteme.slice(0, 1).map((systeme, i) => (
+      {dataSysteme.slice(0, 2).map((systeme, i) => (
       <>
         <Systeme key={i} info={dataSysteme[i]} position={pos[i]} />
       </>
@@ -322,6 +332,8 @@ function Systeme({ info, position }) {
 
   var semi_major_axismax = 0;
   var semi_major_axismin = 0;
+
+  var maxSemi_major_axis=0;
 
   var periodemax = 0;
   var periodemin = 0;
@@ -353,21 +365,24 @@ function Systeme({ info, position }) {
 
   //8 = valeur max , 1 valeur min
   info.forEach((x, i) => {
+    x.semi_major_axis_orig=x.semi_major_axis
     x.semi_major_axis = 1+ (x.semi_major_axis - semi_major_axismin) * (8 - 1) / (semi_major_axismax - semi_major_axismin);
+    maxSemi_major_axis = maxSemi_major_axis > x.semi_major_axis_orig ? maxSemi_major_axis : x.semi_major_axis_orig
   });
 
   info.forEach((x, i) => {
     x.periode = 20 + (x.periode  - periodemin)* (100 - 20) / (periodemax - periodemin);
-    // x.periode=50
   });
 
-  console.log("rr", info);
+  // console.log("dgh",maxSemi_major_axis)
+  // console.log("sgs",info)
 
   return (
     <group position={position}>
       <gridHelper />
       <axesHelper />
       <pointLight intensity={1.0} position={[0, 0, 0]} />
+      <Echelle maxSemi_major_axis={maxSemi_major_axis} name={info[0].star_name}/>
       <Soleil infoEtoile={infoEtoile} aa={AA} position={[0, 0, 0]} />
 
       {info.map((image, i) => (
