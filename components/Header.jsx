@@ -1,32 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValue,
-} from "framer-motion";
 
 import gsap from "gsap";
 
 export default function Entete() {
-  const [hover, setHover] = useState();
+  // const [hover, setHover] = useState();
 
   // const [texte, setTexte] = useState("rr");
 
-  const { scrollYProgress } = useScroll();
+  // const { scrollYProgress } = useScroll();
 
-  function kk(value) {
-    return value;
-  }
+  // function kk(value) {
+  //   return value;
+  // }
 
-  const x = useSpring(1, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  // const x = useSpring(1, {
+  //   stiffness: 100,
+  //   damping: 30,
+  //   restDelta: 0.001,
+  // });
 
-  const y = useTransform(x, kk);
+  // const y = useTransform(x, kk);
 
   const root = useRef(null);
   const titre = useRef(null);
@@ -34,7 +27,7 @@ export default function Entete() {
 
   // useEffect(() => {
   //   let ctx = gsap.context((self) => {
-      
+
   //     // use any arbitrary string as a name; it'll be added to the Context object, so in this case you can call ctx.onClick() later...
   //     self.add("hover", (e) => {
   //       console.log("mouse enter")
@@ -61,35 +54,35 @@ export default function Entete() {
 
   //   }, root);
 
-    
-
-    
-
   //   titre.current.addEventListener("mouseenter", (e) => ctx.hover(e));
   //   titre.current.addEventListener("mouseleave", (e) => ctx.hoverout(e));
 
   //   // return () => ctx.revert();
   // }, []);
 
-  const onLeave = ({ currentTarget }) => {
-    // gsap.to(currentTarget, { backgroundColor: "#28a92b", scale: 1 });
-    gsap.to(currentTarget, {
-      // clipPath:"polygon(50% 0, 50% 0,100% 50%, 50% 100%, 50% 100%,0 50%);"
-      clipPath:"polygon(0 0, 0 0,0 0%, 0% 0%, 0% 0%,0 0%);"
-    })// <-- gets added to the Context!
-  };
-
   const onEnter = ({ currentTarget }) => {
+    // alert("in");
     // gsap.to(currentTarget, { backgroundColor: "#e77614", scale: 1.2 });
     gsap.to(currentTarget, {
-      clipPath:"polygon(25% 0, 75% 0%, 100% 50%,75% 100%, 25% 100%,  0 50%)"
-    })
+      clipPath: "polygon(25% 0%, 75% 0%, 100% 50%,75% 100%, 25% 100%, 0% 50%)",
+      // backgroundColor: "blue",
+    });
+  };
+
+  const onLeave = ({ currentTarget }) => {
+    // gsap.to(currentTarget, { backgroundColor: "#28a92b", scale: 1 });
+    // alert("out");
+    // alert(currentTarget);
+    // console.log(currentTarget);
+    gsap.to(currentTarget, {
+      clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
+      // clipPath: "polygon(0% 0%, 0% 0%,0% 0%, 0% 0%, 0% 0%,0% 0%)",
+    }); // <-- gets added to the Context!
   };
 
   // const onClick = useCallback(event => {
   //   console.log('Clicked Item : ', event.currentTarget);
   // }, [item]);
-
 
   return (
     <header
@@ -108,7 +101,6 @@ export default function Entete() {
       //   x.set(0);
       // }}
 
-   
       ref={root}
     >
       <div
@@ -118,23 +110,19 @@ export default function Entete() {
           fontFamily: "scifi",
           color: "red",
           zIndex: "9",
-          backgroundColor: "black",
+          backgroundColor: "white",
           fontSize: "2vw",
           letterSpacing: "5rem",
-          // clipPath: "polygon(0 0, 0 0,0 0, 0 0, 0 0,0 0);"
-          clipPath:"polygon(50% 0, 50% 0,100% 50%, 50% 100%, 50% 100%,0 50%);"
-          
+          clipPath:
+            "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
         }}
         className="align-middle h-full text-center align-middle py-2"
         ref={titre}
         onMouseEnter={onEnter}
-      
         onMouseLeave={onLeave}
       >
         Title
       </div>
-
- 
     </header>
   );
 }

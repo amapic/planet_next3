@@ -2,7 +2,7 @@
 import { Text } from "@react-three/drei";
 import React, { useRef } from "react";
 
-import {  useFrame} from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 import roboto from "../public/Roboto_Regular.json";
@@ -13,7 +13,6 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
   const myMesh = useRef();
   const myMesh2 = useRef();
 
-
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));
   points.push(new THREE.Vector3(0, 1, 0));
@@ -21,14 +20,13 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
   points.push(new THREE.Vector3(1, 0, 0));
   points.push(new THREE.Vector3(0, 0, 0));
 
-
   // colorMap.needsUpdate = true;
 
   useFrame(({ gl, scene, camera }) => {
-    if (hoveredd && myMesh2.current && myMesh.current ) {
+    if (hoveredd && myMesh2.current && myMesh.current) {
       myMesh.current.parent.lookAt(camera.position); // <-- should work when uncomment
       // console.log(myMesh.current.parent.lookAt(0, camera.position[1], 0))
-      console.log(camera.position)
+      console.log(camera.position);
     }
   });
 
@@ -40,7 +38,7 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
         position={[0, 2, 0.01]}
         scale={[4, 5, 2]}
         ref={myMesh}
-        transparent={hoveredd ? false : true}
+        // transparent={hoveredd ? false : true}
         // onPointerOver={(x) => {
         //   x.stopPropagation(); //not to have 2 elements hovered in the same time
         //   hover(true);
@@ -73,17 +71,13 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
           {text}
         </Text>
       </mesh>
-      
-      <mesh
-        position={[0, 2, 0]}
 
-        ref={myMesh2}
-      >
+      <mesh position={[0, 2, 0]} ref={myMesh2}>
         <planeGeometry geometry={[10, 10]} />
         <meshBasicMaterial
           color="red"
-          opacity={hoveredd ? 1 : 0}
           transparent={hoveredd ? false : true}
+          opacity={hoveredd ? 1 : 0}
         />
       </mesh>
     </group>

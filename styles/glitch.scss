@@ -6,11 +6,11 @@
   //   #171819 50%,
   //   #171819 75%
   // );
-  background-color:rgba(0,0,0,0);
-  
-  opacity:1;
+  background-color: rgba(0, 0, 0, 0);
+
+  opacity: 1;
   background-size: 10px 10px;
-  position:relative;
+  position: relative;
   // height: 100vh;
   overflow: hidden;
   // display: flex;
@@ -20,13 +20,13 @@
 }
 
 #glitchbody2 {
-background: repeating-linear-gradient(
-      0deg,
-      #0E0D0E 25%,
-      #0E0D0E 50%,
-      #171819 50%,
-      #171819 75%
-    );
+  background: repeating-linear-gradient(
+    0deg,
+    #0e0d0e 25%,
+    #0e0d0e 50%,
+    #171819 50%,
+    #171819 75%
+  );
   background-size: 10px 10px;
   background-clip: padding-box;
   // height: 100vh;
@@ -37,7 +37,7 @@ background: repeating-linear-gradient(
   // align-items: center;
   z-index: 1;
   height: 100%;
-  position:relative;
+  position: relative;
 }
 
 .glitch {
@@ -46,8 +46,14 @@ background: repeating-linear-gradient(
   // font-size: 0.1vw;
 }
 
+.glitch div {
+  font-size: 3vh;
+  line-height: 4vh;
+}
+
 .line {
   color: #fff;
+
   &:not(:first-child) {
     position: absolute;
     top: 0;

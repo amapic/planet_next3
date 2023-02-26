@@ -1,14 +1,13 @@
-import React, {
-  Suspense,
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-} from "react";
+import React, { Suspense, useRef, useEffect, useState, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 
-import {RenderTexture, OrbitControls, PerspectiveCamera, Text} from "@react-three/drei";
+import {
+  RenderTexture,
+  OrbitControls,
+  PerspectiveCamera,
+  Text,
+} from "@react-three/drei";
 import * as THREE from "three";
 
 import { Effects, Stars } from "@react-three/drei";
@@ -68,7 +67,14 @@ export default function BoxBlendGeometry({
     geometry.current.translate(0, 0, -depth / 2);
     geometry.current.computeVertexNormals();
   }, [shape]);
-  return <extrudeGeometry ref={geometry} args={[shape, config]} />;
+  return (
+    <extrudeGeometry
+      ref={geometry}
+      args={[shape, config]}
+      color={[127, 0, 127]}
+      toneMapped={false}
+    />
+  );
 }
 
 export function Fform({ width = 1, height = 2, radius = 0.2, depth = 0.1 }) {
@@ -141,6 +147,7 @@ export function Line() {
   const width = 4;
   const height = 4;
   const ref = useRef();
+  const ref2 = useRef();
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));
   points.push(new THREE.Vector3(0, 0, width));
@@ -148,29 +155,50 @@ export function Line() {
   points.push(new THREE.Vector3(0, height, 0));
   points.push(new THREE.Vector3(0, 0, 0));
 
-  useFrame(() => {
+  useEffect(() => {
     if (ref.current) {
       ref.current.geometry.setFromPoints(points);
     }
   });
+
+  // const { camera, size } = useThree();
+
+  // useFrame(({ gl, scene, camera }) => {
+  //   // Spin mesh to the inverse of the default cameras matrix
+  //   // var matrix = new THREE.Matrix4();
+  //   // var target = new THREE.Matrix4();
+  //   // matrix.copy(camera.matrix).invert();
+  //   // console.log(camera.quaternion);
+  //   // mesh.current.quaternion.setFromRotationMatrix(matrix)
+  //   if (ref2.current) {
+  //     // ref2.current.lookAt(camera.position);
+  //     // target.copy(ref2.current.position).add(targetDirection);
+  //     // ref2.current.setFromRotationMatrix(camera.quaternion);
+  //   }
+  // });
+
   return (
-    <line ref={ref}>
-      <bufferGeometry />
-      <lineBasicMaterial color={[127, 255, 0]} toneMapped={false} />
-    </line>
+    <mesh ref={ref2}>
+      <line ref={ref}>
+        <bufferGeometry />
+        <lineBasicMaterial color={[127, 0, 127]} toneMapped={false} />
+      </line>
+    </mesh>
   );
 }
 
 export function Prout() {
-
-  const textRef = useRef()
-  useFrame((state) => (textRef.current.position.x = Math.sin(state.clock.elapsedTime) * 2))
+  const textRef = useRef();
+  useFrame(
+    (state) =>
+      (textRef.current.position.x = Math.sin(state.clock.elapsedTime) * 2)
+  );
   return (
-    <mesh position={[-2,-2,-2]}>
-      <boxGeometry args={[2,2,2]}/>
+    <mesh position={[-2, -2, -2]}>
+      <boxGeometry args={[2, 2, 2]} />
       <meshStandardMaterial>
         <RenderTexture attach="map" anisotropy={16}>
-        {/* <Effects disableGamma> */}
+          {/* <Effects disableGamma> */}
           {/* threshhold has to be 1, so nothing at all gets bloom by default */}
 
           {/* <SSAO /> */}
@@ -181,7 +209,7 @@ export function Prout() {
           /> */}
           {/* <unrealBloomPass threshold={1} strength={intensity} radius={radius} /> */}
           {/* <glitchPass /> */}
-        {/* </Effects> */}
+          {/* </Effects> */}
           <PerspectiveCamera
             makeDefault
             manual
@@ -199,4 +227,22 @@ export function Prout() {
       </meshStandardMaterial>
     </mesh>
   );
+}
+
+export function Spprite({ width = 1, height = 2, radius = 0.2, depth = 0.1 }) {
+  const ref = useRef();
+  const points = [];
+  points.push(new THREE.Vector3(0, 0, 0));
+  points.push(new THREE.Vector3(0, 0, width));
+  points.push(new THREE.Vector3(0, height, width));
+  points.push(new THREE.Vector3(0, height, 0));
+  points.push(new THREE.Vector3(0, 0, 0));
+
+  useFrame(() => {
+    if (ref.current) {
+      ref.current.setFromPoints(points);
+    }
+  });
+
+  return <bufferGeometry ref={ref} />;
 }
