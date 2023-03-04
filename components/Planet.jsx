@@ -12,14 +12,12 @@ import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import CardPlanet from "./TextPlanet";
 
-import { debounce } from "lodash"
+import { debounce } from "lodash";
 
 export default function Planet({ compteur, image, ...args }) {
   const cube = useRef();
 
   const colorMap = useLoader(TextureLoader, image.colorMap);
-
-  // colorMap.needsUpdate = true;
 
   const [sphereX, setSphereX] = useState(0);
   const [semi_major_axis, setSemi_major_axis] = useState(0);
@@ -66,7 +64,7 @@ export default function Planet({ compteur, image, ...args }) {
     );
   });
 
-  const debouncedHandleMouseLeave = debounce(() => hover(false), 500)
+  const debouncedHandleMouseLeave = debounce(() => hover(false), 500);
 
   return (
     <>
@@ -82,10 +80,8 @@ export default function Planet({ compteur, image, ...args }) {
         ref={sphereRef}
         {...args}
         onPointerOver={() => {
-          debouncedHandleMouseLeave.cancel()
+          debouncedHandleMouseLeave.cancel();
           hover(true);
-
-
         }}
         onPointerOut={(x) => {
           debouncedHandleMouseLeave();
@@ -96,7 +92,7 @@ export default function Planet({ compteur, image, ...args }) {
           map={colorMap}
           // color="red"
 
-          // toneMapped={false}
+          toneMapped={false}
         />
       </animated.mesh>
     </>
