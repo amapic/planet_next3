@@ -13,16 +13,32 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import CardPlanet from "./TextPlanet";
 
 import { debounce } from "lodash";
+import { usePlanetStore } from "../pages/index";
 
 export default function Planet({ compteur, image, ...args }) {
   const cube = useRef();
 
-  const colorMap = useLoader(TextureLoader, image.colorMap);
+  // console.log(image.colorMap);
+
+  const { planet, updateData } = usePlanetStore((state) => state);
+
+  const colorMap = [
+    useLoader(TextureLoader, "/earth.jpg"),
+    useLoader(TextureLoader, "/mars.jpg"),
+    useLoader(TextureLoader, "/mercure.jpg"),
+    // useLoader(TextureLoader, "/earth.jpg"),
+  ];
 
   const [sphereX, setSphereX] = useState(0);
-  const [semi_major_axis, setSemi_major_axis] = useState(0);
+  const [semi_major_axis, setSemi_major_axis] = useState(image.semi_major_axis);
 
   const [hoveredd, hover] = useState(false);
+
+  const clickedd = useRef(false);
+
+  if (planet) {
+    clickedd.current = planet.name == image.name ? true : false;
+  }
 
   useEffect(() => {
     var timer = setTimeout(function () {
@@ -45,9 +61,9 @@ export default function Planet({ compteur, image, ...args }) {
   }));
 
   useFrame(() => {
-    if (image.semi_major_axis > semi_major_axis) {
-      setSemi_major_axis(semi_major_axis + 0.05);
-    }
+    // if (image.semi_major_axis > semi_major_axis) {
+    //   setSemi_major_axis(semi_major_axis + 0.05);
+    // }
 
     setSphereX((sphereX) => sphereX + 0.05);
     sphereApi.position.set(
@@ -72,6 +88,7 @@ export default function Planet({ compteur, image, ...args }) {
         <CardPlanet
           {...args}
           hoveredd={hoveredd}
+          clickedd={clickedd.current}
           text={image.text}
           image={image}
         />
@@ -79,6 +96,10 @@ export default function Planet({ compteur, image, ...args }) {
       <animated.mesh
         ref={sphereRef}
         {...args}
+        onClick={() => {
+          updateData(image);
+          clickedd.current = true;
+        }}
         onPointerOver={() => {
           debouncedHandleMouseLeave.cancel();
           hover(true);
@@ -88,11 +109,11 @@ export default function Planet({ compteur, image, ...args }) {
         }}
       >
         <sphereGeometry args={[image.radius, 32, 32]} />
-        <meshStandardMaterial
-          map={colorMap}
-          // color="red"
-
-          toneMapped={false}
+        <meshBasicMaterial
+          map={colorMap[image.colorMap]}
+          // toneMapped={false}
+          // color={[255, 128, 0]}
+          // emissiveIntensity={0.1}
         />
       </animated.mesh>
     </>

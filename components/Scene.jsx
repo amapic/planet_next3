@@ -1,6 +1,4 @@
-/* eslint-disable */
-
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 
 import { animated } from "@react-spring/three";
 
@@ -12,12 +10,27 @@ import { Html } from "@react-three/drei";
 
 import Systeme from "./Systeme";
 
+import Data from "public/data/premierTri.json";
 
-// import Data from "./data/data";
+import { AppContext, useDeplacementStore } from "../pages/index";
 
-import Data from "public/premierTri.json";
+import { usePlanetStore } from "../pages/index";
+
+// export const usePlanetStore = create((set) => ({
+//   planet: { name: "rr", semi_major: "2", radius: "3", mass: "5" },
+//   semi_major: "",
+//   mass: "",
+//   radius: "",
+//   discovered: "",
+//   updateData: (planet) =>
+//     set((state) => ({
+//       planet: planet,
+//     })),
+// }));
 
 export default function Scene() {
+  const { planet, updateData } = usePlanetStore((state) => state);
+
   // const [pos, setPos] = useState([
   //   [-20 * Math.cos(Math.PI / 4), 0, 20 * Math.sin(Math.PI / 4)],
   //   [0, 0, 0],
@@ -32,18 +45,14 @@ export default function Scene() {
   var dataPlanete = {};
 
   const [dataLoaded, setDataLoaded] = useState(false);
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
   useEffect(() => {
     Data.forEach((item, i) => {
-      // console.log(
-      //   item.star_name,
-      //   item.name,
-      //   item.radius,
-      //   item.semi_major_axis,
-      //   item.orbital_period,
-      //   item.temp,
-      //   item.star_radius
-      // );
-
       if (star_name != item.star_name && star_name != "!") {
         dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
         dataPlanete = {};
@@ -54,19 +63,32 @@ export default function Scene() {
 
       dataPlanete.star_name = item.star_name;
       dataPlanete.name = item.name;
-      dataPlanete.radius = item.radius;
-      dataPlanete.semi_major_axis = item.semi_major_axis;
-      dataPlanete.periode = item.orbital_period;
-      dataPlanete.star_radius = item.star_radius;
+      dataPlanete.mass = Math.round(item.mass * 100) / 100;
+      dataPlanete.radius = Math.round(item.radius * 100) / 100;
+      dataPlanete.semi_major_axis =
+        Math.round(item.semi_major_axis * 100) / 100;
+      dataPlanete.period = Math.round(item.orbital_period * 100) / 100;
+      dataPlanete.star_radius = Math.round(item.star_radius * 100) / 100;
       dataPlanete.colorMap = "/earth.jpg";
       dataPlanete.text = item.name;
+      dataPlanete.discovered = item.discovered;
+      // dataPlanete.star_mass = item.name;
 
       dataPlanetes.push(JSON.parse(JSON.stringify(dataPlanete)));
     });
 
     dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
+
+    // dataSysteme.map((x)=>{x.uid:getRandomInt(1,1000)})
+
+    dataSysteme.map((systeme, i) => {
+      systeme.uid = getRandomInt(1, 1000);
+    });
+
+    updateData(dataSysteme[0][0]);
+
     refDataSystemes.current = dataSysteme;
-    console.log("useeffect", refDataSystemes.current);
+
     setDataLoaded(true);
   }, []);
 
@@ -85,9 +107,9 @@ export default function Scene() {
 
   const [pos2, setPos2] = useState([-20, 0, 20]);
 
-  const [droite, setDroite] = useState(false);
-  const [gauche, setGauche] = useState(false);
-  const [nActive, setnActive] = useState(2);
+  // const [droite, setDroite] = useState(false);
+  // const [gauche, setGauche] = useState(false);
+  // const [nActive, setnActive] = useState(2);
 
   const infos = [
     [
@@ -180,64 +202,94 @@ export default function Scene() {
   ];
 
   var cumulDecalage = useRef(0);
-  var gachette = useRef(false);
+  // var gachette = useRef(false);
 
-  function shift(arr) {
-    return arr.map((_, i, a) => a[(i + a.length + 1) % a.length]);
-  }
+  // function shift(arr) {
+  //   return arr.map((_, i, a) => a[(i + a.length + 1) % a.length]);
+  // }
 
-  function shiftBackward(arr) {
-    return arr.map((_, i, a) => a[(i + a.length - 1) % a.length]);
-  }
+  // function shiftBackward(arr) {
+  //   return arr.map((_, i, a) => a[(i + a.length - 1) % a.length]);
+  // }
 
-  useFrame(() => {
-    if (droite && (gachette || cumulDecalage.current != 0)) {
-      gachette.current = false;
-      let theta = 0.5;
-      cumulDecalage.current += theta;
+  // const bears = useBearStore((state) => state.nActive);
 
-      setPos([
-        [pos[0][0] + theta, 0, pos[0][2] - theta],
-        [pos[1][0] + theta, 0, pos[1][2] - theta],
-        [pos[2][0] + theta, 0, pos[2][2] - theta],
-        [pos[3][0] + theta, 0, pos[3][2] - theta],
-        [pos[4][0] + theta, 0, pos[4][2] - theta],
-        [pos[5][0] + theta, 0, pos[5][2] - theta],
-      ]);
-      if (cumulDecalage.current >= 20) {
-        cumulDecalage.current = 0;
+  const {
+    nActive,
+    droite,
+    gauche,
+    gachette,
+    onClickgauche,
+    updateGachette,
+    stopDroite,
+    stopGauche,
+    nActiveUp,
+    nActiveDown,
+  } = useDeplacementStore((state) => state);
 
-        //
-        console.log("droite", refDataSystemes.current);
+  var progress = null;
 
-        setDroite(false);
-        // refDataSystemes.current = shift(refDataSystemes.current);
+  useFrame((state, delta) => {
+    // if (!progress) progress = delta;
+    // var progress = time - startTime;
+    // const paw = useBearStore.getState().nActive;
+    // console.log(delta);
+
+    // if (progress < 0.1) {
+    //   progress = progress + delta;
+    // }
+    // if (progress > 0.1) {
+    if (1 == 1) {
+      // progress = 0;
+      // console.log(bears);
+      if (droite && (gachette || cumulDecalage.current != 0)) {
+        // console.log("nActive2", nActive2);
+        // gachette.current = false;
+        updateGachette();
+        let theta = 0.5;
+        cumulDecalage.current += theta;
+
+        setPos([
+          [pos[0][0] + theta, 0, pos[0][2] - theta],
+          [pos[1][0] + theta, 0, pos[1][2] - theta],
+          [pos[2][0] + theta, 0, pos[2][2] - theta],
+          [pos[3][0] + theta, 0, pos[3][2] - theta],
+          [pos[4][0] + theta, 0, pos[4][2] - theta],
+          [pos[5][0] + theta, 0, pos[5][2] - theta],
+        ]);
+        if (cumulDecalage.current >= 20) {
+          cumulDecalage.current = 0;
+
+          //
+          // console.log("droite", refDataSystemes.current);
+
+          // setDroite(false);
+          stopDroite();
+          nActiveDown();
+          // refDataSystemes.current = shift(refDataSystemes.current);
+        }
       }
-    }
 
-    if (gauche && (gachette || cumulDecalage.current != 0)) {
-      let theta = -0.5;
+      if (gauche && (gachette || cumulDecalage.current != 0)) {
+        let theta = -0.5;
 
-      cumulDecalage.current += theta;
-      gachette.current = false;
+        cumulDecalage.current += theta;
+        updateGachette();
 
-      setPos([
-        [pos[0][0] + theta, 0, pos[0][2] - theta],
-        [pos[1][0] + theta, 0, pos[1][2] - theta],
-        [pos[2][0] + theta, 0, pos[2][2] - theta],
-        [pos[3][0] + theta, 0, pos[3][2] - theta],
-        [pos[4][0] + theta, 0, pos[4][2] - theta],
-        [pos[5][0] + theta, 0, pos[5][2] - theta],
-      ]);
+        setPos([
+          [pos[0][0] + theta, 0, pos[0][2] - theta],
+          [pos[1][0] + theta, 0, pos[1][2] - theta],
+          [pos[2][0] + theta, 0, pos[2][2] - theta],
+          [pos[3][0] + theta, 0, pos[3][2] - theta],
+          [pos[4][0] + theta, 0, pos[4][2] - theta],
+          [pos[5][0] + theta, 0, pos[5][2] - theta],
+        ]);
 
-      if (cumulDecalage.current <= -20) {
-        cumulDecalage.current = 0;
-
-        //
-        console.log("gauche", refDataSystemes);
-
-        setGauche(false);
-        // refDataSystemes.current = shiftBackward(refDataSystemes.current);
+        if (cumulDecalage.current <= -20) {
+          cumulDecalage.current = 0;
+          stopGauche();
+          nActiveUp();
+        }
       }
     }
   });
@@ -245,7 +297,7 @@ export default function Scene() {
   // console.log("data", dataLoaded, refDataSystemes);
   return (
     <>
-      <Html>
+      {/* <Html>
         <div
           onClick={() => {
             if (nActive != 0) {
@@ -280,12 +332,12 @@ export default function Scene() {
             backgroundColor: "blue",
           }}
         ></div>
-      </Html>
+      </Html> */}
       {dataLoaded
         ? refDataSystemes.current.map((systeme, i) => (
             <>
               <Systeme
-                key={i}
+                key={systeme.uid}
                 i={i}
                 gachette={gachette}
                 info={systeme}

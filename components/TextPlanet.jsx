@@ -9,7 +9,13 @@ import roboto from "../public/Roboto_Regular.json";
 
 import * as THREE from "three";
 
-export default function CardPlanet({ text, position, hoveredd, ...args }) {
+export default function CardPlanet({
+  text,
+  position,
+  hoveredd,
+  clickedd,
+  ...args
+}) {
   const myMesh = useRef();
   const myMesh2 = useRef();
 
@@ -26,7 +32,7 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
     if (hoveredd && myMesh2.current && myMesh.current) {
       myMesh.current.parent.lookAt(camera.position); // <-- should work when uncomment
       // console.log(myMesh.current.parent.lookAt(0, camera.position[1], 0))
-      console.log(camera.position);
+      // console.log(camera.position);
     }
   });
 
@@ -34,7 +40,7 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
 
   return (
     <group>
-      <mesh
+      {/* <mesh
         position={[0, 2, 0.01]}
         scale={[4, 5, 2]}
         ref={myMesh}
@@ -70,14 +76,24 @@ export default function CardPlanet({ text, position, hoveredd, ...args }) {
         >
           {text}
         </Text>
-      </mesh>
+      </mesh> */}
 
-      <mesh position={[0, 2, 0]} ref={myMesh2}>
+      {/* <mesh position={[0, 2, 0]} ref={myMesh2}>
         <planeGeometry geometry={[10, 10]} />
         <meshBasicMaterial
           color="red"
           transparent={hoveredd ? false : true}
           opacity={hoveredd ? 1 : 0}
+        />
+      </mesh> */}
+      <mesh position={[0, 2, 0]} ref={myMesh2}>
+        <sphereGeometry args={[0.1, 32, 32]} />
+        <meshBasicMaterial
+          color={[0, 0, 255]}
+          emissiveIntensity={1}
+          transparent={clickedd ? false : true}
+          opacity={clickedd ? 1 : 0}
+          toneMapped={false}
         />
       </mesh>
     </group>
