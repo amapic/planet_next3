@@ -42,6 +42,8 @@ const Soleil = ({ infoEtoile, aa, ...args }) => {
       internalRadius: 0.3,
     },
   ];
+
+  // console.log("rr", infoEtoile);
   return (
     <>
       <animated.mesh
@@ -51,7 +53,7 @@ const Soleil = ({ infoEtoile, aa, ...args }) => {
           aa(IMAGES);
         }}
       >
-        <sphereGeometry args={[0.5, 32, 32]} />
+        <sphereGeometry args={[0.5 * infoEtoile, 32, 32]} />
         <meshBasicMaterial
           emissiveIntensity={4}
           color={[255, 255, 255]}
@@ -121,9 +123,14 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
   info.forEach((x, i) => {
     x.periode =
       20 + ((x.periode - periodemin) * (100 - 20)) / (periodemax - periodemin);
+    x.colorMap = Math.floor(Math.random() * 3); //nombre de map possible
   });
 
-  return nActive == i || nActive == i + 1 || nActive == i - 1 ? (
+  return nActive == i ||
+    nActive == i + 1 ||
+    nActive == i + 2 ||
+    nActive == i - 1 ||
+    nActive == i - 2 ? (
     // return 1 == 1 ? (
     <group position={position}>
       <gridHelper />
@@ -135,7 +142,7 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
         name={info[0].star_name}
       /> */}
       {/* ) : null} */}
-      <Soleil infoEtoile={infoEtoile} aa={AA} position={[0, 0, 0]} />
+      <Soleil infoEtoile={info[0].star_radius} aa={AA} position={[0, 0, 0]} />
 
       {info.map((image, i) => (
         <>

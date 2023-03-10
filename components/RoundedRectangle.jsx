@@ -1,6 +1,15 @@
-import React, { Suspense, useRef, useEffect, useState, useMemo } from "react";
+import React, {
+  Suspense,
+  useRef,
+  useEffect,
+  useState,
+  useMemo,
+  useContext,
+} from "react";
 
 import { useFrame } from "@react-three/fiber";
+
+import { Container, BridgeContainer, BridgeContext } from "../pages/index";
 
 import {
   RenderTexture,
@@ -13,67 +22,92 @@ import * as THREE from "three";
 import { Effects, Stars } from "@react-three/drei";
 
 export default function BoxBlendGeometry({
-  width = 1,
-  height = 2,
+  width = 3,
+  height = 4,
   radius = 0.2,
   depth = 0.1,
+  position,
 }) {
   const geometry = useRef();
+
+  // const ref = useRef();
+
+  const [hovered, setHovered] = useState(false);
+
   const shape = useMemo(() => {
     const s = new THREE.Shape();
     s.moveTo(-width / 2, -height / 2 + radius);
     s.lineTo(-width / 2, height / 2 - radius);
-    s.absarc(
-      -width / 2 + radius,
-      height / 2 - radius,
-      radius,
-      1 * Math.PI,
-      0.5 * Math.PI,
-      true
-    );
-    s.lineTo(width / 2 - radius, height / 2);
-    s.absarc(
-      width / 2 - radius,
-      height / 2 - radius,
-      radius,
-      0.5 * Math.PI,
-      0 * Math.PI,
-      true
-    );
-    s.lineTo(width / 2, -height / 2 + radius);
-    s.absarc(
-      width / 2 - radius,
-      -height / 2 + radius,
-      radius,
-      2 * Math.PI,
-      1.5 * Math.PI,
-      true
-    );
+    // s.absarc(
+    //   -width / 2 + radius,
+    //   height / 2 - radius,
+    //   radius,
+    //   1 * Math.PI,
+    //   0.5 * Math.PI,
+    //   true
+    // );
+    s.lineTo(width / 2 - radius, 0);
+    // s.absarc(
+    //   width / 2 - radius,
+    //   height / 2 - radius,
+    //   radius,
+    //   0.5 * Math.PI,
+    //   0 * Math.PI,
+    //   true
+    // );
+    s.moveTo(-width / 2, -height / 2 + radius);
+
+    // s.absarc(
+    //   width / 2 - radius,
+    //   -height / 2 + radius,
+    //   radius,
+    //   2 * Math.PI,
+    //   1.5 * Math.PI,
+    //   true
+    // );
     s.lineTo(-width / 2 + radius, -height / 2);
-    s.absarc(
-      -width / 2 + radius,
-      -height / 2 + radius,
-      radius,
-      1.5 * Math.PI,
-      1 * Math.PI,
-      true
-    );
-    return new THREE.Shape(s.getPoints(10));
+
+    // s.absarc(
+    //   -width / 2 + radius,
+    //   -height / 2 + radius,
+    //   radius,
+    //   1.5 * Math.PI,
+    //   1 * Math.PI,
+    //   true
+    // );
+    return new THREE.Shape(s.getPoints(8));
   }, [width, height, radius, depth]);
 
   const config = useMemo(() => ({ depth, bevelEnabled: false }), [depth]);
+
   useEffect(() => {
-    // useLayoutEffect(() => {
-    geometry.current.translate(0, 0, -depth / 2);
+    geometry.current.translate(-depth / 2, 0, 0);
     geometry.current.computeVertexNormals();
   }, [shape]);
+
+  // const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? "pointer" : "auto";
+  }, [hovered]);
+
   return (
-    <extrudeGeometry
-      ref={geometry}
-      args={[shape, config]}
-      color={[127, 0, 127]}
-      toneMapped={false}
-    />
+    <>
+      <mesh
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+        position={position}
+        rotation={[0, Math.PI / 2, 0]}
+      >
+        <extrudeGeometry
+          ref={geometry}
+          args={[shape, config]}
+          color={hovered ? [127, 0, 127] : [127, 127, 127]}
+          toneMapped={false}
+        />
+        <meshPhongMaterial />
+      </mesh>
+    </>
   );
 }
 
@@ -143,7 +177,7 @@ export function Fform({ width = 1, height = 2, radius = 0.2, depth = 0.1 }) {
   return <lineGeometry ref={geometry} />;
 }
 
-export function Line() {
+export function ArrayButton({ position }) {
   const width = 4;
   const height = 4;
   const ref = useRef();
@@ -155,6 +189,7 @@ export function Line() {
   points.push(new THREE.Vector3(0, height, 0));
   points.push(new THREE.Vector3(0, 0, 0));
 
+  // var bb = new THREE.Vector3(1, 1, 1);
   useEffect(() => {
     if (ref.current) {
       ref.current.geometry.setFromPoints(points);
@@ -165,20 +200,30 @@ export function Line() {
 
   // useFrame(({ gl, scene, camera }) => {
   //   // Spin mesh to the inverse of the default cameras matrix
-  //   // var matrix = new THREE.Matrix4();
-  //   // var target = new THREE.Matrix4();
-  //   // matrix.copy(camera.matrix).invert();
-  //   // console.log(camera.quaternion);
-  //   // mesh.current.quaternion.setFromRotationMatrix(matrix)
   //   if (ref2.current) {
-  //     // ref2.current.lookAt(camera.position);
-  //     // target.copy(ref2.current.position).add(targetDirection);
-  //     // ref2.current.setFromRotationMatrix(camera.quaternion);
+  //     var aa = new THREE.Vector3(1, 1, 1);
+  //     // aa.add(camera.position);
+  //     // console.log(camera.position);
+  //     // ref2.current.lookAt(aa);
+
+  //     // function updatePositionForCamera(camera) {
+  //     // fixed distance from camera to the object
+  //     var dist = 10;
+  //     var cwd = new THREE.Vector3();
+
+  //     camera.getWorldDirection(cwd);
+
+  //     // cwd.multiplyScalar(dist);
+  //     cwd.add(camera.position);
+
+  //     // ref.current.position.set(cwd.x - 2, cwd.y - 2, cwd.z - 2);
+  //     // ref.current.setRotationFromQuaternion(camera.quaternion);
+  //     // }
   //   }
   // });
 
   return (
-    <mesh ref={ref2}>
+    <mesh ref={ref2} position={position}>
       <line ref={ref}>
         <bufferGeometry />
         <lineBasicMaterial color={[127, 0, 127]} toneMapped={false} />
