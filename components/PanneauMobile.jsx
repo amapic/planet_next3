@@ -57,18 +57,18 @@ export default function PanelGauche() {
   //afficahge des lettres
 
   useEffect(() => {
-    // if (typeof window !== "undefined") {
-    //   gsap.registerPlugin(Draggable);
-    //   Draggable.create("#panneau", {
-    //     type: "x,y",
-    //     edgeResistance: 0.65,
-    //     // bounds: "#container",
-    //     inertia: true,
-    //     onPress: function () {
-    //       // console.log("clicked");
-    //     },
-    //   });
-    // }
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(Draggable);
+      Draggable.create("#panneau", {
+        type: "x,y",
+        edgeResistance: 0.65,
+        // bounds: "#container",
+        inertia: true,
+        onPress: function () {
+          // console.log("clicked");
+        },
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -269,7 +269,7 @@ export function PanelPlanete() {
     // l'image dez fond a un ratio de 5/7
     <>
       {planet == null ? null : (
-        <Panel>
+        // <Panel>
           <div
             style={{
               bottom: "5vh",
@@ -369,7 +369,7 @@ export function PanelPlanete() {
               </div>
             </div>
           </div>
-        </Panel>
+        
       )}
     </>
   );

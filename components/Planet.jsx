@@ -67,16 +67,16 @@ export default function Planet({ compteur, image, ...args }) {
 
     setSphereX((sphereX) => sphereX + 0.05);
     sphereApi.position.set(
-      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.periode),
+      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.period),
       0,
-      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.periode)
+      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.period)
     );
 
     sphereApi.rotation.set(0, sphereX, 0);
     cardApi.position.set(
-      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.periode),
+      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.period),
       0,
-      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.periode)
+      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.period)
     );
   });
 

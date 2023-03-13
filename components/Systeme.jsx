@@ -68,7 +68,9 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
   const [infoEtoile, setInfoEtoile] = useState(info);
   const [compteur, setCompteur] = useState(0);
 
-  // console.log("rrgt", nActive);
+  console.log("rrgt", nActive);
+
+  console.log("rrgtsfg", i);
 
   function AA(x) {
     setInfoEtoile(x);
@@ -142,7 +144,7 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
         name={info[0].star_name}
       /> */}
       {/* ) : null} */}
-      <Soleil infoEtoile={info[0].star_radius} aa={AA} position={[0, 0, 0]} />
+      {/* <Soleil infoEtoile={info[0].star_radius} aa={AA} position={[0, 0, 0]} /> */}
 
       {info.map((image, i) => (
         <>
