@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Planet from "./Planet";
-import Echelle from "./Echelleeee";
+// import Echelle from "./Echelleeee";
 // import {
 //   motion,
 //   useScroll,
@@ -43,7 +43,6 @@ const Soleil = ({ infoEtoile, aa, ...args }) => {
     },
   ];
 
-  // console.log("rr", infoEtoile);
   return (
     <>
       <animated.mesh
@@ -64,11 +63,16 @@ const Soleil = ({ infoEtoile, aa, ...args }) => {
   );
 };
 
-export default function Systeme({ info, position, nActive, i, gachette }) {
+export default function Systeme({
+  info,
+  position,
+  nActive,
+  i,
+  gachette,
+  Mmap,
+}) {
   const [infoEtoile, setInfoEtoile] = useState(info);
   const [compteur, setCompteur] = useState(0);
-
-  // console.log("rrgt", nActive);
 
   function AA(x) {
     setInfoEtoile(x);
@@ -87,8 +91,8 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
     if (i == 0) {
       semi_major_axismax = x.semi_major_axis;
       semi_major_axismin = x.semi_major_axis;
-      periodemax = x.periode;
-      periodemin = x.periode;
+      periodemax = x.period;
+      periodemin = x.period;
     }
     if (x.semi_major_axis > semi_major_axismax) {
       semi_major_axismax = x.semi_major_axis;
@@ -98,12 +102,12 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
       semi_major_axismin = x.semi_major_axis;
     }
 
-    if (x.periode > periodemax) {
-      periodemax = x.periode;
+    if (x.period > periodemax) {
+      periodemax = x.period;
     }
 
-    if (x.periode < periodemin) {
-      periodemin = x.periode;
+    if (x.period < periodemin) {
+      periodemin = x.period;
     }
   });
 
@@ -121,9 +125,9 @@ export default function Systeme({ info, position, nActive, i, gachette }) {
   });
 
   info.forEach((x, i) => {
-    x.periode =
-      20 + ((x.periode - periodemin) * (100 - 20)) / (periodemax - periodemin);
-    x.colorMap = Math.floor(Math.random() * 3); //nombre de map possible
+    x.period =
+      20 + ((x.period - periodemin) * (100 - 20)) / (periodemax - periodemin);
+    x.colorMap = 0;
   });
 
   return nActive == i ||

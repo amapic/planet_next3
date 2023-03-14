@@ -16,6 +16,9 @@ import { AppContext, useDeplacementStore } from "../pages/index";
 
 import { usePlanetStore } from "../pages/index";
 
+import { useLoader } from "@react-three/fiber";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
+
 // export const usePlanetStore = create((set) => ({
 //   planet: { name: "rr", semi_major: "2", radius: "3", mass: "5" },
 //   semi_major: "",
@@ -36,6 +39,8 @@ export default function Scene() {
   //   [0, 0, 0],
   //   [20 * Math.cos(Math.PI / 4), 0, -20 * Math.sin(Math.PI / 4)],
   // ]);
+
+  const Mmap = useLoader(TextureLoader, "/earth.jpg");
 
   // console.log(Data)
   var dataSysteme = [];
@@ -101,9 +106,13 @@ export default function Scene() {
     [60, 0, -60],
   ]);
 
+  console.log("pos00", pos[0][0]);
+
   const s1 = useRef();
   const s2 = useRef();
   const s3 = useRef();
+
+  const posInit = useRef(0);
 
   const [pos2, setPos2] = useState([-20, 0, 20]);
 
@@ -111,108 +120,7 @@ export default function Scene() {
   // const [gauche, setGauche] = useState(false);
   // const [nActive, setnActive] = useState(2);
 
-  const infos = [
-    [
-      {
-        rotation: 900,
-        position: [-2, 1, 1],
-        radius: 1,
-        periode: 50,
-        text: "A",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.1,
-      },
-      {
-        rotation: 700,
-        position: [-1, 1, 1],
-        radius: 2,
-        periode: 60,
-        text: "B",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.2,
-      },
-      {
-        rotation: 600,
-        position: [-0, 1, 1],
-        radius: 3,
-        periode: 80,
-        text: "C",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.3,
-      },
-    ],
-    [
-      {
-        rotation: 900,
-        position: [-2, 1, 1],
-        radius: 1,
-        periode: 50,
-        text: "A",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.1,
-      },
-      {
-        rotation: 700,
-        position: [-1, 1, 1],
-        radius: 2,
-        periode: 60,
-        text: "B",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.2,
-      },
-      {
-        rotation: 600,
-        position: [-0, 1, 1],
-        radius: 3,
-        periode: 80,
-        text: "C",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.3,
-      },
-    ],
-    [
-      {
-        rotation: 900,
-        position: [-2, 1, 1],
-        radius: 1,
-        periode: 50,
-        text: "A",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.1,
-      },
-      {
-        rotation: 700,
-        position: [-1, 1, 1],
-        radius: 2,
-        periode: 60,
-        text: "B",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.2,
-      },
-      {
-        rotation: 600,
-        position: [-0, 1, 1],
-        radius: 3,
-        periode: 80,
-        text: "C",
-        colorMap: "/earth.jpg",
-        internalRadius: 0.3,
-      },
-    ],
-  ];
-
   var cumulDecalage = useRef(0);
-  // var gachette = useRef(false);
-
-  // function shift(arr) {
-  //   return arr.map((_, i, a) => a[(i + a.length + 1) % a.length]);
-  // }
-
-  // function shiftBackward(arr) {
-  //   return arr.map((_, i, a) => a[(i + a.length - 1) % a.length]);
-  // }
-
-  // const bears = useBearStore((state) => state.nActive);
 
   const {
     nActive,
@@ -230,67 +138,85 @@ export default function Scene() {
   var progress = null;
 
   useFrame((state, delta) => {
+    //0.048399999998509885
     // if (!progress) progress = delta;
-    // var progress = time - startTime;
+    // console.log("progress", progress);
+    progress = progress + delta;
+    console.log("diff", Math.abs(posInit.current - pos[0][0]));
     // const paw = useBearStore.getState().nActive;
-    // console.log(delta);
+    // if (1 == 1) {
+    // if (progress > 1) {
+    progress = 0;
+    // console.log("progress", progress);
+    // }
 
     // if (progress < 0.1) {
     //   progress = progress + delta;
     // }
     // if (progress > 0.1) {
-    if (1 == 1) {
-      // progress = 0;
-      // console.log(bears);
-      if (droite && (gachette || cumulDecalage.current != 0)) {
-        // console.log("nActive2", nActive2);
-        // gachette.current = false;
+    // if (1 == 1) {
+    // progress = 0;
+    // console.log("posinit", posInit.current);
+    // console.log("pos00", pos[0][0]);
+    if (droite && (gachette || cumulDecalage.current != 0)) {
+      // console.log("nActive2", nActive2);
+      // gachette.current = false;
+
+      let theta = 0.5;
+      posInit.current = posInit.current == 0 ? pos[0][0] : posInit.current;
+      cumulDecalage.current += theta;
+
+      setPos([
+        [pos[0][0] + theta, 0, pos[0][2] - theta],
+        [pos[1][0] + theta, 0, pos[1][2] - theta],
+        [pos[2][0] + theta, 0, pos[2][2] - theta],
+        [pos[3][0] + theta, 0, pos[3][2] - theta],
+        [pos[4][0] + theta, 0, pos[4][2] - theta],
+        [pos[5][0] + theta, 0, pos[5][2] - theta],
+      ]);
+
+      if (Math.abs(posInit.current - pos[0][0]) >= 20) {
         updateGachette();
-        let theta = 0.5;
-        cumulDecalage.current += theta;
+        console.log("cumul", cumulDecalage.current);
+        cumulDecalage.current = 0;
+        posInit.current = 0;
 
-        setPos([
-          [pos[0][0] + theta, 0, pos[0][2] - theta],
-          [pos[1][0] + theta, 0, pos[1][2] - theta],
-          [pos[2][0] + theta, 0, pos[2][2] - theta],
-          [pos[3][0] + theta, 0, pos[3][2] - theta],
-          [pos[4][0] + theta, 0, pos[4][2] - theta],
-          [pos[5][0] + theta, 0, pos[5][2] - theta],
-        ]);
-        if (cumulDecalage.current >= 20) {
-          cumulDecalage.current = 0;
+        //
+        // console.log("cumul", cumulDecalage.current);
 
-          //
-          // console.log("droite", refDataSystemes.current);
-
-          // setDroite(false);
-          stopDroite();
-          nActiveDown();
-          // refDataSystemes.current = shift(refDataSystemes.current);
-        }
+        // setDroite(false);
+        stopDroite();
+        nActiveDown();
+        // refDataSystemes.current = shift(refDataSystemes.current);
       }
+    }
 
-      if (gauche && (gachette || cumulDecalage.current != 0)) {
-        let theta = -0.5;
+    if (gauche && (gachette || cumulDecalage.current != 0)) {
+      let theta = -0.5;
+      posInit.current = posInit.current == 0 ? pos[0][0] : posInit.current;
 
-        cumulDecalage.current += theta;
+      cumulDecalage.current += theta;
+
+      setPos([
+        [pos[0][0] + theta, 0, pos[0][2] - theta],
+        [pos[1][0] + theta, 0, pos[1][2] - theta],
+        [pos[2][0] + theta, 0, pos[2][2] - theta],
+        [pos[3][0] + theta, 0, pos[3][2] - theta],
+        [pos[4][0] + theta, 0, pos[4][2] - theta],
+        [pos[5][0] + theta, 0, pos[5][2] - theta],
+      ]);
+
+      // if (pos[0][0] <= -40 * nActive && pos[0][0] >= -40 * nActive) {
+
+      if (Math.abs(posInit.current - pos[0][0]) >= 20) {
         updateGachette();
-
-        setPos([
-          [pos[0][0] + theta, 0, pos[0][2] - theta],
-          [pos[1][0] + theta, 0, pos[1][2] - theta],
-          [pos[2][0] + theta, 0, pos[2][2] - theta],
-          [pos[3][0] + theta, 0, pos[3][2] - theta],
-          [pos[4][0] + theta, 0, pos[4][2] - theta],
-          [pos[5][0] + theta, 0, pos[5][2] - theta],
-        ]);
-
-        if (cumulDecalage.current <= -20) {
-          cumulDecalage.current = 0;
-          stopGauche();
-          nActiveUp();
-        }
+        console.log("cumul", cumulDecalage.current);
+        cumulDecalage.current = 0;
+        posInit.current = 0;
+        stopGauche();
+        nActiveUp();
       }
+      // }
     }
   });
 
@@ -343,6 +269,7 @@ export default function Scene() {
                 info={systeme}
                 position={pos[i]}
                 nActive={nActive}
+                Mmap={Mmap}
               />
             </>
           ))

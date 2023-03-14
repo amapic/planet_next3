@@ -10,37 +10,50 @@ import { animated } from "@react-spring/three";
 
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+
 import CardPlanet from "./TextPlanet";
 
 import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
 
+const colorMap = [
+  useLoader(TextureLoader, "/earth.jpg"),
+  useLoader(TextureLoader, "/mars.jpg"),
+  useLoader(TextureLoader, "/mercure.jpg"),
+  // useLoader(TextureLoader, "/earth.jpg"),
+];
+
 export default function Planet({ compteur, image, ...args }) {
   const cube = useRef();
 
-  // console.log(image.colorMap);
-
   const { planet, updateData } = usePlanetStore((state) => state);
 
-  const colorMap = [
-    useLoader(TextureLoader, "/earth.jpg"),
-    useLoader(TextureLoader, "/mars.jpg"),
-    useLoader(TextureLoader, "/mercure.jpg"),
-    // useLoader(TextureLoader, "/earth.jpg"),
-  ];
+  // if (image.star_name == "K2-138 b") {
+  //   console.log(image.semi_major_axis);
+  // }
 
   const [sphereX, setSphereX] = useState(0);
   const [semi_major_axis, setSemi_major_axis] = useState(image.semi_major_axis);
+
+  // console.log(semi_major_axis);
 
   const [hoveredd, hover] = useState(false);
 
   const clickedd = useRef(false);
 
   if (planet) {
-    clickedd.current = planet.name == image.name ? true : false;
+    if (planet.name == image.name) {
+      clickedd.current = true;
+    } else {
+      clickedd.current = false;
+    }
+
+    // console.log("e", planet.name);
+    // console.log("sdfg", image.name);
   }
 
   useEffect(() => {
+    // setSemi_major_axis(image.semi_major_axis);
     var timer = setTimeout(function () {
       if (hover) {
         hover(false);
@@ -61,22 +74,22 @@ export default function Planet({ compteur, image, ...args }) {
   }));
 
   useFrame(() => {
-    // if (image.semi_major_axis > semi_major_axis) {
-    //   setSemi_major_axis(semi_major_axis + 0.05);
-    // }
+    if (image.semi_major_axis > semi_major_axis) {
+      setSemi_major_axis(semi_major_axis + 0.05);
+    }
 
     setSphereX((sphereX) => sphereX + 0.05);
     sphereApi.position.set(
-      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.periode),
+      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.period),
       0,
-      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.periode)
+      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.period)
     );
 
     sphereApi.rotation.set(0, sphereX, 0);
     cardApi.position.set(
-      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.periode),
+      semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.period),
       0,
-      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.periode)
+      semi_major_axis * Math.sin((sphereX * 2 * Math.PI) / image.period)
     );
   });
 
@@ -97,8 +110,9 @@ export default function Planet({ compteur, image, ...args }) {
         ref={sphereRef}
         {...args}
         onClick={() => {
-          updateData(image);
+          console.log("qd");
           clickedd.current = true;
+          updateData(image);
         }}
         onPointerOver={() => {
           debouncedHandleMouseLeave.cancel();
@@ -110,7 +124,8 @@ export default function Planet({ compteur, image, ...args }) {
       >
         <sphereGeometry args={[image.radius, 32, 32]} />
         <meshBasicMaterial
-          map={colorMap[image.colorMap]}
+          map={colorMap[0]}
+          // map={image.Mmap}
           // toneMapped={false}
           // color={[255, 128, 0]}
           // emissiveIntensity={0.1}

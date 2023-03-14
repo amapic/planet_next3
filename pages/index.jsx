@@ -91,7 +91,7 @@ import BoxBlendGeometry, {
 
 export const AppContext = createContext();
 
-const App2 = () => {
+const App = () => {
   // const cam = useRef();
   const [nActive2, setUsers] = useState(0);
 
@@ -140,9 +140,6 @@ const App2 = () => {
 
   return (
     <>
-      {/* <Container> */}
-      {/* <BridgeContainer value={{ ...values }}> */}
-      {/* <AppContext.Provider value={{ nActive2, dispatchUserEvent }}> */}
       <div
         style={{
           height: "100vh",
@@ -150,9 +147,7 @@ const App2 = () => {
           backgroundColor: "#252934",
         }}
       >
-        {/* <Header /> */}
         <PanelGauche />
-        <PanelPlanete />
 
         <Canvas
           // concurrent="true"
@@ -242,17 +237,8 @@ const App2 = () => {
         }}
         onClick={() => {
           if (nActive > 0) {
-            // alert("11");
-            //   alert("qd");
             onClickGauche();
-            //   // console.log("gauche");
-            //   // console.log(nActive);
           }
-          // if (nActive < 5) {
-          //   onClickDroite();
-
-          //   // console.log(nActive);
-          // }
         }}
       >
         <Canvas
@@ -298,27 +284,10 @@ const App2 = () => {
           cursor: "pointer",
         }}
         onClick={() => {
-          // if (nActive > 0) {
-          // alert("11");
-          //   alert("qd");
-          //   onClickGauche();
-          //   // console.log("gauche");
-          //   // console.log(nActive);
-          // }
           if (nActive < 5) {
             onClickDroite();
-
-            // console.log(nActive);
           }
         }}
-        // onMouseEnter={() => {
-        //   // alert("22");
-        //   document.body.style.cursor = "pointer";
-        // }}
-        // onMouseLeave={() => {
-        //   // alert("33");
-        //   document.body.style.cursor = "auto";
-        // }}
       >
         <Canvas
           orthographic
@@ -354,9 +323,6 @@ const App2 = () => {
           {/* <BoxBlendGeometry position={[0, 0, 0]} /> */}
         </Canvas>
       </div>
-      {/* </BridgeContainer> */}
-      {/* </Container> */}
-      {/* </AppContext.Provider> */}
     </>
   );
 };
@@ -401,24 +367,7 @@ export function Carre({ position, flecheGauche, flecheDroite }) {
   } = useDeplacementStore((state) => state);
 
   return (
-    <mesh
-      ref={ref2}
-      position={position}
-      // onPointerOver={() => setHovered(true)}
-      // onPointerOut={() => setHovered(false)}
-      // onClick={() => {
-      //   if (nActive > 0 && flecheGauche) {
-      //     onClickGauche();
-      //     // console.log("gauche");
-      //     // console.log(nActive);
-      //   }
-      //   if (nActive < 5 && flecheDroite) {
-      //     onClickDroite();
-
-      //     // console.log(nActive);
-      //   }
-      // }}
-    >
+    <mesh ref={ref2} position={position}>
       <line ref={ref}>
         <bufferGeometry />
         <lineBasicMaterial color={[127, 0, 127]} toneMapped={false} />
@@ -441,7 +390,6 @@ function Fleche({ position, flecheGauche, flecheDroite, rotation }) {
   points.push(new THREE.Vector3(0, height, 0));
   points.push(new THREE.Vector3(0, height / 2, width));
   points.push(new THREE.Vector3(0, 0, 0));
-  // points.push(new THREE.Vector3(0, 0, 0));
 
   const [hovered, setHovered] = useState(false);
 
@@ -450,22 +398,6 @@ function Fleche({ position, flecheGauche, flecheDroite, rotation }) {
       ref.current.geometry.setFromPoints(points);
     }
   });
-
-  // useEffect(() => {
-  //   document.body.style.cursor = hovered ? "pointer" : "auto";
-  // }, [hovered]);
-
-  // const {
-  //   nActive,
-  //   droite,
-  //   gauche,
-  //   gachette,
-  //   onClickGauche,
-  //   onClickDroite,
-  //   updateGachette,
-  //   stopDroite,
-  //   stopGauche,
-  // } = useBearStore((state) => state);
 
   return (
     <mesh ref={ref2} position={position} rotation={rotation}>
@@ -502,11 +434,11 @@ export const useDeplacementStore = create((set) => ({
 }));
 
 export const usePlanetStore = create((set) => ({
-  planet: null,
+  planet: { name: "" },
   updateData: (planet) =>
     set((state) => ({
       planet: planet,
     })),
 }));
 
-export default App2;
+export default App;

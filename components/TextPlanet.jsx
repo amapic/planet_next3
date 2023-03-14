@@ -14,10 +14,16 @@ export default function CardPlanet({
   position,
   hoveredd,
   clickedd,
+  image,
   ...args
 }) {
   const myMesh = useRef();
   const myMesh2 = useRef();
+
+  // clickedd = true;
+  if (clickedd.current) {
+    console.log("textplanete", image);
+  }
 
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));
@@ -40,7 +46,7 @@ export default function CardPlanet({
 
   return (
     <group>
-      {/* <mesh
+      <mesh
         position={[0, 2, 0.01]}
         scale={[4, 5, 2]}
         ref={myMesh}
@@ -70,13 +76,13 @@ export default function CardPlanet({
           anchorY="middle" // default
           color="white"
           ref={myMesh2}
-          fillOpacity={hoveredd ? 1 : 0}
+          // fillOpacity={hoveredd ? 1 : 0}
           toneMapped={false}
-          transparent={hoveredd ? false : true}
+          // transparent={hoveredd ? false : true}
         >
-          {text}
+          {clickedd ? "cliqué" : ""}
         </Text>
-      </mesh> */}
+      </mesh>
 
       {/* <mesh position={[0, 2, 0]} ref={myMesh2}>
         <planeGeometry geometry={[10, 10]} />

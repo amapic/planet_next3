@@ -84,7 +84,7 @@ export default function PanelGauche() {
   useEffect(() => {
     setTimeout(() => {
       setGlitch(!glitch);
-    }, 1000 * Math.random());
+    }, 3000 * Math.random());
   }, [glitch]);
 
   return (
@@ -97,13 +97,11 @@ export default function PanelGauche() {
         height: "30%",
         // aspectRatio: "5/7",
         zIndex: "5",
-        // clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
         clipPath:
-          // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-          // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
           "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% calc(100% - 1px),0% calc(100% - 1px),0% 13px)",
         borderColor: "red",
         backgroundColor: "teal",
+        overflow: "hidden",
       }}
       className="fixed"
       id="panneau"
@@ -129,7 +127,7 @@ export default function PanelGauche() {
           document.body.style.cursor = "auto";
         }}
       >
-        {!folded ? <img src="cross.svg" /> : <img src="fleche_bas.svg" />}
+        {!folded ? <img src="fleche_haut.svg" /> : <img src="fleche_bas.svg" />}
       </div>
       <div
         ref={ref2}
@@ -150,8 +148,8 @@ export default function PanelGauche() {
           height: "95%",
           zIndex: 1000,
           backgroundClip: "border-box",
+          overflow: "hidden",
           clipPath:
-            // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
             "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% 100%,0% 100%,0% 13px)",
         }}
       >
@@ -241,7 +239,7 @@ export function PanelPlanete() {
   var ttexte = "";
 
   if (planet) {
-    console.log(planet);
+    // console.log(planet);
     ttexte =
       "Planete : " +
       planet.name +
@@ -269,93 +267,93 @@ export function PanelPlanete() {
     // l'image dez fond a un ratio de 5/7
     <>
       {planet == null ? null : (
-        <Panel>
+        // <Panel>
+        <div
+          style={{
+            bottom: "5vh",
+            left: "20%",
+            width: "50%",
+            height: "30%",
+            // aspectRatio: "5/7",
+            zIndex: "5",
+            // clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
+            clipPath:
+              // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
+              // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
+              "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% calc(100% - 1px),0% calc(100% - 1px),0% 13px)",
+            borderColor: "red",
+            backgroundColor: "teal",
+          }}
+          className="fixed"
+          id="panneauPlanet"
+          ref={ref}
+        >
           <div
             style={{
-              bottom: "5vh",
-              left: "20%",
-              width: "50%",
-              height: "30%",
-              // aspectRatio: "5/7",
-              zIndex: "5",
-              // clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
+              top: "1vh",
+              right: "8%",
+              zIndex: "1001",
+              position: "absolute",
+              // size: "15px",
+              size: "50px",
+              // backgroundColor: "teal",
+              color: "white",
+            }}
+            onClick={onClick}
+            onMouseEnter={() => {
+              document.body.style.cursor = "pointer";
+            }}
+            onMouseLeave={() => {
+              document.body.style.cursor = "auto";
+            }}
+          >
+            {!folded ? (
+              <img src="fleche_haut.svg" />
+            ) : (
+              <img src="fleche_bas.svg" />
+            )}
+          </div>
+          <div
+            ref={ref2}
+            style={{
+              top: "1px" /* equal to border thickness */,
+              left: "1px",
+              right: "1px",
+              bottom: "1px",
+              // backgroundImage: "url('fondSF.svg')",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "auto auto",
+              backgroundColor: "black",
+              // fontFamily: "scifi",
+              lineHeight: "1",
+              padding: "25px",
+              position: "absolute",
+              width: "95%",
+              height: "95%",
+              zIndex: 1000,
+              backgroundClip: "border-box",
               clipPath:
                 // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-                // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-                "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% calc(100% - 1px),0% calc(100% - 1px),0% 13px)",
-              borderColor: "red",
-              backgroundColor: "teal",
+                "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% 100%,0% 100%,0% 13px)",
             }}
-            className="fixed"
-            id="panneauPlanet"
-            ref={ref}
           >
-            <div
-              style={{
-                top: "1vh",
-                right: "8%",
-                zIndex: "1001",
-                position: "absolute",
-                // size: "15px",
-                size: "50px",
-                // backgroundColor: "teal",
-                color: "white",
-              }}
-              onClick={onClick}
-              onMouseEnter={() => {
-                document.body.style.cursor = "pointer";
-              }}
-              onMouseLeave={() => {
-                document.body.style.cursor = "auto";
-              }}
-            >
-              {!folded ? (
-                <img src="fleche_haut.svg" />
-              ) : (
-                <img src="fleche_bas.svg" />
-              )}
-            </div>
-            <div
-              ref={ref2}
-              style={{
-                top: "1px" /* equal to border thickness */,
-                left: "1px",
-                right: "1px",
-                bottom: "1px",
-                // backgroundImage: "url('fondSF.svg')",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "auto auto",
-                backgroundColor: "black",
-                // fontFamily: "scifi",
-                lineHeight: "1",
-                padding: "25px",
-                position: "absolute",
-                width: "95%",
-                height: "95%",
-                zIndex: 1000,
-                backgroundClip: "border-box",
-                clipPath:
-                  // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-                  "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% 100%,0% 100%,0% 13px)",
-              }}
-            >
-              <div id="glitchbody2">
-                <div className="aa">
-                  <div
-                    className=""
-                    style={{
-                      fontFamily: "arial",
-                      padding: "5px",
-                    }}
-                  >
-                    {/* {nActive}
+            <div id="glitchbody2">
+              <div className="aa">
+                <div
+                  className=""
+                  style={{
+                    fontFamily: "arial",
+                    padding: "5px",
+                  }}
+                >
+                  {/* {nActive}
                   {droite ? "true" : "false"}
                   {gauche ? "true" : "false"} */}
-                    {Parser(ttexte)}
-                  </div>
-                  {glitch ? (
-                    <>
-                      {/* <div className="line">{Parser(ttexte)}</div>
+                  {Parser(ttexte)}
+                </div>
+                {glitch ? (
+                  <>
+                    {/* <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div>
@@ -363,13 +361,13 @@ export function PanelPlanete() {
                     <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div> */}
-                    </>
-                  ) : null}
-                </div>
+                  </>
+                ) : null}
               </div>
             </div>
           </div>
-        </Panel>
+        </div>
+        // </Panel>
       )}
     </>
   );
