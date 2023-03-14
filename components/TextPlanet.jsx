@@ -15,15 +15,16 @@ export default function CardPlanet({
   hoveredd,
   clickedd,
   image,
+  info,
   ...args
 }) {
   const myMesh = useRef();
   const myMesh2 = useRef();
 
   // clickedd = true;
-  if (clickedd.current) {
-    console.log("textplanete", image);
-  }
+  // if (clickedd.current) {
+  //   console.log("textplanete", image);
+  // }
 
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));

@@ -138,7 +138,7 @@ export default function PanelGauche() {
           bottom: "1px",
           // backgroundImage: "url('fondSF.svg')",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "auto auto",
+          // backgroundSize: "auto auto",
           backgroundColor: "black",
           fontFamily: "scifi",
           lineHeight: "2.5",

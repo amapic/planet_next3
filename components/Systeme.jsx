@@ -12,7 +12,9 @@ import Planet from "./Planet";
 
 import { animated } from "@react-spring/three";
 
-const Soleil = ({ infoEtoile, aa, ...args }) => {
+import CardPlanet from "./TextPlanet";
+
+const Soleil = ({ infoEtoile, aa, info, ...args }) => {
   const IMAGES = [
     {
       rotation: 200,
@@ -45,6 +47,12 @@ const Soleil = ({ infoEtoile, aa, ...args }) => {
 
   return (
     <>
+      <CardPlanet
+        info={info}
+        clickedd={true}
+        text="sfgsf"
+        position={[0, 0, 0]}
+      />
       <animated.mesh
         {...args}
         onClick={(x) => {
@@ -146,7 +154,12 @@ export default function Systeme({
         name={info[0].star_name}
       /> */}
       {/* ) : null} */}
-      <Soleil infoEtoile={info[0].star_radius} aa={AA} position={[0, 0, 0]} />
+      <Soleil
+        info={info[0]}
+        infoEtoile={info[0].star_radius}
+        aa={AA}
+        position={[0, 0, 0]}
+      />
 
       {info.map((image, i) => (
         <>
