@@ -35,8 +35,8 @@ export default function CardPlanet({
   // colorMap.needsUpdate = true;
 
   useFrame(({ gl, scene, camera }) => {
-    if (hoveredd && myMesh2.current && myMesh.current) {
-      myMesh.current.parent.lookAt(camera.position); // <-- should work when uncomment
+    if ((hoveredd || clickedd) && myMesh2.current && myMesh.current) {
+      myMesh.current.lookAt(camera.position); // <-- should work when uncomment
       // console.log(myMesh.current.parent.lookAt(0, camera.position[1], 0))
       // console.log(camera.position);
     }

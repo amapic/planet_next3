@@ -49,10 +49,12 @@
 .glitch div {
   font-size: 3vh;
   line-height: 4vh;
+  user-select: none;
 }
 
 .line {
   color: #fff;
+
   // line-height: 30px;
 
   &:not(:first-child) {

@@ -91,9 +91,9 @@ export default function PanelGauche() {
     // l'image dez fond a un ratio de 5/7
     <div
       style={{
-        top: "5vh",
-        left: "5%",
-        width: "80%",
+        top: "2vh",
+        left: "2%",
+        width: "95%",
         height: "30%",
         // aspectRatio: "5/7",
         zIndex: "5",
@@ -344,6 +344,7 @@ export function PanelPlanete() {
                   style={{
                     fontFamily: "arial",
                     padding: "5px",
+                    userSelect: "none",
                   }}
                 >
                   {/* {nActive}

@@ -16,15 +16,15 @@ import CardPlanet from "./TextPlanet";
 import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
 
-const colorMap = [
-  useLoader(TextureLoader, "/earth.jpg"),
-  useLoader(TextureLoader, "/mars.jpg"),
-  useLoader(TextureLoader, "/mercure.jpg"),
-  // useLoader(TextureLoader, "/earth.jpg"),
-];
-
 export default function Planet({ compteur, image, ...args }) {
   const cube = useRef();
+
+  const colorMap = [
+    useLoader(TextureLoader, "/earth.jpg"),
+    useLoader(TextureLoader, "/mars.jpg"),
+    useLoader(TextureLoader, "/mercure.jpg"),
+    // useLoader(TextureLoader, "/earth.jpg"),
+  ];
 
   const { planet, updateData } = usePlanetStore((state) => state);
 
