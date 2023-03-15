@@ -11,7 +11,7 @@ import { animated } from "@react-spring/three";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
-import CardPlanet from "./TextPlanet";
+import TextPlanet from "./TextPlanet";
 
 import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
@@ -98,12 +98,16 @@ export default function Planet({ compteur, image, ...args }) {
   return (
     <>
       <animated.mesh ref={cardRef}>
-        <CardPlanet
+        <TextPlanet
           {...args}
           hoveredd={hoveredd}
           clickedd={clickedd.current}
           text={image.text}
+          mass={image.mass}
+          rayon={image.semi_major_axis}
+          period={image.period}
           image={image}
+          star={false}
         />
       </animated.mesh>
       <animated.mesh
@@ -126,7 +130,7 @@ export default function Planet({ compteur, image, ...args }) {
         <meshBasicMaterial
           map={colorMap[0]}
           // map={image.Mmap}
-          // toneMapped={false}
+          toneMapped={false}
           // color={[255, 128, 0]}
           // emissiveIntensity={0.1}
         />

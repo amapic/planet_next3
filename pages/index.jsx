@@ -158,6 +158,7 @@ const App = () => {
             far: 1000,
             zoom: 1,
             position: [4, 4, 4],
+            maxPolarAngle:0.85
           }}
           onCreated={({ gl, camera }) => {
             gl.setClearColor("#252934", 0);
@@ -166,7 +167,7 @@ const App = () => {
             camera.lookAt(0, 0, 0);
             // camera.position.set(4, 4, 4);
 
-            camera.position.set(12, 12, 12);
+            camera.position.set(10, 3, 10);
           }}
         >
           <EffectComposer>
@@ -208,7 +209,10 @@ const App = () => {
           {/* <BoxBlendGeometry /> */}
           {/* <Prout /> */}
           <Stats />
-          <OrbitControls />
+          <OrbitControls 
+          // maxPolarAngle={0.85}
+          maxDistance={20}
+          />
           <Stars
             radius={100}
             depth={50}
@@ -248,6 +252,7 @@ const App = () => {
             far: 10,
             zoom: 25,
             position: [0.2, 0, 0],
+           
           }}
         >
           <EffectComposer>
@@ -341,18 +346,14 @@ export function Carre({ position, flecheGauche, flecheDroite }) {
 
   const [hovered, setHovered] = useState(false);
 
-  // const { nActive2, dispatchUserEvent } = useContext(AppContext);
 
-  // var bb = new THREE.Vector3(1, 1, 1);
   useEffect(() => {
     if (ref.current) {
       ref.current.geometry.setFromPoints(points);
     }
   });
 
-  // useEffect(() => {
-  //   document.body.style.cursor = hovered ? "pointer" : "auto";
-  // }, [hovered]);
+
 
   const {
     nActive,
@@ -372,10 +373,6 @@ export function Carre({ position, flecheGauche, flecheDroite }) {
         <bufferGeometry />
         <lineBasicMaterial color={[127, 0, 127]} toneMapped={false} />
       </line>
-      {/* <mesh>
-        <planeGeometry args={[0, 2, 2]} />
-        <meshBasicMaterial color={[127, 0, 0]} />
-      </mesh> */}
     </mesh>
   );
 }
@@ -416,13 +413,11 @@ export const useDeplacementStore = create((set) => ({
   gauche: false,
   onClickGauche: () =>
     set((state) => ({
-      // nActive: state.nActive - 1,
       gachette: true,
       droite: true,
     })),
   onClickDroite: () =>
     set((state) => ({
-      // nActive: state.nActive + 1,
       gachette: true,
       gauche: true,
     })),

@@ -80,14 +80,12 @@ export default function Scene() {
       dataPlanete.colorMap = "/earth.jpg";
       dataPlanete.text = item.name;
       dataPlanete.discovered = item.discovered;
-      // dataPlanete.star_mass = item.name;
 
       dataPlanetes.push(JSON.parse(JSON.stringify(dataPlanete)));
     });
 
     dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
 
-    // dataSysteme.map((x)=>{x.uid:getRandomInt(1,1000)})
 
     dataSysteme.map((systeme, i) => {
       systeme.uid = getRandomInt(1, 1000);
@@ -109,7 +107,7 @@ export default function Scene() {
     [60, 0, -60],
   ]);
 
-  console.log("pos00", pos[0][0]);
+  // console.log("pos00", pos[0][0]);
 
   const s1 = useRef();
   const s2 = useRef();
@@ -119,9 +117,6 @@ export default function Scene() {
 
   const [pos2, setPos2] = useState([-20, 0, 20]);
 
-  // const [droite, setDroite] = useState(false);
-  // const [gauche, setGauche] = useState(false);
-  // const [nActive, setnActive] = useState(2);
 
   var cumulDecalage = useRef(0);
 
@@ -180,7 +175,7 @@ export default function Scene() {
 
       if (Math.abs(posInit.current - pos[0][0]) >= 20) {
         updateGachette();
-        console.log("cumul", cumulDecalage.current);
+        // console.log("cumul", cumulDecalage.current);
         cumulDecalage.current = 0;
         posInit.current = 0;
 
@@ -213,7 +208,7 @@ export default function Scene() {
 
       if (Math.abs(posInit.current - pos[0][0]) >= 20) {
         updateGachette();
-        console.log("cumul", cumulDecalage.current);
+        // console.log("cumul", cumulDecalage.current);
         cumulDecalage.current = 0;
         posInit.current = 0;
         stopGauche();

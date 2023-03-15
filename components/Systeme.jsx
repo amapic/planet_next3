@@ -12,10 +12,10 @@ import Planet from "./Planet";
 
 import { animated } from "@react-spring/three";
 
-import CardPlanet from "./TextPlanet";
+import TextPlanet from "./TextPlanet";
 
-const Soleil = ({  info, ...args }) => {
-  console.log("info",info)
+const Soleil = ({  info,centre, ...args }) => {
+  // console.log("info",info)
   const IMAGES = [
     {
       rotation: 200,
@@ -48,22 +48,19 @@ const Soleil = ({  info, ...args }) => {
 
   return (
     <>
-      <CardPlanet
+      <TextPlanet
         info={info}
         clickedd={true}
         text={info.star_name }
         text2={info.star_age}
         text3={info.star_distance}
-        // + " <br />" + info.star_age + " <br />" + info.star_distance  + " <br />" + info.star_mass
+        text4={info.star_radius}
         position={[0, 0, 0]}
         star={true}
+        centre={centre}
       />
       <animated.mesh
         {...args}
-        // onClick={(x) => {
-        //   IMAGES.map((x) => (x.radius = x.radius + 1));
-        //   aa(IMAGES);
-        // }}
       >
         <sphereGeometry args={[0.5 * info.star_radius, 32, 32]} />
         <meshBasicMaterial
@@ -88,9 +85,9 @@ export default function Systeme({
   const [compteur, setCompteur] = useState(0);
 
   // console.log("info",info)
-  console.log("rrgt", nActive);
+  // console.log("rrgt", nActive);
 
-  console.log("rrgtsfg", i);
+  // console.log("rrgtsfg", i);
 
   function AA(x) {
     setInfoEtoile(x);
@@ -145,7 +142,7 @@ export default function Systeme({
   info.forEach((x, i) => {
     x.period =
       20 + ((x.period - periodemin) * (100 - 20)) / (periodemax - periodemin);
-    x.colorMap = 0;
+    x.colorMap = 2 * Math.ceil(Math.random());
   });
 
   return nActive == i ||
@@ -167,6 +164,7 @@ export default function Systeme({
       {/* <Soleil infoEtoile={info[0].star_radius} aa={AA} position={[0, 0, 0]} /> */}
       <Soleil
         info={info[0]}
+        centre={(nActive == i)}
         
       />
 
