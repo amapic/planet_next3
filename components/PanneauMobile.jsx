@@ -57,18 +57,18 @@ export default function PanelGauche() {
   //afficahge des lettres
 
   useEffect(() => {
-    // if (typeof window !== "undefined") {
-    //   gsap.registerPlugin(Draggable);
-    //   Draggable.create("#panneau", {
-    //     type: "x,y",
-    //     edgeResistance: 0.65,
-    //     // bounds: "#container",
-    //     inertia: true,
-    //     onPress: function () {
-    //       // console.log("clicked");
-    //     },
-    //   });
-    // }
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(Draggable);
+      Draggable.create("#panneau", {
+        type: "x,y",
+        edgeResistance: 0.65,
+        // bounds: "#container",
+        inertia: true,
+        onPress: function () {
+          // console.log("clicked");
+        },
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -267,87 +267,86 @@ export function PanelPlanete() {
     // l'image dez fond a un ratio de 5/7
     <>
       {planet == null ? null : (
-        // <Panel>
-        <div
-          style={{
-            bottom: "5vh",
-            left: "20%",
-            width: "50%",
-            height: "30%",
-            // aspectRatio: "5/7",
-            zIndex: "5",
-            // clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
-            clipPath:
-              // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-              // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-              "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% calc(100% - 1px),0% calc(100% - 1px),0% 13px)",
-            borderColor: "red",
-            backgroundColor: "teal",
-          }}
-          className="fixed"
-          id="panneauPlanet"
-          ref={ref}
-        >
+        <Panel>
           <div
             style={{
-              top: "1vh",
-              right: "8%",
-              zIndex: "1001",
-              position: "absolute",
-              // size: "15px",
-              size: "50px",
-              // backgroundColor: "teal",
-              color: "white",
-            }}
-            onClick={onClick}
-            onMouseEnter={() => {
-              document.body.style.cursor = "pointer";
-            }}
-            onMouseLeave={() => {
-              document.body.style.cursor = "auto";
-            }}
-          >
-            {!folded ? (
-              <img src="fleche_haut.svg" />
-            ) : (
-              <img src="fleche_bas.svg" />
-            )}
-          </div>
-          <div
-            ref={ref2}
-            style={{
-              top: "1px" /* equal to border thickness */,
-              left: "1px",
-              right: "1px",
-              bottom: "1px",
-              // backgroundImage: "url('fondSF.svg')",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "auto auto",
-              backgroundColor: "black",
-              // fontFamily: "scifi",
-              lineHeight: "1",
-              padding: "25px",
-              position: "absolute",
-              width: "95%",
-              height: "95%",
-              zIndex: 1000,
-              backgroundClip: "border-box",
+              bottom: "5vh",
+              left: "20%",
+              width: "50%",
+              height: "30%",
+              // aspectRatio: "5/7",
+              zIndex: "5",
+              // clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
               clipPath:
                 // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
-                "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% 100%,0% 100%,0% 13px)",
+                // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
+                "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% calc(100% - 1px),0% calc(100% - 1px),0% 13px)",
+              borderColor: "red",
+              backgroundColor: "teal",
             }}
+            className="fixed"
+            id="panneauPlanet"
+            ref={ref}
           >
-            <div id="glitchbody2">
-              <div className="aa">
-                <div
-                  className=""
-                  style={{
-                    fontFamily: "arial",
-                    padding: "5px",
-                    userSelect: "none",
-                  }}
-                >
-                  {/* {nActive}
+            <div
+              style={{
+                top: "1vh",
+                right: "8%",
+                zIndex: "1001",
+                position: "absolute",
+                // size: "15px",
+                size: "50px",
+                // backgroundColor: "teal",
+                color: "white",
+              }}
+              onClick={onClick}
+              onMouseEnter={() => {
+                document.body.style.cursor = "pointer";
+              }}
+              onMouseLeave={() => {
+                document.body.style.cursor = "auto";
+              }}
+            >
+              {!folded ? (
+                <img src="fleche_haut.svg" />
+              ) : (
+                <img src="fleche_bas.svg" />
+              )}
+            </div>
+            <div
+              ref={ref2}
+              style={{
+                top: "1px" /* equal to border thickness */,
+                left: "1px",
+                right: "1px",
+                bottom: "1px",
+                // backgroundImage: "url('fondSF.svg')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "auto auto",
+                backgroundColor: "black",
+                // fontFamily: "scifi",
+                lineHeight: "1",
+                padding: "25px",
+                position: "absolute",
+                width: "95%",
+                height: "95%",
+                zIndex: 1000,
+                backgroundClip: "border-box",
+                clipPath:
+                  // "polygon(5% 0%, 95% 0%,100% 5%, 100% 95%, 95% 100%,0% 100%,0% 5%)",
+                  "polygon(5% 0%, 95% 0%,100% 13px, 100% calc(100% - 14px), 95% 100%,0% 100%,0% 13px)",
+              }}
+            >
+              <div id="glitchbody2">
+                <div className="aa">
+                  <div
+                    className=""
+                    style={{
+                      fontFamily: "arial",
+                      padding: "5px",
+                    }}
+                  >
+                    {/* {nActive}
                   {droite ? "true" : "false"}
                   {gauche ? "true" : "false"} */}
                   {Parser(ttexte)}
@@ -362,13 +361,13 @@ export function PanelPlanete() {
                     <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div>
                     <div className="line">{Parser(ttexte)}</div> */}
-                  </>
-                ) : null}
+                    </>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        // </Panel>
+        </Panel>
       )}
     </>
   );
