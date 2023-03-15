@@ -14,7 +14,8 @@ import { animated } from "@react-spring/three";
 
 import CardPlanet from "./TextPlanet";
 
-const Soleil = ({ infoEtoile, aa, info, ...args }) => {
+const Soleil = ({  info, ...args }) => {
+  console.log("info",info)
   const IMAGES = [
     {
       rotation: 200,
@@ -50,17 +51,21 @@ const Soleil = ({ infoEtoile, aa, info, ...args }) => {
       <CardPlanet
         info={info}
         clickedd={true}
-        text="sfgsf"
+        text={info.star_name }
+        text2={info.star_age}
+        text3={info.star_distance}
+        // + " <br />" + info.star_age + " <br />" + info.star_distance  + " <br />" + info.star_mass
         position={[0, 0, 0]}
+        star={true}
       />
       <animated.mesh
         {...args}
-        onClick={(x) => {
-          IMAGES.map((x) => (x.radius = x.radius + 1));
-          aa(IMAGES);
-        }}
+        // onClick={(x) => {
+        //   IMAGES.map((x) => (x.radius = x.radius + 1));
+        //   aa(IMAGES);
+        // }}
       >
-        <sphereGeometry args={[0.5 * infoEtoile, 32, 32]} />
+        <sphereGeometry args={[0.5 * info.star_radius, 32, 32]} />
         <meshBasicMaterial
           emissiveIntensity={4}
           color={[255, 255, 255]}
@@ -81,6 +86,8 @@ export default function Systeme({
 }) {
   const [infoEtoile, setInfoEtoile] = useState(info);
   const [compteur, setCompteur] = useState(0);
+
+  // console.log("info",info)
 
   function AA(x) {
     setInfoEtoile(x);
@@ -156,9 +163,7 @@ export default function Systeme({
       {/* ) : null} */}
       <Soleil
         info={info[0]}
-        infoEtoile={info[0].star_radius}
-        aa={AA}
-        position={[0, 0, 0]}
+        
       />
 
       {info.map((image, i) => (

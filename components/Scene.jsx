@@ -74,6 +74,9 @@ export default function Scene() {
         Math.round(item.semi_major_axis * 100) / 100;
       dataPlanete.period = Math.round(item.orbital_period * 100) / 100;
       dataPlanete.star_radius = Math.round(item.star_radius * 100) / 100;
+      dataPlanete.star_name =item.star_name;
+      dataPlanete.star_distance =item.star_distance;
+      dataPlanete.star_age =item.star_age;
       dataPlanete.colorMap = "/earth.jpg";
       dataPlanete.text = item.name;
       dataPlanete.discovered = item.discovered;
@@ -142,7 +145,7 @@ export default function Scene() {
     // if (!progress) progress = delta;
     // console.log("progress", progress);
     progress = progress + delta;
-    console.log("diff", Math.abs(posInit.current - pos[0][0]));
+    // console.log("diff", Math.abs(posInit.current - pos[0][0]));
     // const paw = useBearStore.getState().nActive;
     // if (1 == 1) {
     // if (progress > 1) {

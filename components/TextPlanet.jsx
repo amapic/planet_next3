@@ -9,13 +9,18 @@ import roboto from "../public/Roboto_Regular.json";
 
 import * as THREE from "three";
 
+import Parser from "html-react-parser";
+
 export default function CardPlanet({
-  text,
+  text="",
+  text2="",
+  text3="",
   position,
   hoveredd,
   clickedd,
   image,
   info,
+  star = false,
   ...args
 }) {
   const myMesh = useRef();
@@ -51,6 +56,8 @@ export default function CardPlanet({
         position={[0, 2, 0.01]}
         scale={[4, 5, 2]}
         ref={myMesh}
+        transparent={clickedd ? false : true}
+        opacity={clickedd ? 1 : 0}
         // transparent={hoveredd ? false : true}
         // onPointerOver={(x) => {
         //   x.stopPropagation(); //not to have 2 elements hovered in the same time
@@ -79,9 +86,52 @@ export default function CardPlanet({
           ref={myMesh2}
           // fillOpacity={hoveredd ? 1 : 0}
           toneMapped={false}
-          // transparent={hoveredd ? false : true}
+          // transparent={star ? true : false}
         >
-          {clickedd ? "cliqué" : ""}
+          {/* {clickedd ? "cliqué" : ""} */}
+          {text}
+        </Text>
+      </mesh>
+      <mesh
+        position={[0, 2.5, 0.01]}
+        scale={[4, 5, 2]}
+        ref={myMesh}
+        transparent={clickedd ? false : true}
+        opacity={clickedd ? 1 : 0}
+      >
+        <Text
+          scale={[1, 1, 1]}
+          anchorX="center" // default
+          anchorY="middle" // default
+          color="white"
+          ref={myMesh2}
+          // fillOpacity={hoveredd ? 1 : 0}
+          toneMapped={false}
+          // transparent={star ? true : false}
+        >
+          {/* {clickedd ? "cliqué" : ""} */}
+          {text2}
+        </Text>
+      </mesh>
+      <mesh
+        position={[0, 3, 0.01]}
+        scale={[4, 5, 2]}
+        ref={myMesh}
+        transparent={clickedd ? false : true}
+        opacity={clickedd ? 1 : 0}
+      >
+        <Text
+          scale={[1, 1, 1]}
+          anchorX="center" // default
+          anchorY="middle" // default
+          color="white"
+          ref={myMesh2}
+          // fillOpacity={hoveredd ? 1 : 0}
+          toneMapped={false}
+          // transparent={star ? true : false}
+        >
+          {/* {clickedd ? "cliqué" : ""} */}
+          {text3}
         </Text>
       </mesh>
 
@@ -93,13 +143,13 @@ export default function CardPlanet({
           opacity={hoveredd ? 1 : 0}
         />
       </mesh> */}
-      <mesh position={[0, 2, 0]} ref={myMesh2}>
+      <mesh position={[0, 2.5, 0]} ref={myMesh2}>
         <sphereGeometry args={[0.1, 32, 32]} />
         <meshBasicMaterial
           color={[0, 0, 255]}
           emissiveIntensity={1}
-          transparent={clickedd ? false : true}
-          opacity={clickedd ? 1 : 0}
+          transparent={(clickedd && !star) ? false : true}
+          opacity={(clickedd && !star) ? 1 : 0}
           toneMapped={false}
         />
       </mesh>
