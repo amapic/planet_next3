@@ -11,7 +11,7 @@ import Data from 'public/data.json'
 
 export default function Data2(){
 
-    console.log(Data)
+    // console.log(Data)
     return(
         ""
     )

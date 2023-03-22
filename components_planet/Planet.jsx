@@ -17,20 +17,27 @@ import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
 
 export default function Planet({ compteur, image, ...args }) {
-  const cube = useRef();
-
   const colorMap = [
-    useLoader(TextureLoader, "/earth.jpg"),
-    useLoader(TextureLoader, "/mars.jpg"),
-    useLoader(TextureLoader, "/mercure.jpg"),
-    // useLoader(TextureLoader, "/earth.jpg"),
+    useLoader(TextureLoader, "/image/earth.jpg"),
+    useLoader(TextureLoader, "/image/mars.jpg"),
+    useLoader(TextureLoader, "/image/mercure.jpg"),
+    useLoader(TextureLoader, "/image/neptune.jpg"),
+    useLoader(TextureLoader, "/image/moon.jpg"),
+    useLoader(TextureLoader, "/image/jupiter.jpg"),
+    useLoader(TextureLoader, "/image/venus.jpg"),
+    useLoader(TextureLoader, "/image/uranus.jpg"),
   ];
 
+  const nbMapPlanet = useRef(colorMap[Math.ceil(7 * Math.random())]);
+
+
+  // console.log("sfgs", Math.ceil(7 * Math.random()))
   const { planet, updateData } = usePlanetStore((state) => state);
 
   // if (image.star_name == "K2-138 b") {
   //   console.log(image.semi_major_axis);
   // }
+
 
   const [sphereX, setSphereX] = useState(0);
   const [semi_major_axis, setSemi_major_axis] = useState(image.semi_major_axis);
@@ -114,7 +121,35 @@ export default function Planet({ compteur, image, ...args }) {
         ref={sphereRef}
         {...args}
         onClick={() => {
-          console.log("qd");
+          clickedd.current = true;
+          updateData(image);
+        }}
+        onPointerOver={() => {
+          debouncedHandleMouseLeave.cancel();
+          hover(true);
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={(x) => {
+          document.body.style.cursor = "auto";
+          debouncedHandleMouseLeave();
+        }}
+      >
+        <sphereGeometry args={[image.radius, 32, 32]} />
+        <meshPhongMaterial
+          map={nbMapPlanet.current}
+          // map={image.Mmap}
+          // toneMapped={false}
+          // transparent={true}
+          // opacity={1}
+          // color={[255, 128, 0]}
+          // emissiveIntensity={0.1}
+        />
+      </animated.mesh>
+      {/* <animated.mesh
+        ref={sphereRef}
+        {...args}
+        onClick={() => {
+          // console.log("qd");
           clickedd.current = true;
           updateData(image);
         }}
@@ -126,15 +161,18 @@ export default function Planet({ compteur, image, ...args }) {
           debouncedHandleMouseLeave();
         }}
       >
-        <sphereGeometry args={[image.radius, 32, 32]} />
-        <meshBasicMaterial
-          map={colorMap[0]}
+        <sphereGeometry args={[image.radius* 2, 32, 32]} />
+        <meshNormalMaterial
+        transparent={true}
+        opacity={0}
+        // transparent
+          // map={colorMap[0]}
           // map={image.Mmap}
-          toneMapped={false}
-          // color={[255, 128, 0]}
+          // toneMapped={false}
+          color={[255, 128, 0]}
           // emissiveIntensity={0.1}
         />
-      </animated.mesh>
+      </animated.mesh> */}
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function Scene() {
   //   [20 * Math.cos(Math.PI / 4), 0, -20 * Math.sin(Math.PI / 4)],
   // ]);
 
-  const Mmap = useLoader(TextureLoader, "/earth.jpg");
+  // const Mmap = useLoader(TextureLoader, "/earth.jpg");
 
   // console.log(Data)
   var dataSysteme = [];
@@ -74,10 +74,10 @@ export default function Scene() {
         Math.round(item.semi_major_axis * 100) / 100;
       dataPlanete.period = Math.round(item.orbital_period * 100) / 100;
       dataPlanete.star_radius = Math.round(item.star_radius * 100) / 100;
-      dataPlanete.star_name =item.star_name;
-      dataPlanete.star_distance =item.star_distance;
+      dataPlanete.star_name =Math.round(item.star_name* 100) / 100;
+      dataPlanete.star_distance =Math.round(item.star_distance* 100) / 100;
       dataPlanete.star_age =item.star_age;
-      dataPlanete.colorMap = "/earth.jpg";
+      // dataPlanete.colorMap = "/earth.jpg";
       dataPlanete.text = item.name;
       dataPlanete.discovered = item.discovered;
 
@@ -267,7 +267,7 @@ export default function Scene() {
                 info={systeme}
                 position={pos[i]}
                 nActive={nActive}
-                Mmap={Mmap}
+                // Mmap={Mmap}
               />
             </>
           ))

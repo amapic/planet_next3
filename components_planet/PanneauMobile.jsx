@@ -62,10 +62,8 @@ export default function PanelGauche() {
       Draggable.create("#panneau", {
         type: "x,y",
         edgeResistance: 0.65,
-        // bounds: "#container",
         inertia: true,
         onPress: function () {
-          // console.log("clicked");
         },
       });
     }
@@ -76,7 +74,7 @@ export default function PanelGauche() {
       setTimeout(() => {
         setText(text + fullText[index]);
         setIndex(index + 1);
-      }, 100);
+      }, 10);
     }
   }, [index]);
 
@@ -114,9 +112,7 @@ export default function PanelGauche() {
           right: "8%",
           zIndex: "1001",
           position: "absolute",
-          // size: "15px",
           size: "50px",
-          // backgroundColor: "teal",
           color: "white",
         }}
         onClick={onClick}
@@ -136,9 +132,7 @@ export default function PanelGauche() {
           left: "1px",
           right: "1px",
           bottom: "1px",
-          // backgroundImage: "url('fondSF.svg')",
           backgroundRepeat: "no-repeat",
-          // backgroundSize: "auto auto",
           backgroundColor: "black",
           fontFamily: "scifi",
           lineHeight: "2.5",
@@ -183,11 +177,6 @@ export function PanelPlanete() {
   );
 
   const [text, setText] = useState("RR");
-  // const [fullText, setFullText] = useState(
-  //   // "Cet ecran permet de voir quelques systemes planetaires"
-  //   name
-  // );
-  //vous pouvez en savoir plus en survolant les planètes
   const [index, setIndex] = useState(0);
   const [folded, setFolded] = useState(false);
 
