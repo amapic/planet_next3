@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 // gsap.registerPlugin(ScrollTrigger);
 
 export default function Echelle({ maxSemi_major_axis, name }) {
-  // console.log("max", maxSemi_major_axis);
 
   var ddist = (100 * 1) / maxSemi_major_axis;
   var texteEchelle;

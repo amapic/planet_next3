@@ -16,9 +16,10 @@ export default function TextPlanet({
   text2 = null,
   text3 = null,
   text4 = null,
-  period=null,
+  period_orig=null,
   mass=null,
   rayon=null,
+  semi_major_axis_orig=null,
   position,
   hoveredd,
   clickedd,
@@ -34,7 +35,9 @@ export default function TextPlanet({
   const myMeshText4 = useRef();
   const myMesh2 = useRef();
 
- 
+  if (!star && clickedd){
+    // console.log(image)
+  }
 
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));
@@ -78,7 +81,7 @@ export default function TextPlanet({
               // transparent={star ? true : false}
             >
               {/* {clickedd ? "cliqué" : ""} */}
-              {text4?"Rayon : " + text4 + " rayon solaire":""}
+              {text4?"Rayon : " + parseFloat(text4.toPrecision(2)) + " rayon solaire":""}
             </Text>
           </mesh>
           <mesh
@@ -99,7 +102,7 @@ export default function TextPlanet({
               // transparent={star ? true : false}
             >
               {/* {clickedd ? "cliqué" : ""} */}
-              {text3?"Distance : " + text3 + " année lumière":""}
+              {text3?"Distance : " + parseFloat(text3.toPrecision(2)) + " année lumière":""}
             </Text>
           </mesh>
           <mesh
@@ -150,7 +153,7 @@ export default function TextPlanet({
       {(!star && clickedd) ? (
         <>
         <mesh
-          position={[0, 2, 0.01]}
+          position={[0, 1, 0.01]}
           scale={[4, 5, 2]}
           ref={myMeshText4}
           transparent={clickedd ? false : true}
@@ -163,11 +166,11 @@ export default function TextPlanet({
             color="white"
             toneMapped={false}
           >
-            {period?"Période de révolution : " + period + " année":""}
+            {period_orig?"Période de révolution : " + parseFloat(period_orig.toPrecision(2))+ "  jour":""}
           </Text>
         </mesh>
         <mesh
-          position={[0, 2.5, 0.01]}
+          position={[0, 1.5, 0.01]}
           scale={[4, 5, 2]}
           ref={myMeshText}
           transparent={clickedd ? false : true}
@@ -180,11 +183,11 @@ export default function TextPlanet({
             color="white"
             toneMapped={false}
           >
-            {rayon?"Demi grand-Axe : " + rayon + " UA":""}
+            {semi_major_axis_orig?"Demi grand-Axe : " +  parseFloat(semi_major_axis_orig.toPrecision(2)) + " UA":""}
           </Text>
         </mesh>
         <mesh
-          position={[0, 3, 0.01]}
+          position={[0, 2, 0.01]}
           scale={[4, 5, 2]}
           ref={myMeshText2}
           transparent={clickedd ? false : true}
@@ -197,11 +200,11 @@ export default function TextPlanet({
             color="white"
             toneMapped={false}
           >
-            {mass?"Masse : " + mass + " milliard d'année":""}
+            {mass?"Masse : " + parseFloat(mass.toPrecision(2)) + " masse jupitérienne":""}
           </Text>
         </mesh>
         <mesh
-          position={[0, 3.5, 0.01]}
+          position={[0, 2.5, 0.01]}
           scale={[4, 5, 2]}
           ref={myMeshText3}
           transparent={clickedd ? false : true}
@@ -221,7 +224,7 @@ export default function TextPlanet({
       ):""}
 
       {(!star && clickedd) ? (
-        <mesh position={[0, 4, 0]} ref={myMesh2}>
+        <mesh position={[0, 3, 0]} ref={myMesh2}>
           <sphereGeometry args={[0.1, 32, 32]} />
           <meshBasicMaterial
             color={[0, 0, 255]}

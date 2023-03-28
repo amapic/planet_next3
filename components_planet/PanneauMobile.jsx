@@ -69,20 +69,20 @@ export default function PanelGauche() {
     }
   }, []);
 
-  useEffect(() => {
-    if (index < fullText.length) {
-      setTimeout(() => {
-        setText(text + fullText[index]);
-        setIndex(index + 1);
-      }, 10);
-    }
-  }, [index]);
+  // useEffect(() => {
+  //   if (index < fullText.length) {
+  //     setTimeout(() => {
+  //       setText(text + fullText[index]);
+  //       setIndex(index + 1);
+  //     }, 10);
+  //   }
+  // }, [index]);
 
   //effect glitch aléatoire
   useEffect(() => {
     setTimeout(() => {
       setGlitch(!glitch);
-    }, 3000 * Math.random());
+    }, 10000 * Math.random());
   }, [glitch]);
 
   return (
@@ -149,17 +149,17 @@ export default function PanelGauche() {
       >
         <div id="glitchbody2">
           <div className="glitch">
-            <div className={glitch ? "line" : ""}>{Parser(text)}</div>
+            <div className={glitch ? "line" : ""}>{Parser(fullText)}</div>
             {glitch ? (
               <>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
-                <div className="line">{Parser(text)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
+                <div className="line">{Parser(fullText)}</div>
               </>
             ) : null}
           </div>
@@ -219,7 +219,6 @@ export function PanelPlanete() {
         // bounds: "#container",
         inertia: true,
         onPress: function () {
-          // console.log("clicked");
         },
       });
     }
@@ -228,7 +227,6 @@ export function PanelPlanete() {
   var ttexte = "";
 
   if (planet) {
-    // console.log(planet);
     ttexte =
       "Planete : " +
       planet.name +
@@ -362,14 +360,4 @@ export function PanelPlanete() {
   );
 }
 
-// export const usePlanetStore = create((set) => ({
-//   planet: null,
-//   semi_major: "",
-//   mass: "",
-//   radius: "",
-//   discovered: "",
-//   updateData: (planet) =>
-//     set((state) => ({
-//       planet: planet,
-//     })),
-// }));
+

@@ -203,7 +203,6 @@ export function ArrayButton({ position }) {
   //   if (ref2.current) {
   //     var aa = new THREE.Vector3(1, 1, 1);
   //     // aa.add(camera.position);
-  //     // console.log(camera.position);
   //     // ref2.current.lookAt(aa);
 
   //     // function updatePositionForCamera(camera) {

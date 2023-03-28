@@ -1,57 +1,21 @@
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 
 import Planet from "./Planet";
-// import Echelle from "./Echelleeee";
-// import {
-//   motion,
-//   useScroll,
-//   useSpring,
-//   useTransform,
-//   useMotionValue,
-// } from "framer-motion";
+
 
 import { animated } from "@react-spring/three";
 
 import TextPlanet from "./TextPlanet";
 
-const Soleil = ({  info,centre, ...args }) => {
-  // console.log("info",info)
-  // const IMAGES = [
-  //   {
-  //     rotation: 200,
-  //     position: [-2, 1, 1],
-  //     radius: 1,
-  //     periode: 50,
-  //     text: "A",
-  //     colorMap: "/earth.jpg",
-  //     internalRadius: 0.1,
-  //   },
-  //   {
-  //     rotation: 145,
-  //     position: [-1, 1, 1],
-  //     radius: 2,
-  //     periode: 50,
-  //     text: "B",
-  //     colorMap: "/earth.jpg",
-  //     internalRadius: 0.2,
-  //   },
-  //   {
-  //     rotation: 190,
-  //     position: [-0, 1, 1],
-  //     radius: 3,
-  //     periode: 70,
-  //     text: "C",
-  //     colorMap: "/earth.jpg",
-  //     internalRadius: 0.3,
-  //   },
-  // ];
+const Soleil = ({ info, centre, ...args }) => {
+  
 
   return (
     <>
       <TextPlanet
         info={info}
         clickedd={true}
-        text={info.star_name }
+        text={info.star_name}
         text2={info.star_age}
         text3={info.star_distance}
         text4={info.star_radius}
@@ -59,13 +23,11 @@ const Soleil = ({  info,centre, ...args }) => {
         star={true}
         centre={centre}
       />
-      <animated.mesh
-        {...args}
-      >
+      <animated.mesh {...args}>
         <sphereGeometry args={[0.5 * info.star_radius, 32, 32]} />
         <meshStandardMaterial
           // emissiveIntensity={4}
-          color={[255, 127, 0]}
+          color={[255, 255, 255]}
           toneMapped={false}
         />
       </animated.mesh>
@@ -81,15 +43,11 @@ export default function Systeme({
   gachette,
   Mmap,
 }) {
-  const [infoEtoile, setInfoEtoile] = useState(info);
   const [compteur, setCompteur] = useState(0);
 
-  const idSysteme=useRef(Math.ceil(1000 * Math.random()))
+  const idSysteme = useRef(Math.ceil(1000 * Math.random()));
 
-  function AA(x) {
-    setInfoEtoile(x);
-    setCompteur(compteur + 1);
-  }
+  let tt=useRef(info)
 
   var semi_major_axismax = 0;
   var semi_major_axismin = 0;
@@ -98,6 +56,14 @@ export default function Systeme({
 
   var periodemax = 0;
   var periodemin = 0;
+
+
+  let infoOrig = JSON.parse(JSON.stringify(info));
+
+  if (infoOrig.star_name=="Kepler-107"){
+    // console.log(tt.current)
+  }
+
 
   info.forEach((x, i) => {
     if (i == 0) {
@@ -137,10 +103,15 @@ export default function Systeme({
   });
 
   info.forEach((x, i) => {
+    x.period_orig=x.period
     x.period =
       20 + ((x.period - periodemin) * (100 - 20)) / (periodemax - periodemin);
     // x.colorMap = 2 * Math.ceil(Math.random());
   });
+
+  if (infoOrig.star_name=="Kepler-107"){
+    // console.log(infoOrig)
+  }
 
   return nActive == i ||
     nActive == i + 1 ||
@@ -149,7 +120,7 @@ export default function Systeme({
     nActive == i - 2 ? (
     // return 1 == 1 ? (
     <group position={position}>
-      <gridHelper colorCenterLine={[255,127,0]} colorGrid={[255,127,0]} />
+      <gridHelper colorCenterLine={[255, 127, 0]} colorGrid={[255, 127, 0]} />
       {/* <axesHelper /> */}
       <pointLight intensity={1.0} position={[0, 0, 0]} />
       {/* {gachette && nActive == i ? ( */}
@@ -159,16 +130,21 @@ export default function Systeme({
       /> */}
       {/* ) : null} */}
       {/* <Soleil infoEtoile={info[0].star_radius} aa={AA} position={[0, 0, 0]} /> */}
-      
+
       <Soleil
         info={info[0]}
-        centre={(nActive == i)}
+        centre={nActive == i}
         // key={i}
       />
 
       {info.map((image, i) => (
         <>
-          <Planet key={idSysteme.current * i} compteur={compteur} image={image} />
+          <Planet
+            key={idSysteme.current * i}
+            compteur={compteur}
+            image={image}
+            imageData={infoOrig[i]}
+          />
         </>
       ))}
     </group>

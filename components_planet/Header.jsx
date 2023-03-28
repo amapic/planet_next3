@@ -30,7 +30,6 @@ export default function Entete() {
 
   //     // use any arbitrary string as a name; it'll be added to the Context object, so in this case you can call ctx.onClick() later...
   //     self.add("hover", (e) => {
-  //       console.log("mouse enter")
   //       // setTexte("mouse leave")
   //       // texte.current="f"
   //       let tl = gsap.timeline();
@@ -41,7 +40,6 @@ export default function Entete() {
   //     });
 
   //     self.add("hoverout", (e) => {
-  //       console.log("mouse leave");
   //       let tl2 = gsap.timeline();
   //       // texte.current="qsg"
   //       // setTexte("mouse enter")
@@ -70,10 +68,6 @@ export default function Entete() {
   };
 
   const onLeave = ({ currentTarget }) => {
-    // gsap.to(currentTarget, { backgroundColor: "#28a92b", scale: 1 });
-    // alert("out");
-    // alert(currentTarget);
-    // console.log(currentTarget);
     gsap.to(currentTarget, {
       clipPath: "polygon(50% 0%, 50% 0%,100% 50%, 50% 100%, 50% 100%,0% 50%)",
       // clipPath: "polygon(0% 0%, 0% 0%,0% 0%, 0% 0%, 0% 0%,0% 0%)",
@@ -81,7 +75,6 @@ export default function Entete() {
   };
 
   // const onClick = useCallback(event => {
-  //   console.log('Clicked Item : ', event.currentTarget);
   // }, [item]);
 
   return (

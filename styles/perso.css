@@ -1,6 +1,7 @@
 @font-face {
   font-family: "scifi";
-  src: url("../public/overthere.ttf") format("truetype");
+  /* src: url("../public/overthere.ttf") format("truetype"); */
+  src: url("../public/525-SQUA.TTF") format("truetype");
 }
 
 .semi-circle {

@@ -4,41 +4,31 @@ import React, {
   useEffect,
   useState,
   createContext,
-  useContext,
 } from "react";
 import {
   Canvas,
-  useFrame,
-  useThree,
   extend,
-  createPortal,
 } from "@react-three/fiber";
 
 import * as THREE from "three";
 
-import Link from 'next/link'
 
-import { PerspectiveCamera, Hud } from "@react-three/drei";
 
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 import PanelGauche, { PanelPlanete } from "../components_planet/PanneauMobile";
 
-// extend({ TextGeometry });
 
 import roboto from "../public/Roboto_Regular.json";
 
 const font = new FontLoader().parse(roboto);
 
-// import { usePlanetStore } from "../components_planet/store";
 
 import {
   Stats,
   OrbitControls,
   Effects as EffectsComposer,
-  // PerspectiveCamera,
   Text,
   Text3D,
 } from "@react-three/drei";
@@ -46,9 +36,7 @@ import {
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 import { Debug, Physics, usePlane, useSphere } from "@react-three/cannon";
-import * as three from "three";
 
-import { useSpring, animated, config } from "@react-spring/three";
 
 import { UnrealBloomPass, WaterPass } from "three-stdlib";
 import { useControls } from "leva";
@@ -59,7 +47,6 @@ import Header from "../components_planet/Header";
 
 import FrameLimiter, { FPSLimiter } from "../components_planet/FrameLimiter";
 
-import TextteQuiTourne from "../components_planet/texteQuitourne";
 
 extend({ UnrealBloomPass });
 
@@ -72,24 +59,7 @@ import BoxBlendGeometry, {
   Spprite,
 } from "../components_planet/RoundedRectangle";
 
-// export const MyContext = createContext();
-// export const BridgeContext = React.createContext();
 
-// export const Container = ({ children }) => (
-//   <MyContext.Provider value={{ hello: "true", nActive: 0 }}>
-//     {children}
-//   </MyContext.Provider>
-// );
-
-// export const BridgeContainer = ({ value, children }) => {
-//   return (
-//     <BridgeContext.Provider value={{ ...value }}>
-//       {children}
-//     </BridgeContext.Provider>
-//   );
-// };
-
-// extend({ colorShiftMaterial });
 
 export const AppContext = createContext();
 
@@ -113,7 +83,7 @@ const App = () => {
   var isNotTouchDevice=true
   // const isTouchDevice=useDeviceDetect()
   React.useEffect(() => {
-    console.log("matchmedia", window.matchMedia("(pointer:coarse)").matches);
+    // console.log("matchmedia", window.matchMedia("(pointer:coarse)").matches);
     isNotTouchDevice=window.matchMedia("(pointer:coarse)").matches
   }, []);
 

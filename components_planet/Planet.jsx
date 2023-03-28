@@ -16,7 +16,7 @@ import TextPlanet from "./TextPlanet";
 import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
 
-export default function Planet({ compteur, image, ...args }) {
+export default function Planet({ compteur, image,imageData, ...args }) {
   const colorMap = [
     useLoader(TextureLoader, "/image/earth.jpg"),
     useLoader(TextureLoader, "/image/mars.jpg"),
@@ -28,21 +28,21 @@ export default function Planet({ compteur, image, ...args }) {
     useLoader(TextureLoader, "/image/uranus.jpg"),
   ];
 
+  
+
   const nbMapPlanet = useRef(colorMap[Math.ceil(7 * Math.random())]);
 
 
-  // console.log("sfgs", Math.ceil(7 * Math.random()))
   const { planet, updateData } = usePlanetStore((state) => state);
 
-  // if (image.star_name == "K2-138 b") {
-  //   console.log(image.semi_major_axis);
-  // }
+  if (image.name == "Kepler-107 e") {
+    // console.log(image);
+  }
 
 
   const [sphereX, setSphereX] = useState(0);
   const [semi_major_axis, setSemi_major_axis] = useState(image.semi_major_axis);
 
-  // console.log(semi_major_axis);
 
   const [hoveredd, hover] = useState(false);
 
@@ -55,12 +55,9 @@ export default function Planet({ compteur, image, ...args }) {
       clickedd.current = false;
     }
 
-    // console.log("e", planet.name);
-    // console.log("sdfg", image.name);
   }
 
   useEffect(() => {
-    // setSemi_major_axis(image.semi_major_axis);
     var timer = setTimeout(function () {
       if (hover) {
         hover(false);
@@ -85,7 +82,7 @@ export default function Planet({ compteur, image, ...args }) {
       setSemi_major_axis(semi_major_axis + 0.05);
     }
 
-    setSphereX((sphereX) => sphereX + 0.05);
+    setSphereX((sphereX) => sphereX + 0.02);
     sphereApi.position.set(
       semi_major_axis * Math.cos((sphereX * 2 * Math.PI) / image.period),
       0,
@@ -109,11 +106,12 @@ export default function Planet({ compteur, image, ...args }) {
           {...args}
           hoveredd={hoveredd}
           clickedd={clickedd.current}
-          text={image.text}
-          mass={image.mass}
-          rayon={image.semi_major_axis}
-          period={image.period}
-          image={image}
+          text={imageData.text}
+          mass={imageData.mass}
+          rayon={imageData.rayon}
+          semi_major_axis_orig={imageData.semi_major_axis_orig}
+          period_orig={imageData.period_orig}
+          image={imageData}
           star={false}
         />
       </animated.mesh>
@@ -149,7 +147,6 @@ export default function Planet({ compteur, image, ...args }) {
         ref={sphereRef}
         {...args}
         onClick={() => {
-          // console.log("qd");
           clickedd.current = true;
           updateData(image);
         }}
