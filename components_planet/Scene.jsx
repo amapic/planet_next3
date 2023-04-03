@@ -7,7 +7,7 @@ import { useFrame, useThree, extend } from "@react-three/fiber";
 
 import Systeme from "./Systeme";
 
-import Data from "public/data/premierTri.json";
+import Data from "premierTri.json";
 
 import { AppContext, useDeplacementStore } from "../pages/index";
 
@@ -94,6 +94,8 @@ export default function Scene() {
     [60, 0, -60],
   ]);
 
+  
+
 
   const s1 = useRef();
   const s2 = useRef();
@@ -102,7 +104,6 @@ export default function Scene() {
   const posInit = useRef(0);
 
   const [pos2, setPos2] = useState([-20, 0, 20]);
-
 
   var cumulDecalage = useRef(0);
 
@@ -178,7 +179,7 @@ export default function Scene() {
     }
   });
 
-  console.log("rr",refDataSystemes.current)
+  // console.log("rr",refDataSystemes.current)
 
   return (
     <>

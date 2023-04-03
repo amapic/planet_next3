@@ -5,25 +5,20 @@ import React, {
   useState,
   createContext,
 } from "react";
-import {
-  Canvas,
-  extend,
-} from "@react-three/fiber";
+
+import { Canvas, extend } from "@react-three/fiber";
 
 import * as THREE from "three";
 
-
-
+import {  isMobile } from "react-device-detect";
 
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 import PanelGauche, { PanelPlanete } from "../components_planet/PanneauMobile";
 
-
 import roboto from "../public/Roboto_Regular.json";
 
 const font = new FontLoader().parse(roboto);
-
 
 import {
   Stats,
@@ -37,35 +32,29 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 import { Debug, Physics, usePlane, useSphere } from "@react-three/cannon";
 
-
 import { UnrealBloomPass, WaterPass } from "three-stdlib";
 import { useControls } from "leva";
 import { Effects, Stars } from "@react-three/drei";
 
 import Scene from "../components_planet/Scene";
-import Header from "../components_planet/Header";
 
-import FrameLimiter, { FPSLimiter } from "../components_planet/FrameLimiter";
-
+// import FrameLimiter, { FPSLimiter } from "../components_planet/FrameLimiter";
 
 extend({ UnrealBloomPass });
 
 import { create } from "zustand";
-
-import BoxBlendGeometry, {
-  Fform,
-  // Line,
-  Prout,
-  Spprite,
-} from "../components_planet/RoundedRectangle";
-
-
 
 export const AppContext = createContext();
 
 const App = () => {
   // const cam = useRef();
   const [nActive2, setUsers] = useState(0);
+
+  const [_isMobile, setMobile] = useState(true);
+
+  useEffect(() => {
+    setMobile(isMobile);
+  }, [setMobile]);
 
   const dispatchUserEvent = (payload) => {
     setUsers(payload);
@@ -80,12 +69,13 @@ const App = () => {
 
     return isTouchDevice;
   }
-  var isNotTouchDevice=true
+  var isNotTouchDevice = true;
+  // var isMobile=true
   // const isTouchDevice=useDeviceDetect()
-  React.useEffect(() => {
-    // console.log("matchmedia", window.matchMedia("(pointer:coarse)").matches);
-    isNotTouchDevice=window.matchMedia("(pointer:coarse)").matches
-  }, []);
+  // React.useEffect(() => {
+  //   // console.log("matchmedia", window.matchMedia("(pointer:coarse)").matches);
+  //   isNotTouchDevice=window.matchMedia("(pointer:coarse)").matches
+  // }, []);
 
   const { name, updateData } = usePlanetStore((state) => state);
 
@@ -125,17 +115,33 @@ const App = () => {
   const luminanceSmoothing = 1;
 
   // const values = useContext(MyContext);
+  useEffect(() => {
+    // if (window.innerWidth <= 768) {
+    //   FOV = 50
+    //   FAR = 1200
+    //   // 769px - 1080px screen width camera
+    // } else if (window.innerWidth >= 769 && window.innerWidth <= 1080) {
+    //   FOV = 50
+    //   FAR = 1475
+    //   // > 1080px screen width res camera
+    // } else {
+    //   FOV = 40
+    //   FAR = 1000
+    // }
+  }, []);
+
+  // console.log(_isMobile);
 
   return (
     <>
-      {isNotTouchDevice ? (
+      {/* {true ? ( */}
         <>
-        
           <div
             style={{
               height: "100vh",
               width: "100vw",
               backgroundColor: "#252934",
+              display: _isMobile?"none":"block" ,
             }}
           >
             <PanelGauche />
@@ -146,7 +152,7 @@ const App = () => {
               gl={{ antialias: false }}
               camera={{
                 near: 0.1,
-                far: 1000,
+                far: 50,
                 zoom: 1,
                 position: [4, 4, 4],
                 maxPolarAngle: 0.85,
@@ -161,6 +167,7 @@ const App = () => {
                 camera.position.set(10, 3, 10);
               }}
             >
+              {/* <Suspense fallback={null}> */}
               <EffectComposer>
                 <Bloom
                   luminanceThreshold={luminanceThreshold}
@@ -199,7 +206,7 @@ const App = () => {
               {/* <Line position={[0, 0, 0]} /> */}
               {/* <BoxBlendGeometry /> */}
               {/* <Prout /> */}
-              {/* <Stats /> */}
+              <Stats />
               <OrbitControls
                 // maxPolarAngle={0.85}
                 maxDistance={20}
@@ -213,11 +220,11 @@ const App = () => {
                 fade
                 speed={1}
               />
-              <Suspense fallback={null}>
-                <Physics allowSleep={false} gravity={[0, 0, 0]}>
-                  <Scene />
-                </Physics>
-              </Suspense>
+
+              <Physics allowSleep={false} gravity={[0, 0, 0]}>
+                <Scene />
+              </Physics>
+              {/* </Suspense> */}
             </Canvas>
           </div>
           <div
@@ -229,6 +236,7 @@ const App = () => {
               width: "20vh",
               backgroundColor: "rgba(0, 0, 0, 0)",
               cursor: "pointer",
+              display:_isMobile?"none":"block" 
             }}
             onClick={() => {
               if (nActive > 0) {
@@ -277,6 +285,7 @@ const App = () => {
               width: "20vh",
               backgroundColor: "rgba(0, 0, 0, 0)",
               cursor: "pointer",
+              display:_isMobile?"none":"block" 
             }}
             onClick={() => {
               if (nActive < 5) {
@@ -319,9 +328,22 @@ const App = () => {
             </Canvas>
           </div>
         </>
-      ) : (
-        ""
-      )}
+      {/* ) : ( */}
+        <div
+          style={{
+            backgroundColor: "white",
+            height: "100vh",
+            width: "100wh",
+            color: "black",
+            textAlign: "center",
+            lineHeight: "25vh",
+            display: _isMobile?"block":"none" ,
+          }}
+        >
+          Site non prévu pour Smartphone
+        </div>
+        {/* <Stats /> */}
+      {/* )} */}
     </>
   );
 };

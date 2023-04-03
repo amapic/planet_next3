@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  basePath:"/planet"
+  // distDir: 'planet',
+
 }
 
 module.exports = nextConfig

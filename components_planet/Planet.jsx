@@ -16,17 +16,29 @@ import TextPlanet from "./TextPlanet";
 import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
 
+import { useRouter } from 'next/router'
+
+// export function useBasePath(){
+//   const { basePath } = useRouter();
+//   return basePath;
+// }
+
 export default function Planet({ compteur, image,imageData, ...args }) {
+
   const colorMap = [
-    useLoader(TextureLoader, "/image/earth.jpg"),
-    useLoader(TextureLoader, "/image/mars.jpg"),
-    useLoader(TextureLoader, "/image/mercure.jpg"),
-    useLoader(TextureLoader, "/image/neptune.jpg"),
-    useLoader(TextureLoader, "/image/moon.jpg"),
-    useLoader(TextureLoader, "/image/jupiter.jpg"),
-    useLoader(TextureLoader, "/image/venus.jpg"),
-    useLoader(TextureLoader, "/image/uranus.jpg"),
+    useLoader(TextureLoader, "/planet/image/earth.jpg"),
+    useLoader(TextureLoader, "/planet/image/mars.jpg"),
+    useLoader(TextureLoader, "/planet/image/mercure.jpg"),
+    useLoader(TextureLoader, "/planet/image/neptune.jpg"),
+    useLoader(TextureLoader, "/planet/image/moon.jpg"),
+    useLoader(TextureLoader, "/planet/image/jupiter.jpg"),
+    useLoader(TextureLoader, "/planet/image/venus.jpg"),
+    useLoader(TextureLoader, "/planet/image/uranus.jpg"),
   ];
+
+  // console.log(useRouter())
+
+  // const colorMap = [useLoader(TextureLoader, "@/planet/earth.jpg")]
 
   
 
@@ -133,13 +145,13 @@ export default function Planet({ compteur, image,imageData, ...args }) {
         }}
       >
         <sphereGeometry args={[image.radius, 32, 32]} />
-        <meshPhongMaterial
+        <meshStandardMaterial
           map={nbMapPlanet.current}
           // map={image.Mmap}
           // toneMapped={false}
           // transparent={true}
           // opacity={1}
-          // color={[255, 128, 0]}
+          // color={[128, 128, 128]}
           // emissiveIntensity={0.1}
         />
       </animated.mesh>

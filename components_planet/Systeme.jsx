@@ -7,6 +7,12 @@ import { animated } from "@react-spring/three";
 
 import TextPlanet from "./TextPlanet";
 
+import dynamic from 'next/dynamic'
+
+const DynamicPlanet = dynamic(() => import("./Planet"), {
+  ssr: false,
+})
+
 const Soleil = ({ info, centre, ...args }) => {
   
 
@@ -115,9 +121,10 @@ export default function Systeme({
 
   return nActive == i ||
     nActive == i + 1 ||
-    nActive == i + 2 ||
-    nActive == i - 1 ||
-    nActive == i - 2 ? (
+    // nActive == i + 2 ||
+    nActive == i - 1 ?
+    // nActive == i - 2 ? 
+    (
     // return 1 == 1 ? (
     <group position={position}>
       <gridHelper colorCenterLine={[255, 127, 0]} colorGrid={[255, 127, 0]} />
@@ -139,7 +146,8 @@ export default function Systeme({
 
       {info.map((image, i) => (
         <>
-          <Planet
+        <DynamicPlanet
+          // <Planet></Planet>
             key={idSysteme.current * i}
             compteur={compteur}
             image={image}

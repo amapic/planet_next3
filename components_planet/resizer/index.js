@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Direction } from './constants';
 import './styles.css';
 
+
 const Resizer = ({ onResize }) => {
   const [direction, setDirection] = useState('');
   const [mouseDown, setMouseDown] = useState(false);
