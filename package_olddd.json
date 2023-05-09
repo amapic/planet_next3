@@ -1,0 +1,47 @@
+{
+    "name": "planet_next3",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "dev": "next dev -p 4000",
+      "build": "next build && next export -o planet",
+      "start": "next start -p 4000",
+      "lint": "next lint"
+    },
+    "dependencies": {
+      "@next/font": "13.1.1",
+      "@react-spring/three": "^9.6.1",
+      "@react-three/cannon": "^6.5.0",
+      "@react-three/drei": "^9.48.1",
+      "@react-three/fiber": "^8.9.1",
+      "@react-three/postprocessing": "^2.7.0",
+      "autoprefixer": "^10.4.13",
+      "babel-plugin-glsl": "^1.0.0",
+      "framer-motion": "^8.1.9",
+      "gl-react": "^5.2.0",
+      "glsl-noise": "^0.0.0",
+      "glslify": "^7.1.1",
+      "gsap": "^3.11.4",
+      "html-react-parser": "^3.0.12",
+      "leva": "^0.9.34",
+      "lodash": "^4.17.21",
+      "next": "13.1.1",
+      "papaparse": "^5.3.2",
+      "postcss": "^8.4.20",
+      "react": "18.2.0",
+      "react-device-detect": "^2.2.3",
+      "react-dom": "18.2.0",
+      "react-useportal": "^1.0.17",
+      "sass": "^1.57.1",
+      "tailwindcss": "^3.2.4",
+      "three": "^0.148.0",
+      "zustand": "^4.3.5"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.20.7",
+      "@types/node": "18.11.18",
+      "@types/react": "18.0.26",
+      "csv-loader": "^3.0.5",
+      "typescript": "4.9.4"
+    }
+  }

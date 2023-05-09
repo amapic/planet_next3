@@ -19,8 +19,8 @@ import Panel from "./resizer/Panel";
 export default function PanelGauche() {
   const [text, setText] = useState("");
   const [fullText, setFullText] = useState(
-    "Cet ecran permet de voir quelques systemes planetaires <br />" +
-      "Cliquez sur une planete pour avoir des informations sur celle-ci"
+    "Plusieurs systemes planetaires sont representes sur cette page <br />" +
+      "Cliquez sur une planete pour avoir des informations la concernant"
     // name
   );
   //vous pouvez en savoir plus en survolant les planètes
@@ -59,13 +59,13 @@ export default function PanelGauche() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       gsap.registerPlugin(Draggable);
-      // Draggable.create("#panneau", {
-      //   type: "x,y",
-      //   edgeResistance: 0.65,
-      //   inertia: true,
-      //   onPress: function () {
-      //   },
-      // });
+      Draggable.create("#panneau", {
+        type: "x,y",
+        edgeResistance: 0.65,
+        inertia: true,
+        onPress: function () {
+        },
+      });
     }
   }, []);
 
@@ -123,7 +123,7 @@ export default function PanelGauche() {
           document.body.style.cursor = "auto";
         }}
       >
-         {!folded ? (
+         {/* {!folded ? (
                 <div>
                   <svg
                     // version="1.1"
@@ -177,7 +177,7 @@ export default function PanelGauche() {
                     />
                   </g>
                 </svg>
-              )}
+              )} */}
       </div>
       <div
         ref={ref2}

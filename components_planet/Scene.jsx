@@ -35,9 +35,7 @@ export default function Scene() {
   useEffect(() => {
     Data.forEach((item, i) => {
 
-      if (item.name=='K2-138 b'){
-        console.log(item)
-      }
+   
       if (star_name != item.star_name && star_name != "!") {
         dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
         dataPlanete = {};
