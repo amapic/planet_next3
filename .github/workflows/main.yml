@@ -4,7 +4,7 @@ name: DeploymentWorkflow
 on:
   push:
     branches:
-      - problem
+      - main
 
 jobs:
   deploy:
@@ -21,6 +21,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
           script: |
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
-            git pull origin problem
+            git pull origin main
             npm install --legacy-peer-deps
             npm run build
