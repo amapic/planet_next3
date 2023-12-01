@@ -16,11 +16,28 @@ import Parser from "html-react-parser";
 
 import Panel from "./resizer/Panel";
 
+
+import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
+import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
+import { init, gl, scene, camera, controls } from './init/init';
+
+import vertexShader from '../components_planet/shaders/vertex.js';
+import fragmentShader from '../components_planet/shaders/fragment.js';
+// import { GUI } from './init/lil-gui.module.min';
+// import './style.css';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+
+
+
 export default function PanelGauche() {
   const [text, setText] = useState("");
   const [fullText, setFullText] = useState(
-    "Plusieurs systemes planetaires sont representes sur cette page <br />" +
-      "Cliquez sur une planete pour avoir des informations la concernant"
+    "Cliquez sur les fleches pour faire defiler les systemes solaires <br />" +
+      "et cliquez sur une planete pour avoir des informations la concernant TEST"
     // name
   );
   //vous pouvez en savoir plus en survolant les planètes
@@ -47,7 +64,6 @@ export default function PanelGauche() {
         backgroundColor: "teal",
         duration: 1,
         height: "30%",
-        // backgroundColor: "blue",
       });
     }
 
@@ -63,20 +79,62 @@ export default function PanelGauche() {
         type: "x,y",
         edgeResistance: 0.65,
         inertia: true,
-        onPress: function () {
-        },
+        onPress: function () {},
       });
     }
   }, []);
 
   // useEffect(() => {
-  //   if (index < fullText.length) {
-  //     setTimeout(() => {
-  //       setText(text + fullText[index]);
-  //       setIndex(index + 1);
-  //     }, 10);
-  //   }
-  // }, [index]);
+
+  //   kaka=new scene();
+  //   const torus = new THREE.Mesh(
+  //     new THREE.TorusGeometry(1, 0.3, 100, 100),
+  //     new THREE.ShaderMaterial({
+  //       vertexShader,
+  //       fragmentShader,
+  //       side: THREE.DoubleSide,
+  //       uniforms: {
+  //         uTime: { value: 0 },
+  //         uResolution: { value: new THREE.Vector2() },
+  //         uDisplace: { value: 2 },
+  //         uSpread: { value: 1.2 },
+  //         uNoise: { value: 16 },
+  //       },
+  //     })
+  //   );
+
+  //   kaka.add(torus);
+
+  //   let composer = new EffectComposer(gl);
+  //   composer.addPass(new RenderPass(scene, camera));
+
+  //   gui
+  //     .add(torus.material.uniforms.uDisplace, "value", 0, 2, 0.1)
+  //     .name("displacemnt");
+  //   gui.add(torus.material.uniforms.uSpread, "value", 0, 2, 0.1).name("spread");
+  //   gui.add(torus.material.uniforms.uNoise, "value", 10, 25, 0.1).name("noise");
+
+  //   const bloomPass = new UnrealBloomPass(
+  //     new THREE.Vector2(window.innerWidth, window.innerHeight),
+  //     1.4,
+  //     0.0001,
+  //     0.01
+  //   );
+
+  //   composer.addPass(bloomPass);
+
+  //   const clock = new THREE.Clock();
+
+  //   let animate = () => {
+  //     const elapsedTime = clock.getElapsedTime();
+  //     torus.material.uniforms.uTime.value = elapsedTime;
+  //     torus.rotation.z = Math.sin(elapsedTime) / 4 + elapsedTime / 20 + 5;
+  //     composer.render();
+  //     controls.update();
+  //     requestAnimationFrame(animate);
+  //   };
+  //   animate();
+  // }, []);
 
   //effect glitch aléatoire
   useEffect(() => {
@@ -123,7 +181,7 @@ export default function PanelGauche() {
           document.body.style.cursor = "auto";
         }}
       >
-         {/* {!folded ? (
+        {/* {!folded ? (
                 <div>
                   <svg
                     // version="1.1"
@@ -350,22 +408,13 @@ export function PanelPlanete() {
               {!folded ? (
                 <div>
                   <svg
-                    // version="1.1"
-                    // id="Capa_1"
-                    // xmlns="http://www.w3.org/2000/svg"
-                    // xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px"
                     y="0px"
                     width="15"
                     height="15"
                     viewBox="0 0 960 560"
-                    // enable-background="new 0 0 960 560"
-                    // xml:space="preserve"
                   >
-                    <g
-                      // id="Rounded_Rectangle_33_copy_4_1_"
-                      transform="translate(40, 280) rotate(0 0 0)"
-                    >
+                    <g transform="translate(40, 280) rotate(0 0 0)">
                       <path
                         fill="teal"
                         d="M480,344.181L268.869,131.889c-15.756-15.859-41.3-15.859-57.054,0c-15.754,15.857-15.754,41.57,0,57.431l237.632,238.937
@@ -376,23 +425,15 @@ export function PanelPlanete() {
                   </svg>
                 </div>
               ) : (
+                // <canvas></canvas>
                 <svg
-                  // version="1.1"
-                  // id="Capa_1"
-                  // xmlns="http://www.w3.org/2000/svg"
-                  // xmlns:xlink="http://www.w3.org/1999/xlink"
                   x="0px"
                   y="0px"
                   width="15"
                   height="15"
                   viewBox="0 0 960 560"
-                  // enable-background="new 0 0 960 560"
-                  // xml:space="preserve"
                 >
-                  <g
-                    // id="Rounded_Rectangle_33_copy_4_1_"
-                    transform="translate(40, 280) rotate(0 0 0)"
-                  >
+                  <g transform="translate(40, 280) rotate(0 0 0)">
                     <path
                       fill="teal"
                       d="M480,344.181L268.869,131.889c-15.756-15.859-41.3-15.859-57.054,0c-15.754,15.857-15.754,41.57,0,57.431l237.632,238.937

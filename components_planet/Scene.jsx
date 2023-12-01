@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 
-import { useFrame, useThree, extend } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 
 
 
@@ -9,7 +9,7 @@ import Systeme from "./Systeme";
 
 import Data from "premierTri.json";
 
-import { AppContext, useDeplacementStore } from "../pages/index";
+import {  useDeplacementStore } from "../pages/index";
 
 import { usePlanetStore } from "../pages/index";
 
@@ -51,6 +51,8 @@ export default function Scene() {
       // dataPlanete.radius = Math.round(item.radius * 100) / 100;
       dataPlanete.radius = item.radius;
       dataPlanete.semi_major_axis =item.semi_major_axis;
+      dataPlanete.orbital_period_ =item.orbital_period;
+      dataPlanete.semi_major_axis_ =item.semi_major_axis;
         // Math.round(item.semi_major_axis * 100) / 100;
       dataPlanete.period = item.orbital_period;
 
@@ -177,7 +179,6 @@ export default function Scene() {
     }
   });
 
-  // console.log("rr",refDataSystemes.current)
 
   return (
     <>
@@ -192,7 +193,6 @@ export default function Scene() {
                 info={systeme}
                 position={pos[i]}
                 nActive={nActive}
-                // Mmap={Mmap}
               />
             </>
           ))

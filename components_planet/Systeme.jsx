@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 
-import Planet from "./Planet";
 
 
 import { animated } from "@react-spring/three";
@@ -66,9 +65,6 @@ export default function Systeme({
 
   let infoOrig = JSON.parse(JSON.stringify(info));
 
-  if (infoOrig.star_name=="Kepler-107"){
-    // console.log(tt.current)
-  }
 
 
   info.forEach((x, i) => {
@@ -97,7 +93,7 @@ export default function Systeme({
 
   //8 = valeur max , 1 valeur min
   info.forEach((x, i) => {
-    x.semi_major_axis_orig = x.semi_major_axis;
+    x.semi_major_axis_orig = infoOrig[i].semi_major_axis;
     x.semi_major_axis =
       1 +
       ((x.semi_major_axis - semi_major_axismin) * (8 - 1)) /
@@ -112,12 +108,8 @@ export default function Systeme({
     x.period_orig=x.period
     x.period =
       20 + ((x.period - periodemin) * (100 - 20)) / (periodemax - periodemin);
-    // x.colorMap = 2 * Math.ceil(Math.random());
   });
 
-  if (infoOrig.star_name=="Kepler-107"){
-    // console.log(infoOrig)
-  }
 
   return nActive == i ||
     nActive == i + 1 ||

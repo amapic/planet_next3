@@ -4,12 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4000",
-    "build": "next build && next export -o planet",
+    "build": "next build && next export -o ../../prod/planet",
     "start": "next start -p 4000",
     "lint": "next lint"
   },
   "dependencies": {
     "@next/font": "13.1.5",
+    "@react-spring/three": "^9.6.1",
+    "@react-three/cannon": "^6.5.0",
+    "@react-three/drei": "^9.48.1",
+    "@react-three/fiber": "^8.9.1",
+    "@react-three/postprocessing": "^2.7.0",
     "@types/node": "18.11.17",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
@@ -20,8 +25,8 @@
     "eslint-config-next": "13.1.5",
     "framer-motion": "^8.1.9",
     "gl-react": "^5.2.0",
-    "glslify": "^7.1.1",
     "glsl-noise": "^0.0.0",
+    "glslify": "^7.1.1",
     "gsap": "^3.11.4",
     "html-react-parser": "^3.0.12",
     "leva": "^0.9.34",
@@ -33,25 +38,23 @@
     "react": "18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
+    "react-responsive": "^9.0.2",
     "react-scroll": "^1.8.9",
     "react-useportal": "^1.0.17",
     "sass": "^1.57.1",
     "tailwindcss": "^3.2.4",
+    "theme-ui": "^0.15.7",
     "three": "^0.149.0",
     "three-stdlib": "^2.21.8",
     "typescript": "4.9.4",
-    "zustand": "^4.3.6",
-    "@react-spring/three": "^9.6.1",
-    "@react-three/cannon": "^6.5.0",
-    "@react-three/drei": "^9.48.1",
-    "@react-three/fiber": "^8.9.1",
-    "@react-three/postprocessing": "^2.7.0"
+    "zustand": "^4.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "csv-loader": "^3.0.5",
+    "purify-css": "^1.2.5",
     "typescript": "4.9.4"
   }
 }

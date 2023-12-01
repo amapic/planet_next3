@@ -1,10 +1,9 @@
 /* eslint-disable */
 // @ts-ignore
-import React, { Suspense, useRef, useEffect, useState, useMemo } from "react";
-import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
+import React, { useRef, useEffect, useState, useMemo } from "react";
+import {  useFrame } from "@react-three/fiber";
 
 import { useSphere } from "@react-three/cannon";
-import * as three from "three";
 
 import { animated } from "@react-spring/three";
 
@@ -16,12 +15,7 @@ import TextPlanet from "./TextPlanet";
 import { debounce } from "lodash";
 import { usePlanetStore } from "../pages/index";
 
-import { useRouter } from 'next/router'
 
-// export function useBasePath(){
-//   const { basePath } = useRouter();
-//   return basePath;
-// }
 
 export default function Planet({ compteur, image,imageData, ...args }) {
 
@@ -36,9 +30,7 @@ export default function Planet({ compteur, image,imageData, ...args }) {
     useLoader(TextureLoader, "/planet/image/uranus.jpg"),
   ];
 
-  // console.log(useRouter())
 
-  // const colorMap = [useLoader(TextureLoader, "@/planet/earth.jpg")]
 
   
 
@@ -47,9 +39,6 @@ export default function Planet({ compteur, image,imageData, ...args }) {
 
   const { planet, updateData } = usePlanetStore((state) => state);
 
-  if (image.name == "Kepler-107 e") {
-    // console.log(image);
-  }
 
 
   const [sphereX, setSphereX] = useState(0);
@@ -121,7 +110,7 @@ export default function Planet({ compteur, image,imageData, ...args }) {
           text={imageData.text}
           mass={imageData.mass}
           rayon={imageData.rayon}
-          semi_major_axis_orig={imageData.semi_major_axis_orig}
+          semi_major_axis_orig={image.semi_major_axis}
           period_orig={imageData.period_orig}
           image={imageData}
           star={false}
