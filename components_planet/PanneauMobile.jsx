@@ -37,7 +37,7 @@ export default function PanelGauche() {
   const [text, setText] = useState("");
   const [fullText, setFullText] = useState(
     "Cliquez sur les fleches pour faire defiler les systemes solaires <br />" +
-      "et cliquez sur une planete pour avoir des informations la concernant TEST3"
+      "et cliquez sur une planete pour avoir des informations la concernant"
     // name
   );
   //vous pouvez en savoir plus en survolant les planètes
