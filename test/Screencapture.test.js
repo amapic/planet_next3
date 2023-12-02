@@ -15,5 +15,5 @@ expect.extend({ toMatchImageSnapshot });
 // },50000)
 
 it('CreateReactApp home', async () => {
-  expect("1").toEqual("1");
+  expect("2").toEqual("1");
 })
