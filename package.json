@@ -6,7 +6,8 @@
     "dev": "next dev -p 4000",
     "build": "next build && next export -o ../../prod/planet",
     "start": "next start -p 4000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@next/font": "13.1.5",
@@ -23,6 +24,7 @@
     "bootstrap": "^5.2.3",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",
+    "express": "^4.18.2",
     "framer-motion": "^8.1.9",
     "gl-react": "^5.2.0",
     "glsl-noise": "^0.0.0",
@@ -35,6 +37,7 @@
     "next-absolute-url": "^1.2.2",
     "papaparse": "^5.3.2",
     "postcss": "^8.4.21",
+    "puppeteer": "^21.5.2",
     "react": "18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
@@ -51,9 +54,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "csv-loader": "^3.0.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-image-snapshot": "^6.3.0",
     "purify-css": "^1.2.5",
     "typescript": "4.9.4"
   }
