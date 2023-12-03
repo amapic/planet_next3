@@ -8,7 +8,7 @@ function sleep(ms) {
 
 it("CreateReactApp home", async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    // headless: false,
     product: "chrome",
 
     args: ["--no-sandbox","--disable-setuid-sandbox"],
