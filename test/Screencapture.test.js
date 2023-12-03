@@ -11,7 +11,7 @@ it("CreateReactApp home", async () => {
     headless: false,
     product: "chrome",
 
-    args: ["--start-maximized","--no-sandbox"],
+    args: ["--start-maximized","--no-sandbox","--disable-setuid-sandbox"],
 
     defaultViewport: { width: 1700, height: 800 },
   });
