@@ -8,10 +8,10 @@ function sleep(ms) {
 
 it("CreateReactApp home", async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    
     product: "chrome",
 
-    args: ["--start-maximized","--no-sandbox","--disable-setuid-sandbox"],
+    args: ["--no-sandbox","--disable-setuid-sandbox"],
 
     defaultViewport: { width: 1700, height: 800 },
   });
