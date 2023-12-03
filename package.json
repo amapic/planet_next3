@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4000",
-    "build": "next build && next export -o ../../prod/planet",
+    "build": "next export -o ../../prod/planet",
+    "pre_build": "next build && next export -o ../../prod/dev/planet",
     "start": "next start -p 4000",
     "lint": "next lint",
     "test": "jest --detectOpenHandles"

@@ -16,7 +16,7 @@ it("CreateReactApp home", async () => {
     defaultViewport: { width: 1700, height: 800 },
   });
   const page = await browser.newPage();
-  await page.goto("http://localhost:4000/planet");
+  await page.goto("https://amaurypichat.fr/dev/planet/index.html");
 
   // await page.waitForTimeout(6000);
   // sleep(20000).then(async () => {
