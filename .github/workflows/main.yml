@@ -24,3 +24,4 @@ jobs:
             git pull origin main
             npm install --legacy-peer-deps
             npm run pre_build
+            npm run test
