@@ -8,7 +8,7 @@ function sleep(ms) {
 
 it("CreateReactApp home", async () => {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     product: "chrome",
 
     args: ["--no-sandbox","--disable-setuid-sandbox"],
@@ -16,7 +16,7 @@ it("CreateReactApp home", async () => {
     defaultViewport: { width: 1700, height: 800 },
   });
   const page = await browser.newPage();
-  await page.goto("https://amaurypichat.fr/dev/planet/");
+  await page.goto("https://amaurypichat.fr/dev/planet",{waitUntil: 'networkidle0'});
 
   // await page.waitForTimeout(6000);
   // sleep(20000).then(async () => {
@@ -30,24 +30,21 @@ it("CreateReactApp home", async () => {
   //   // await browser.close();
   // });
 
-  sleep(20000).then(async () => {
+  // sleep(30000).then(async () => {
     // const element = await page.waitForSelector("#div_canvas1");
 
     // await element.click();
 
     // console.log("World!");
-    const image = await page.screenshot({
-      clip: { x: 220, y: 0, width: 1700, height: 800 },
-    });
+    const image = await page.screenshot();
 
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 65,
-      threshold: 65,
-      failureThresholdType: "percent",
+      failureThreshold: 0,
+      failureThresholdType: "percent"
     });
 
     await browser.close();
-  });
+  // });
 
   // await browser.close();
 }, 100000);
