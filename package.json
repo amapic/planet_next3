@@ -7,7 +7,7 @@
     "build": "next build && next export -o ../../prod/planet",
     "start": "next start -p 4000",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "@next/font": "13.1.5",
@@ -37,7 +37,7 @@
     "next-absolute-url": "^1.2.2",
     "papaparse": "^5.3.2",
     "postcss": "^8.4.21",
-    "puppeteer": "^21.5.2",
+    "puppeteer": "^20.5.0",
     "react": "18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",

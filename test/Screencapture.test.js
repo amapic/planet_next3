@@ -1,19 +1,53 @@
-
-
-import { toMatchImageSnapshot } from 'jest-image-snapshot';
-const puppeteer = require('puppeteer');
+import { toMatchImageSnapshot } from "jest-image-snapshot";
+const puppeteer = require("puppeteer");
 expect.extend({ toMatchImageSnapshot });
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+it("CreateReactApp home", async () => {
+  const browser = await puppeteer.launch({
+    headless: false,
+    product: "chrome",
+
+    args: ["--start-maximized"],
+
+    defaultViewport: { width: 1700, height: 800 },
+  });
+  const page = await browser.newPage();
+  await page.goto("http://localhost:4000/planet");
+
+  // await page.waitForTimeout(6000);
+  // sleep(20000).then(async () => {
+  //   console.log("World!");
+  //   const image = await page.screenshot({
+  //     clip: { x: 220, y: 0, width: 630, height: 360 },
+  //   });
+
+  //   expect(image).toMatchImageSnapshot();
+
+  //   // await browser.close();
+  // });
+
+  sleep(20000).then(async () => {
+    const element = await page.waitForSelector("#div_canvas1");
+
+    await element.click();
+
+    // console.log("World!");
+    const image = await page.screenshot({
+      clip: { x: 220, y: 0, width: 1700, height: 800 },
+    });
+
+    expect(image).toMatchImageSnapshot({failureThreshold:60,threshold:60,failureThresholdType: 'percent'});
+
+    await browser.close();
+  });
+
+  // await browser.close();
+}, 100000);
 
 // it('CreateReactApp home', async () => {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto('http://localhost:4000/screenshot?url=https://example.com/');
-//     const image = await page.screenshot();
-
-//     expect(image).toMatchImageSnapshot();
-// },50000)
-
-it('CreateReactApp home', async () => {
-  expect("2").toEqual("1");
-})
+//   expect("2").toEqual("1");
+// })

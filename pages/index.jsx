@@ -234,6 +234,7 @@ const App = () => {
                 </Canvas>
               </div>
               <div
+                id="div_canvas1"
                 style={{
                   position: "fixed",
                   bottom: "10vh",
@@ -241,7 +242,8 @@ const App = () => {
                   height: "20vh",
                   width: "20vh",
                   backgroundColor: "rgba(0, 0, 0, 0)",
-                  cursor: "pointer",
+                  cursor: "pointer"
+                  
                   // display: _isMobile ? "none" : "block",
                 }}
                 onClick={() => {
