@@ -12,12 +12,7 @@ import { Canvas, extend } from "@react-three/fiber";
 
 import * as THREE from "three";
 
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
+
 
 // import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
