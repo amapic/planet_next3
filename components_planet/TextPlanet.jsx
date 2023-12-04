@@ -3,9 +3,9 @@ import { Text } from "@react-three/drei";
 import React, { useRef } from "react";
 
 import { useFrame } from "@react-three/fiber";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+// import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
-import roboto from "../public/Roboto_Regular.json";
+// import roboto from "../public/Roboto_Regular.json";
 
 import * as THREE from "three";
 
@@ -57,7 +57,7 @@ export default function TextPlanet({
 
   
 
-  const font = new FontLoader().parse(roboto);
+  // const font = new FontLoader().parse(roboto);
 
   return (
     <group>

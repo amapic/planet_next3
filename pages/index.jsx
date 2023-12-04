@@ -19,7 +19,7 @@ import {
   isMobile,
 } from "react-device-detect";
 
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+// import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
 import PanelGauche, { PanelPlanete } from "../components_planet/PanneauMobile";
 
@@ -41,7 +41,7 @@ import TransitionProvider, {
   CuubeCanvas,
 } from "../components_planet/context";
 
-import { Debug, Physics, usePlane, useSphere } from "@react-three/cannon";
+// import { Debug, Physics, usePlane, useSphere } from "@react-three/cannon";
 
 // import { UnrealBloomPass, WaterPass } from "three-stdlib";
 import { useControls } from "leva";
@@ -227,9 +227,9 @@ const App = () => {
                     speed={1}
                   />
 
-                  <Physics allowSleep={false} gravity={[0, 0, 0]}>
+                  {/* <Physics allowSleep={false} gravity={[0, 0, 0]}> */}
                     <Scene />
-                  </Physics>
+                  {/* </Physics> */}
                   {/* </Suspense> */}
                 </Canvas>
               </div>

@@ -4,7 +4,7 @@ const config = {
     "moduleNameMapper": {
         "\\.(css|jpg|png)$": "identity-obj-proxy"
       },
-      // "testEnvironment": "jsdom",
+      "testEnvironment": "jsdom",
       transform: {
         '\\.(js|jsx)$': ['babel-jest', { configFile: './babel.config.testing.js' }]
       },

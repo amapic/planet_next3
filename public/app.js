@@ -1,5 +1,6 @@
 import * as THREE from '..three';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';

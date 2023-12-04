@@ -18,18 +18,18 @@ import Panel from "./resizer/Panel";
 
 
 import * as THREE from 'three';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
-import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
-import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
-import { init, gl, scene, camera, controls } from './init/init';
+// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+// import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+// import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
+// import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
+// import { init, gl, scene, camera, controls } from './init/init';
 
-import vertexShader from '../components_planet/shaders/vertex.js';
-import fragmentShader from '../components_planet/shaders/fragment.js';
+// import vertexShader from '../components_planet/shaders/vertex.js';
+// import fragmentShader from '../components_planet/shaders/fragment.js';
 // import { GUI } from './init/lil-gui.module.min';
 // import './style.css';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 
 
 
@@ -37,7 +37,7 @@ export default function PanelGauche() {
   const [text, setText] = useState("");
   const [fullText, setFullText] = useState(
     "Cliquez sur les fleches pour faire defiler les systemes solaires <br />" +
-      "et cliquez sur une planete pour avoir des informations la concernant sfhdgh"
+      "et cliquez sur une planete pour avoir des informations la concernant"
     // name
   );
   //vous pouvez en savoir plus en survolant les planètes
@@ -161,6 +161,7 @@ export default function PanelGauche() {
       }}
       className="fixed"
       id="panneau"
+      role="contact"
       ref={ref}
     >
       <div
@@ -288,8 +289,8 @@ export function PanelPlanete() {
     (state) => state
   );
 
-  const [text, setText] = useState("RR");
-  const [index, setIndex] = useState(0);
+  // const [text, setText] = useState("RR");
+  // const [index, setIndex] = useState(0);
   const [folded, setFolded] = useState(false);
 
   const [glitch, setGlitch] = useState(true);
