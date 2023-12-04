@@ -10,7 +10,7 @@ import React from "react";
 // };
 // jest.mock('@react-three/cannon');
 
-test("loads and displays greeting", async () => {
+test("Texte centrale", async () => {
   // const useEffectMock = jest.fn();
   // jest.spyOn(console, "warn").mockImplementation(() => {});
 
