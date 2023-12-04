@@ -34,6 +34,8 @@ import TransitionProvider, {
   CuubeCanvas,
 } from "../components_planet/context";
 
+import {useDeplacementStore} from "../components_planet/store/store";
+
 import { Physics } from "@react-three/cannon";
 
 // import { UnrealBloomPass, WaterPass } from "three-stdlib";

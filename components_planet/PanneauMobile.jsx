@@ -17,7 +17,7 @@ import Parser from "html-react-parser";
 import Panel from "./resizer/Panel";
 
 
-// import * as THREE from 'three';
+// import * as THREE from 'three'
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 // import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 // import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
