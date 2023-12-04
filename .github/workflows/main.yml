@@ -25,3 +25,4 @@ jobs:
             npm install --legacy-peer-deps
             npm run pre_build
             npm run test
+            npm run build
