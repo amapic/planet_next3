@@ -13,7 +13,7 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import TextPlanet from "./TextPlanet";
 
 import { debounce } from "lodash";
-import { usePlanetStore } from "../pages/index";
+import { usePlanetStore } from "./store/store";
 
 
 

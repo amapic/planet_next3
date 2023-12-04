@@ -8,12 +8,13 @@ import React from "react";
 // const setup = () => {
   // return render(Home);
 // };
+// jest.mock('@react-three/cannon');
 
 test("loads and displays greeting", async () => {
-  const useEffectMock = jest.fn();
-  jest.spyOn(console, "warn").mockImplementation(() => {});
+  // const useEffectMock = jest.fn();
+  // jest.spyOn(console, "warn").mockImplementation(() => {});
 
-  jest.spyOn(React, "useEffect").mockImplementation(useEffectMock);
+  // jest.spyOn(React, "useEffect").mockImplementation(useEffectMock);
   // ARRANGE
   var hh = "";
   // act(() => {

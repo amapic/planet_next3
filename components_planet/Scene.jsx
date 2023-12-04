@@ -1,17 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 
-
 import { useFrame } from "@react-three/fiber";
-
-
 
 import Systeme from "./Systeme";
 
 import Data from "../public/premierTri.json";
 
-import {  useDeplacementStore } from "../pages/index";
+import {  useDeplacementStore,usePlanetStore } from "./store/store";
 
-import { usePlanetStore } from "../pages/index";
+// import { usePlanetStore } from "../pages/index";
 
 
 
