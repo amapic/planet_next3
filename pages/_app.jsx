@@ -6,8 +6,8 @@ import "../styles/glitch_planet.scss";
 import "../styles/resizer_planet.css";
 // import '../styles/glitch2.css'
 
-import type { AppProps } from "next/app";
+// import type { AppProps } from "next/app";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }

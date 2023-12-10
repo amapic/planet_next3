@@ -34,7 +34,7 @@ import {useDeplacementStore} from "../components_planet/store/store";
 import { Physics } from "@react-three/cannon";
 
 // import { UnrealBloomPass, WaterPass } from "three-stdlib";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import { Effects, Stars } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import Scene from "../components_planet/Scene";
