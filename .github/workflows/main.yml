@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
           script: |
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
-            git pull origin main
+            git pull origin3 main
             npm install --legacy-peer-deps
             npm run pre_build
             npm run test
