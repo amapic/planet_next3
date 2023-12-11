@@ -22,7 +22,7 @@ it("CreateReactApp home", async () => {
     slowMo: 50
   });
   const page = await browser.newPage();
-  await page.goto("https://amaurypichat.fr/dev/planet", {
+  await page.goto("https://amaurypichat.fr/dev/agap2", {
     // waitUntil: "networkidle0",
   });
 
