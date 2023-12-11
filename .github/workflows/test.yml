@@ -12,10 +12,10 @@ jobs:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
             node-version: 18
-      - run: npm ci
+      - run: npm install --legacy-peer-deps
       - run: npm test
       - name: Test Code
-        uses: mujo-code/puppeteer-headful@16.6.0
+        uses: mujo-code/puppeteer-headful@18.9.0
         env:
           CI: "true"
         with:
