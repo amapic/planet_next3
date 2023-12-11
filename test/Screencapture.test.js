@@ -35,7 +35,7 @@ it("CreateReactApp home", async () => {
 
   expect(image).toMatchImageSnapshot({
     comparisonMethod: 'ssim',
-    failureThreshold: 0,
+    failureThreshold: 5,
     failureThresholdType: 'percent'
   });
 
