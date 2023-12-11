@@ -14,7 +14,7 @@ jobs:
 
       - name: SSH Deploy
         # Use the 'appleboy/ssh-action' action for SSH deployment
-        uses: google-github-actions/auth@v0.4.0
+        uses: google-github-actions/auth@v2.0.0
         with:
           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
