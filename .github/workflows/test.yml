@@ -7,11 +7,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependencies
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         with:
-          args: npm install --legacy-peer-deps
+            node-version: 18
+      - run: npm ci
+      - run: npm test
       - name: Test Code
         uses: mujo-code/puppeteer-headful@16.6.0
         env:
