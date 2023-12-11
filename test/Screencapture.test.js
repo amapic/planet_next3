@@ -19,11 +19,11 @@ it("CreateReactApp home", async () => {
     args: ["--no-sandbox"],
     executablePath: process.env.PUPPETEER_EXEC_PATH,
     defaultViewport: { width: 1700, height: 800 },
-    // slowMo: 50
+    slowMo: 50
     
   });
   const page = await browser.newPage();
-  await page.goto("https://amaurypichat.fr/dev/planet", {
+  await page.goto("chrome-extension://amaurypichat.fr/dev/planet", {
     waitUntil: "networkidle0",
   });
 
