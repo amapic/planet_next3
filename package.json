@@ -11,6 +11,7 @@
     "test": "jest --forceExit"
   },
   "dependencies": {
+    "@google-cloud/vision": "^4.0.2",
     "@react-spring/three": "^9.6.1",
     "@react-three/cannon": "^6.5.0",
     "@react-three/drei": "^9.48.1",
@@ -22,6 +23,7 @@
     "gl-react": "^5.2.0",
     "gsap": "^3.11.4",
     "html-react-parser": "^3.0.12",
+    "js-levenshtein": "^1.1.6",
     "lodash": "^4.17.21",
     "next": "13.1.5",
     "puppeteer": "^20.5.0",
