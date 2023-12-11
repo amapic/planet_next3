@@ -23,7 +23,7 @@ it("CreateReactApp home", async () => {
   });
   const page = await browser.newPage();
   await page.goto("https://amaurypichat.fr/dev/planet", {
-    waitUntil: "networkidle0",
+    // waitUntil: "networkidle0",
   });
 
   //   // await page.waitForTimeout(6000);
