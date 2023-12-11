@@ -32,6 +32,7 @@ test("Texte centrale", async () => {
   const client = new vision.ImageAnnotatorClient({
     projectId: "turing-position-236722",
   });
+  console.log("reeeeeeeee")
 
   const fileName =
     "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
