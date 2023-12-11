@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+      - uses: actions/checkout@v3
       - name: SSH Deploy
         # Use the 'appleboy/ssh-action' action for SSH deployment
         uses: google-github-actions/auth@v2.0.0
