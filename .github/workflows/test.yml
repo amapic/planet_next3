@@ -13,10 +13,9 @@ jobs:
         with:
             node-version: 18
       - run: npm install --legacy-peer-deps
-      - run: npm test
       - name: Test Code
         uses: mujo-code/puppeteer-headful@18.9.0
         env:
           CI: "true"
         with:
-          args: npm test
+          args: npm run test
