@@ -31,6 +31,8 @@ test("Texte centrale", async () => {
   // Creates a client
   const client = new vision.ImageAnnotatorClient({
     projectId: "turing-position-236722",
+    // credentials:
+    keyFilename:'turing-position-236722-f66db215fe06.json'
   });
   console.log("reeeeeeeee")
 
