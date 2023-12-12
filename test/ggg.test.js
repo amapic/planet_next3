@@ -45,11 +45,13 @@ test("Texte centrale", async () => {
   console.log("Text:");
   // detections.forEach((text) => console.log(text[0]));
   // detections.forEach((text) => console.log(text[0]));
-  console.log(detections[0].description);
+  
   var distance = levenshtein(
     detections[0].description,
-    "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
+    "CLIQQQQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
   );
+
+  console.log("distance : " + distance);
 
   expect(distance).toBeLessThanOrEqual(5);
 
