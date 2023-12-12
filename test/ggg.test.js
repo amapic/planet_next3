@@ -43,8 +43,8 @@ test("Texte centrale", async () => {
   const [result] = await client.textDetection(fileName);
   const detections = result.textAnnotations;
   console.log("Text:");
-  detections.forEach((text) => console.log(text[0]));
-  detections.forEach((text) => console.log(text[0]));
+  // detections.forEach((text) => console.log(text[0]));
+  // detections.forEach((text) => console.log(text[0]));
   console.log(detections[0].description);
   var distance = levenshtein(
     detections[0].description,
