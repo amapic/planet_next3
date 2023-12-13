@@ -70,25 +70,25 @@ test("Texte centrale", async () => {
   deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
-  const element = await page.waitForSelector("#div_canvas1");
+  // const element = await page.waitForSelector("#div_canvas1");
 
   // await element.click();
-  const [response] = await Promise.all([
-    page.waitForSelector("#div_canvas1"),
-    element.click(),
-    sleep(10000) 
-  ]);
+  // const [response] = await Promise.all([
+  //   page.waitForSelector("#div_canvas1"),
+  //   element.click(),
+  //   sleep(10000) 
+  // ]);
   // });
 
   const image = await page.screenshot({
     path: "image/test_photo1.png",
   });
   // Creates a client
-  const client = new vision.ImageAnnotatorClient({
-    projectId: "turing-position-236722",
-    // credentials:
-    keyFilename: "turing-position-236722-f66db215fe06.json",
-  });
+  // const client = new vision.ImageAnnotatorClient({
+  //   projectId: "turing-position-236722",
+  //   // credentials:
+  //   keyFilename: "turing-position-236722-f66db215fe06.json",
+  // });
 
   const fileName =
     "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
