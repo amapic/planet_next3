@@ -23,13 +23,15 @@ it("CreateReactApp home", async () => {
   });
   const page = await browser.newPage();
   await page.goto("https://amaurypichat.fr/dev/planet", {
-    // waitUntil: "networkidle0",
+    waitUntil: "networkidle2",
+    
   });
 
   //   // await page.waitForTimeout(6000);
   //   // sleep(20000).then(async () => {
   //   //   console.log("World!");
   const image = await page.screenshot({
+    path:"image/kaka.png"
     // clip: { x: 220, y: 0, width: 630, height: 360 },
   });
 

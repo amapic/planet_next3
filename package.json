@@ -8,7 +8,7 @@
     "pre_build": "next build && next export -o ../../prod/dev/planet",
     "start": "next start -p 4000",
     "lint": "next lint",
-    "test": "jest --forceExit"
+    "test": "jest --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "@google-cloud/vision": "^4.0.2",
