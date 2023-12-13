@@ -97,7 +97,7 @@ test("Texte centrale", async () => {
   const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
   // console.log("Text:");
-  // console.log(accentsTidy(detections[0].description));
+  console.log(accentsTidy(detections[0].description));
   var ttexte =
     "cliquezsurlesflechespourfairedefilerlessystemessolairesetcliquezsuruneplanetepouravoirdesinformationslaconcernantk2229age54milliarddanneedistance100anneelumiererayon079rayonsolairea";
 
