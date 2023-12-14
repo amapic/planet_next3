@@ -68,7 +68,7 @@ test("Texte centrale", async () => {
     waitUntil: "networkidle2",
   });
 
-  deleteFile("image/test_photo1.png");
+  // deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
   // const element = await page.waitForSelector("#div_canvas1");
@@ -85,11 +85,11 @@ test("Texte centrale", async () => {
     path: "image/test_photo1.png",
   });
   // Creates a client
-  // const client = new vision.ImageAnnotatorClient({
-  //   projectId: "turing-position-236722",
-  //   // credentials:
-  //   keyFilename: "turing-position-236722-f66db215fe06.json",
-  // });
+  const client = new vision.ImageAnnotatorClient({
+    projectId: "turing-position-236722",
+    // credentials:
+    keyFilename: "turing-position-236722-f66db215fe06.json",
+  });
 
   const fileName =
     "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
