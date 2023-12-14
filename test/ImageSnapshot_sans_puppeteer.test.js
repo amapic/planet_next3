@@ -3,7 +3,7 @@
  */
 
 import { toMatchImageSnapshot } from "jest-image-snapshot";
-import puppeteer from "puppeteer";
+// import puppeteer from "puppeteer";
 expect.extend({ toMatchImageSnapshot });
 
 function sleep(ms) {
