@@ -15,8 +15,9 @@ it("CreateReactApp home", async () => {
     headless: false,
     product: "chrome",
 
-    // args: ["--no-sandbox","--disable-setuid-sandbox"],
-    args: ["--no-sandbox"],
+    args: ["--no-sandbox","--disable-setuid-sandbox"],
+    ignoreHTTPSErrors: true,
+    // args: ["--no-sandbox"],
     executablePath: process.env.PUPPETEER_EXEC_PATH,
     defaultViewport: { width: 1700, height: 800 },
     // slowMo: 50
