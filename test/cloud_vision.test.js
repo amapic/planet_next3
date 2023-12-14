@@ -16,8 +16,8 @@ import { render, screen, act } from "@testing-library/react";
 // import userEvent from '@testing-library/user-event'
 import "@testing-library/jest-dom";
 // import Home from "../pages/index";
-import PanelGauche from "../components_planet/PanneauMobile";
-import React from "react";
+// import PanelGauche from "../components_planet/PanneauMobile";
+// import React from "react";
 
 
 function sleep(ms) {
@@ -60,7 +60,7 @@ test("Texte centrale", async () => {
     args: ["--no-sandbox"],
     executablePath: process.env.PUPPETEER_EXEC_PATH,
     defaultViewport: { width: 1700, height: 800 },
-    slowMo: 50,
+    // slowMo: 50,
   });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
@@ -68,7 +68,7 @@ test("Texte centrale", async () => {
     waitUntil: "networkidle2",
   });
 
-  // deleteFile("image/test_photo1.png");
+  deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
   // const element = await page.waitForSelector("#div_canvas1");
@@ -91,14 +91,14 @@ test("Texte centrale", async () => {
     keyFilename: "turing-position-236722-f66db215fe06.json",
   });
 
-  const fileName =
-    "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
+  // const fileName =
+  //   "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
 
   // Performs text detection on the local file
   const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
   // console.log("Text:");
-  console.log(accentsTidy(detections[0].description));
+  // console.log(accentsTidy(detections[0].description));
   var ttexte =
     "cliquezsurlesflechespourfairedefilerlessystemessolairesetcliquezsuruneplanetepouravoirdesinformationslaconcernantk2229age54milliarddanneedistance100anneelumiererayon079rayonsolairea";
 
@@ -111,5 +111,7 @@ test("Texte centrale", async () => {
   console.log("distance : " + distance);
 
   expect(distance).toBeLessThanOrEqual(8);
+
+  await browser.close();
 
 }, 120000);
