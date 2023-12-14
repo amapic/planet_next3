@@ -12,18 +12,17 @@ function sleep(ms) {
 
 it("CreateReactApp home", async () => {
   const browser = await puppeteer.launch({
-    headless: false,
-    product: "chrome",
+    headless: true,
+    // product: "chrome",
 
-    args: ["--no-sandbox","--disable-setuid-sandbox"],
-    ignoreHTTPSErrors: true,
-    // args: ["--no-sandbox"],
+    // args: ["--no-sandbox","--disable-setuid-sandbox"],
+    args: ["--no-sandbox"],
     executablePath: process.env.PUPPETEER_EXEC_PATH,
     defaultViewport: { width: 1700, height: 800 },
-    // slowMo: 50
+    slowMo: 50
   });
   const page = await browser.newPage();
-  await page.goto("https://amaurypichat.fr/dev/agap2", {
+  await page.goto("https://amaurypichat.fr/dev/planet", {
     // waitUntil: "networkidle0",
   });
 
@@ -35,7 +34,7 @@ it("CreateReactApp home", async () => {
   });
 
   expect(image).toMatchImageSnapshot({
-    // comparisonMethod: 'ssim',
+    comparisonMethod: 'ssim',
     failureThreshold: 0,
     failureThresholdType: 'percent'
   });
