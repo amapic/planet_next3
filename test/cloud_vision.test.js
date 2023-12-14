@@ -112,4 +112,4 @@ test("Texte centrale", async () => {
 
   expect(distance).toBeLessThanOrEqual(8);
 
-}, 60000);
+}, 120000);
