@@ -13,13 +13,13 @@ function sleep(ms) {
 it("CreateReactApp home", async () => {
   const browser = await puppeteer.launch({
     headless: false,
-    // product: "chrome",
+    product: "chrome",
 
     // args: ["--no-sandbox","--disable-setuid-sandbox"],
-    // args: ["--no-sandbox"],
+    args: ["--no-sandbox"],
     executablePath: process.env.PUPPETEER_EXEC_PATH,
     defaultViewport: { width: 1700, height: 800 },
-    slowMo: 50
+    // slowMo: 50
   });
   const page = await browser.newPage();
   await page.goto("https://amaurypichat.fr/dev/agap2", {
