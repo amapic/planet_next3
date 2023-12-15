@@ -60,7 +60,7 @@ test("Texte centrale", async () => {
     args: ["--no-sandbox"],
     executablePath: process.env.PUPPETEER_EXEC_PATH,
     defaultViewport: { width: 1700, height: 800 },
-    // slowMo: 50,
+    slowMo: 50,
   });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
