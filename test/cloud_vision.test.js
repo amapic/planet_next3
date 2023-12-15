@@ -68,7 +68,7 @@ test("Texte centrale", async () => {
     waitUntil: "networkidle2",
   });
 
-  deleteFile("image/test_photo1.png");
+  // deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
   // const element = await page.waitForSelector("#div_canvas1");
