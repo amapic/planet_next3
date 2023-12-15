@@ -88,29 +88,26 @@ test("Texte centrale", async () => {
   const client = new vision.ImageAnnotatorClient({
     projectId: "turing-position-236722",
     // credentials:
-    keyFilename: "turing-position-236722-f66db215fe06.json",
+    keyFilename:'turing-position-236722-f66db215fe06.json'
   });
+//   console.log("reeeeeeeee")
 
-  // const fileName =
-  //   "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
+  const fileName =
+    "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
 
-  // Performs text detection on the local file
-  // const [result] = await client.textDetection("image/test_photo1.png");
-  // const detections = result.textAnnotations;
-  // console.log("Text:");
-  // console.log(accentsTidy(detections[0].description));
-  var ttexte =
-    "cliquezsurlesflechespourfairedefilerlessystemessolairesetcliquezsuruneplanetepouravoirdesinformationslaconcernantk2229age54milliarddanneedistance100anneelumiererayon079rayonsolairea";
+//   // Performs text detection on the local file
+  const [result] = await client.textDetection(fileName);
+  const detections = result.textAnnotations;
+//   console.log("Text:");
+//   detections.forEach((text) => console.log(text[0]));
+//   detections.forEach((text) => console.log(text[0]));
+  console.log(detections[0].description);
+  var distance = levenshtein(
+    detections[0].description,
+    "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
+  );
 
-  // console.log("ttexte", ttexte);
-  // var distance = levenshtein(
-  //   accentsTidy(detections[0].description),
-  //   accentsTidy(ttexte)
-  // );
-
-  // console.log("distance : " + distance);
-
-  expect(1).toBeLessThanOrEqual(8);
+  expect(1).toBeLessThanOrEqual(5);
 
   await browser.close();
 
