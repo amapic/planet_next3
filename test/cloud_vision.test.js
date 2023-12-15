@@ -53,7 +53,7 @@ async function deleteFile(filePath) {
 
 test("Texte centrale", async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     // product: "chrome",
 
     // args: ["--no-sandbox","--disable-setuid-sandbox"],
