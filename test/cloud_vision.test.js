@@ -65,10 +65,10 @@ test("Texte centrale", async () => {
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
   await page.goto("https://amaurypichat.fr/dev/planet", {
-    // waitUntil: "networkidle2",
+    waitUntil: "networkidle2",
   });
 
-  // deleteFile("image/test_photo1.png");
+  deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
   // const element = await page.waitForSelector("#div_canvas1");
@@ -114,4 +114,4 @@ test("Texte centrale", async () => {
 
   await browser.close();
 
-}, 120000);
+},60000);
