@@ -82,7 +82,7 @@ test("Texte centrale", async () => {
   // });
 
   const image = await page.screenshot({
-    // path: "image/test_photo1.png",
+    path: "image/test_photo1.png",
   });
   // Creates a client
   const client = new vision.ImageAnnotatorClient({
@@ -96,7 +96,7 @@ test("Texte centrale", async () => {
     "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
 
 //   // Performs text detection on the local file
-  const [result] = await client.textDetection(fileName);
+  const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
 //   console.log("Text:");
 //   detections.forEach((text) => console.log(text[0]));
@@ -107,7 +107,7 @@ test("Texte centrale", async () => {
     "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
   );
 
-  expect(1).toBeLessThanOrEqual(5);
+  expect(distance).toBeLessThanOrEqual(5);
 
   await browser.close();
 
