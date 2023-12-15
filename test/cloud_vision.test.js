@@ -65,7 +65,7 @@ test("Texte centrale", async () => {
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
   await page.goto("https://amaurypichat.fr/dev/planet", {
-    waitUntil: "networkidle2",
+    // waitUntil: "networkidle2",
   });
 
   // deleteFile("image/test_photo1.png");
@@ -81,9 +81,9 @@ test("Texte centrale", async () => {
   // ]);
   // });
 
-  const image = await page.screenshot({
-    // path: "image/test_photo1.png",
-  });
+  // const image = await page.screenshot({
+  //   // path: "image/test_photo1.png",
+  // });
   // Creates a client
   // const client = new vision.ImageAnnotatorClient({
   //   projectId: "turing-position-236722",
