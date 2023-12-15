@@ -22,22 +22,22 @@ test("Texte centrale", async () => {
     // credentials:
     keyFilename:'turing-position-236722-f66db215fe06.json'
   });
-  console.log("reeeeeeeee")
+//   console.log("reeeeeeeee")
 
-//   const fileName =
-//     "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
+  const fileName =
+    "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
 
 //   // Performs text detection on the local file
-//   const [result] = await client.textDetection(fileName);
-//   const detections = result.textAnnotations;
+  const [result] = await client.textDetection(fileName);
+  const detections = result.textAnnotations;
 //   console.log("Text:");
 //   detections.forEach((text) => console.log(text[0]));
 //   detections.forEach((text) => console.log(text[0]));
-//   console.log(detections[0].description);
-//   var distance = levenshtein(
-//     detections[0].description,
-//     "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
-//   );
+  console.log(detections[0].description);
+  var distance = levenshtein(
+    detections[0].description,
+    "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
+  );
 
   expect(1).toBeLessThanOrEqual(5);
 
