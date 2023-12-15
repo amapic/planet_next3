@@ -81,9 +81,9 @@ test("Texte centrale", async () => {
   // ]);
   // });
 
-  // const image = await page.screenshot({
-  //   // path: "image/test_photo1.png",
-  // });
+  const image = await page.screenshot({
+    // path: "image/test_photo1.png",
+  });
   // Creates a client
   // const client = new vision.ImageAnnotatorClient({
   //   projectId: "turing-position-236722",
