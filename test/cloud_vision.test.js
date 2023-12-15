@@ -114,4 +114,4 @@ test("Texte centrale", async () => {
 
   await browser.close();
 
-},60000);
+},50000);
