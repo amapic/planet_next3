@@ -65,7 +65,7 @@ test("Texte centrale", async () => {
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
   await page.goto("https://amaurypichat.fr/dev/planet", {
-    // waitUntil: "networkidle2",
+    waitUntil: "networkidle0",
   });
 
   deleteFile("image/test_photo1.png");
