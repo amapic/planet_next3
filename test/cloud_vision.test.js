@@ -19,7 +19,6 @@ import "@testing-library/jest-dom";
 // import PanelGauche from "../components_planet/PanneauMobile";
 // import React from "react";
 
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -53,7 +52,11 @@ async function deleteFile(filePath) {
 
 test("Texte centrale", async () => {
   const browser = await puppeteer.launch({
+    //config serveur
     headless: true,
+
+    //config pc
+    // headless: false,
     // product: "chrome",
 
     // args: ["--no-sandbox","--disable-setuid-sandbox"],
@@ -63,6 +66,7 @@ test("Texte centrale", async () => {
     slowMo: 50,
   });
   const page = await browser.newPage();
+  // problème de timeout uniquement
   await page.setDefaultNavigationTimeout(10000);
   await page.goto("https://amaurypichat.fr/dev/planet", {
     // waitUntil: "networkidle0",
@@ -71,14 +75,14 @@ test("Texte centrale", async () => {
   deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
-  // const element = await page.waitForSelector("#div_canvas1");
+  const element = await page.waitForSelector("#div_canvas1");
 
   // await element.click();
-  // const [response] = await Promise.all([
-  //   page.waitForSelector("#div_canvas1"),
-  //   element.click(),
-  //   sleep(10000) 
-  // ]);
+  const [response] = await Promise.all([
+    page.waitForSelector("#div_canvas1"),
+    element.click(),
+    sleep(10000),
+  ]);
   // });
 
   const image = await page.screenshot({
@@ -88,19 +92,18 @@ test("Texte centrale", async () => {
   const client = new vision.ImageAnnotatorClient({
     projectId: "turing-position-236722",
     // credentials:
-    keyFilename:'turing-position-236722-f66db215fe06.json'
+    keyFilename: "turing-position-236722-f66db215fe06.json",
   });
-//   console.log("reeeeeeeee")
 
   const fileName =
     "test/__image_snapshots__/screencapture-test-js-create-react-app-home-1-snap.png";
 
-//   // Performs text detection on the local file
+  //   // Performs text detection on the local file
   const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
-//   console.log("Text:");
-//   detections.forEach((text) => console.log(text[0]));
-//   detections.forEach((text) => console.log(text[0]));
+  //   console.log("Text:");
+  //   detections.forEach((text) => console.log(text[0]));
+  //   detections.forEach((text) => console.log(text[0]));
   console.log(detections[0].description);
   var distance = levenshtein(
     detections[0].description,
@@ -110,5 +113,4 @@ test("Texte centrale", async () => {
   expect(distance).toBeLessThanOrEqual(5);
 
   await browser.close();
-
-},50000);
+}, 50000);
