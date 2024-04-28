@@ -22,6 +22,7 @@ jobs:
           script: |
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
             git pull origin main
-            npm install --legacy-peer-deps
+            npm install --no-optional --legacy-peer-deps
+            npm install --optional --legacy-peer-deps
             npm run pre_build
             npm run build
