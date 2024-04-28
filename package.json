@@ -5,11 +5,10 @@
   "scripts": {
     "dev": "next dev -p 4000",
     "build": "next export -o ../../prod/planet",
-    "pre_build": "next build && next export -o ../../prod/dev/planet",
+    "pre_build": "next build",
     "start": "next start -p 4000",
     "lint": "next lint",
-    "test": "jest --forceExit --detectOpenHandles",
-    "find:unused": "next-unused"
+    "test": "jest --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "@google-cloud/vision": "^4.2.1",
@@ -20,8 +19,6 @@
     "@react-three/postprocessing": "^2.16.2",
     "@types/three": "^0.164.0",
     "autoprefixer": "^10.4.19",
-    "eslint": "9.1.1",
-    "eslint-config-next": "14.2.3",
     "gl-react": "^5.2.0",
     "gsap": "^3.12.5",
     "html-react-parser": "^5.1.10"
@@ -53,7 +50,9 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "jest-image-snapshot": "^6.4.0"
+    "jest-image-snapshot": "^6.4.0",
+	"eslint": "9.1.1",
+    "eslint-config-next": "14.2.3"
   },
   "next-unused": {
     "include": [
