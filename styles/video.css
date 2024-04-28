@@ -1,0 +1,21 @@
+.video-wrapper {
+    height: 700px;
+    width: 1000px;
+    min-height: 225px;
+}
+
+.react-player {
+    /* // Percentage ratio for 16:9 */
+    /* padding-top: 56.25%;  */
+    /* // Set to relative */
+    position: relative; 
+}
+
+.react-player>div {
+    /* // Scaling will occur since parent is relative now */
+    position: absolute; 
+}
+
+html{
+    width: 100%;
+}

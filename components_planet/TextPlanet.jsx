@@ -1,31 +1,26 @@
-/* eslint-disable */
 import { Text } from "@react-three/drei";
 import React, { useRef } from "react";
 
 import { useFrame } from "@react-three/fiber";
-// import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
-
-// import roboto from "../public/Roboto_Regular.json";
 
 import * as THREE from "three";
-
 
 export default function TextPlanet({
   text = null,
   text2 = null,
   text3 = null,
   text4 = null,
-  period_orig=null,
-  mass=null,
-  rayon=null,
-  semi_major_axis_orig=null,
+  period_orig = null,
+  mass = null,
+  rayon = null,
+  semi_major_axis_orig = null,
   position,
   hoveredd,
   clickedd,
   image,
   info,
   star = false,
-  centre=false,
+  centre = false,
   ...args
 }) {
   const myMeshText = useRef();
@@ -34,8 +29,7 @@ export default function TextPlanet({
   const myMeshText4 = useRef();
   const myMesh2 = useRef();
 
-  const prout=useRef();
-
+  const prout = useRef();
 
   const points = [];
   points.push(new THREE.Vector3(0, 0, 0));
@@ -44,24 +38,23 @@ export default function TextPlanet({
   points.push(new THREE.Vector3(1, 0, 0));
   points.push(new THREE.Vector3(0, 0, 0));
 
-
-
   useFrame(({ gl, scene, camera }) => {
-    if (myMeshText4.current && myMeshText3.current && myMeshText2.current && myMeshText.current) {
-      myMeshText.current.lookAt(camera.position); // <-- should work when uncomment
+    if (
+      myMeshText4.current &&
+      myMeshText3.current &&
+      myMeshText2.current &&
+      myMeshText.current
+    ) {
+      myMeshText.current.lookAt(camera.position);
       myMeshText2.current.lookAt(camera.position);
       myMeshText3.current.lookAt(camera.position);
       myMeshText4.current.lookAt(camera.position);
     }
   });
 
-  
-
-  // const font = new FontLoader().parse(roboto);
-
   return (
     <group>
-      {(star && centre) ? (
+      {star && centre ? (
         <>
           <mesh
             position={[0, 1.6, 0.01]}
@@ -72,16 +65,16 @@ export default function TextPlanet({
           >
             <Text
               scale={[0.13, 0.13, 0.13]}
-              anchorX="center" // default
-              anchorY="middle" // default
+              anchorX="center"
+              anchorY="middle"
               color="white"
-              // ref={myMesh}
-              // fillOpacity={hoveredd ? 1 : 0}
               toneMapped={false}
-              // transparent={star ? true : false}
             >
-              {/* {clickedd ? "cliqué" : ""} */}
-              {text4?"Rayon : " + parseFloat(text4.toPrecision(2)) + " rayon solaire":""}
+              {text4
+                ? "Rayon : " +
+                  parseFloat(text4.toPrecision(2)) +
+                  " rayon solaire"
+                : ""}
             </Text>
           </mesh>
           <mesh
@@ -93,16 +86,16 @@ export default function TextPlanet({
           >
             <Text
               scale={[0.13, 0.13, 0.13]}
-              anchorX="center" // default
-              anchorY="middle" // default
+              anchorX="center"
+              anchorY="middle"
               color="white"
-              // ref={myMesh}
-              // fillOpacity={hoveredd ? 1 : 0}
               toneMapped={false}
-              // transparent={star ? true : false}
             >
-              {/* {clickedd ? "cliqué" : ""} */}
-              {text3?"Distance : " + parseFloat(text3.toPrecision(2)) + " année lumière":""}
+              {text3
+                ? "Distance : " +
+                  parseFloat(text3.toPrecision(2)) +
+                  " année lumière"
+                : ""}
             </Text>
           </mesh>
           <mesh
@@ -114,12 +107,12 @@ export default function TextPlanet({
           >
             <Text
               scale={[0.13, 0.13, 0.13]}
-              anchorX="center" // default
-              anchorY="middle" // default
+              anchorX="center"
+              anchorY="middle"
               color="white"
               toneMapped={false}
             >
-              {text2?"Age : " + text2 + " milliard d'année":""}
+              {text2 ? "Age : " + text2 + " milliard d'année" : ""}
             </Text>
           </mesh>
           <mesh
@@ -131,94 +124,106 @@ export default function TextPlanet({
           >
             <Text
               scale={[0.13, 0.13, 0.13]}
-              anchorX="center" // default
-              anchorY="middle" // default
+              anchorX="center"
+              anchorY="middle"
               color="white"
-              // ref={myMesh}
-              // fillOpacity={hoveredd ? 1 : 0}
               toneMapped={false}
-              // transparent={star ? true : false}
             >
-              {/* {clickedd ? "cliqué" : ""} */}
               {text}
             </Text>
           </mesh>
         </>
-      ):("")}
-      {(!star && clickedd) ? (
+      ) : (
+        ""
+      )}
+      {!star && clickedd ? (
         <>
-        <mesh
-          position={[0, 1, 0.01]}
-          scale={[4, 5, 2]}
-          ref={myMeshText4}
-          transparent={clickedd ? false : true}
-          opacity={clickedd ? 1 : 0}
-        >
-          <Text
-            scale={[0.08, 0.08, 0.08]}
-            anchorX="center" // default
-            anchorY="middle" // default
-            color="white"
-            toneMapped={false}
+          <mesh
+            position={[0, 1, 0.01]}
+            scale={[4, 5, 2]}
+            ref={myMeshText4}
+            transparent={clickedd ? false : true}
+            opacity={clickedd ? 1 : 0}
           >
-            {period_orig?"Période de révolution : " + image.orbital_period_.toPrecision(2) + "  jour":""}
-          </Text>
-        </mesh>
-        <mesh
-          position={[0, 1.5, 0.01]}
-          scale={[4, 5, 2]}
-          ref={myMeshText}
-          transparent={clickedd ? false : true}
-          opacity={clickedd ? 1 : 0}
-        >
-          <Text
-            scale={[0.08, 0.08, 0.08]}
-            anchorX="center" // default
-            anchorY="middle" // default
-            color="white"
-            toneMapped={false}
+            <Text
+              scale={[0.08, 0.08, 0.08]}
+              anchorX="center"
+              anchorY="middle"
+              color="white"
+              toneMapped={false}
+            >
+              {period_orig
+                ? "Période de révolution : " +
+                  image.orbital_period_.toPrecision(2) +
+                  "  jour"
+                : ""}
+            </Text>
+          </mesh>
+          <mesh
+            position={[0, 1.5, 0.01]}
+            scale={[4, 5, 2]}
+            ref={myMeshText}
+            transparent={clickedd ? false : true}
+            opacity={clickedd ? 1 : 0}
           >
-            {semi_major_axis_orig?"Demi grand-Axe : " +  image.semi_major_axis_.toPrecision(2) + " UA":""}
-          </Text>
-        </mesh>
-        <mesh
-          position={[0, 2, 0.01]}
-          scale={[4, 5, 2]}
-          ref={myMeshText2}
-          transparent={clickedd ? false : true}
-          opacity={clickedd ? 1 : 0}
-        >
-          <Text
-            scale={[0.08, 0.08, 0.08]}
-            anchorX="center" // default
-            anchorY="middle" // default
-            color="white"
-            toneMapped={false}
+            <Text
+              scale={[0.08, 0.08, 0.08]}
+              anchorX="center"
+              anchorY="middle"
+              color="white"
+              toneMapped={false}
+            >
+              {semi_major_axis_orig
+                ? "Demi grand-Axe : " +
+                  image.semi_major_axis_.toPrecision(2) +
+                  " UA"
+                : ""}
+            </Text>
+          </mesh>
+          <mesh
+            position={[0, 2, 0.01]}
+            scale={[4, 5, 2]}
+            ref={myMeshText2}
+            transparent={clickedd ? false : true}
+            opacity={clickedd ? 1 : 0}
           >
-            {mass?"Masse : " + parseFloat(mass.toPrecision(2)) + " masse jupitérienne":""}
-          </Text>
-        </mesh>
-        <mesh
-          position={[0, 2.5, 0.01]}
-          scale={[4, 5, 2]}
-          ref={myMeshText3}
-          transparent={clickedd ? false : true}
-          opacity={clickedd ? 1 : 0}
-        >
-          <Text
-            scale={[0.08, 0.08, 0.08]}
-            anchorX="center" // default
-            anchorY="middle" // default
-            color="white"
-            toneMapped={false}
+            <Text
+              scale={[0.08, 0.08, 0.08]}
+              anchorX="center"
+              anchorY="middle"
+              color="white"
+              toneMapped={false}
+            >
+              {mass
+                ? "Masse : " +
+                  parseFloat(mass.toPrecision(2)) +
+                  " masse jupitérienne"
+                : ""}
+            </Text>
+          </mesh>
+          <mesh
+            position={[0, 2.5, 0.01]}
+            scale={[4, 5, 2]}
+            ref={myMeshText3}
+            transparent={clickedd ? false : true}
+            opacity={clickedd ? 1 : 0}
           >
-            {text}
-          </Text>
-        </mesh>
-      </>
-      ):""}
+            <Text
+              scale={[0.08, 0.08, 0.08]}
+              anchorX="center"
+              anchorY="middle"
+              color="white"
+              toneMapped={false}
+            >
+              {text}
+            </Text>
+          </mesh>
+        </>
+      ) : (
+        ""
+      )}
 
-      {(!star && clickedd) ? (
+      {!star && clickedd ? (
         <mesh position={[0, 3, 0]} ref={myMesh2}>
           <sphereGeometry args={[0.1, 32, 32]} />
           <meshBasicMaterial

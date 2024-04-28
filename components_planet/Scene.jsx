@@ -6,12 +6,7 @@ import Systeme from "./Systeme";
 
 import Data from "../public/premierTri.json";
 
-import {  useDeplacementStore,usePlanetStore } from "./store/store";
-
-// import { usePlanetStore } from "../pages/index";
-
-
-
+import { useDeplacementStore, usePlanetStore } from "./store/store";
 
 export default function Scene() {
   const { planet, updateData } = usePlanetStore((state) => state);
@@ -27,12 +22,10 @@ export default function Scene() {
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min) + min);
   }
   useEffect(() => {
     Data.forEach((item, i) => {
-
-   
       if (star_name != item.star_name && star_name != "!") {
         dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
         dataPlanete = {};
@@ -43,25 +36,23 @@ export default function Scene() {
 
       dataPlanete.star_name = item.star_name;
       dataPlanete.name = item.name;
-      // dataPlanete.mass = Math.round(item.mass * 100) / 100;
+
       dataPlanete.mass = item.mass;
-      // dataPlanete.radius = Math.round(item.radius * 100) / 100;
+
       dataPlanete.radius = item.radius;
-      dataPlanete.semi_major_axis =item.semi_major_axis;
-      dataPlanete.orbital_period_ =item.orbital_period;
-      dataPlanete.semi_major_axis_ =item.semi_major_axis;
-        // Math.round(item.semi_major_axis * 100) / 100;
+      dataPlanete.semi_major_axis = item.semi_major_axis;
+      dataPlanete.orbital_period_ = item.orbital_period;
+      dataPlanete.semi_major_axis_ = item.semi_major_axis;
+
       dataPlanete.period = item.orbital_period;
 
-      // Math.round(item.orbital_period * 100) / 100;
-      // dataPlanete.star_radius = Math.round(item.star_radius * 100) / 100;
-      dataPlanete.star_radius=item.star_radius
-      // dataPlanete.star_name =Math.round(item.star_name* 100) / 100;
-      dataPlanete.star_name=item.star_name
-      // dataPlanete.star_distance =Math.round(item.star_distance* 100) / 100;
-      dataPlanete.star_distance=item.star_distance
-      dataPlanete.star_age =item.star_age;
-      // dataPlanete.colorMap = "/earth.jpg";
+      dataPlanete.star_radius = item.star_radius;
+
+      dataPlanete.star_name = item.star_name;
+
+      dataPlanete.star_distance = item.star_distance;
+      dataPlanete.star_age = item.star_age;
+
       dataPlanete.text = item.name;
       dataPlanete.discovered = item.discovered;
 
@@ -69,7 +60,6 @@ export default function Scene() {
     });
 
     dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
-
 
     dataSysteme.map((systeme, i) => {
       systeme.uid = getRandomInt(1, 1000);
@@ -90,9 +80,6 @@ export default function Scene() {
     [40, 0, -40],
     [60, 0, -60],
   ]);
-
-  
-
 
   const s1 = useRef();
   const s2 = useRef();
@@ -119,13 +106,11 @@ export default function Scene() {
   var progress = null;
 
   useFrame((state, delta) => {
-
     progress = progress + delta;
 
     progress = 0;
- 
-    if (droite && (gachette || cumulDecalage.current != 0)) {
 
+    if (droite && (gachette || cumulDecalage.current != 0)) {
       let theta = 0.5;
       posInit.current = posInit.current == 0 ? pos[0][0] : posInit.current;
       cumulDecalage.current += theta;
@@ -143,7 +128,6 @@ export default function Scene() {
         updateGachette();
         cumulDecalage.current = 0;
         posInit.current = 0;
-
 
         stopDroite();
         nActiveDown();
@@ -165,7 +149,6 @@ export default function Scene() {
         [pos[5][0] + theta, 0, pos[5][2] - theta],
       ]);
 
-
       if (Math.abs(posInit.current - pos[0][0]) >= 20) {
         updateGachette();
         cumulDecalage.current = 0;
@@ -176,10 +159,8 @@ export default function Scene() {
     }
   });
 
-
   return (
     <>
-   
       {dataLoaded
         ? refDataSystemes.current.map((systeme, i) => (
             <>

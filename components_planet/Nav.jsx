@@ -22,7 +22,6 @@ export default function Navv(){
                 }}
                 href="/agap2/agap2.html"
               >
-                {/* <img height="100%" width="50vh" src="/agap2/fleche_gauche.svg" /> */}
                 <svg
                   width="50px"
                   height="83px"

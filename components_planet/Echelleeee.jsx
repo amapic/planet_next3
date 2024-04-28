@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Html } from "@react-three/drei";
 
 import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-// gsap.registerPlugin(ScrollTrigger);
+
+
 
 export default function Echelle({ maxSemi_major_axis, name }) {
 
@@ -35,7 +35,7 @@ export default function Echelle({ maxSemi_major_axis, name }) {
     return () => ctx.revert();
   });
 
-  // ddist=200
+  
   return (
     <>
       <Html occlude="blending">
@@ -52,7 +52,7 @@ export default function Echelle({ maxSemi_major_axis, name }) {
             width={ddist}
             height="200"
             viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
+         
           >
             <line
               x1="0"

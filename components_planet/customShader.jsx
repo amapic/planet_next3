@@ -28,90 +28,7 @@ export class HelloBlue extends React.Component {
     }
   }
 
-// const customMaterial = new THREE.MeshPhongMaterial({
-//   shininess: 100,
-//   side: THREE.DoubleSide,
-//   wireframe: false,
 
-//   onBeforeCompile: (shader) => {
-//     // one would define the uniforms prior as an object
-//     shader.uniforms.legend = uniforms.legend;
-//     shader.uniforms.minMaxVal = uniforms.minMaxVal;
-//     shader.uniforms.ddh_coord = uniforms.ddh_coord;
-//     shader.uniforms.colors_arr = uniforms.colors_arr;
-//     shader.uniforms.ddh_rmr = uniforms.ddh_rmr;
-
-//     shader.vertexShader = `
-//         varying vec3 vposition;
-
-//         ${shader.vertexShader}
-//         `.replace(
-//       `#include <begin_vertex>`,
-//       `
-//             vposition = position;
-//             vec3 transformed = vec3( position );`
-//     );
-
-//     shader.fragmentShader = `
-//         varying vec3 vposition;
-//         uniform sampler2D legend;
-//         uniform vec2 minMaxVal;
-//         uniform vec3 ddh_coord[6];
-//         uniform vec3 colors_arr[6];
-//         uniform float ddh_rmr[6];
-
-//         bool condition1(vec3 a, vec3 b, vec3 pt, float radius, float epsilon) {
-
-//            // some code here
-
-//             if ( abs(d-radius) <= epsilon ) {
-//                     return true;
-//                 }
-//             else {
-//                     return false;
-//                 }
-//         }
-
-//         bool condition2( vec3 a, vec3 b, vec3 pt, float radius, float epsilon) {
-
-//             // some code here
-
-//             if ( // some code ) {
-//                     return true;
-//                 }
-//             else {
-//                     return false;
-//                 }
-
-//         }
-
-//         ${shader.fragmentShader}
-//         `.replace(
-//       `#include <map_fragment>`,
-//       `
-
-//             vec3 start_point;
-//             vec3 end_point;
-//             vec3 col;
-
-//             for(int i = 0; i <= 4; i++) {
-
-//                 start_point = vec3 (ddh_coord[i].x, ddh_coord[i].y ,ddh_coord[i].z) ;
-//                 end_point = vec3 (ddh_coord[i+1].x, ddh_coord[i+1].y ,ddh_coord[i+1].z);
-
-//                 if( condition1() &&
-//                     condition2() ) {
-
-//                         col = texture(legend, vec2(0.5, (ddh_rmr[i] - minMaxVal.x) / (minMaxVal.y - minMaxVal.x))).rgb;
-
-//                 }
-
-//             }
-
-//             diffuseColor.rgb *= col;`
-//     );
-//   },
-// });
 
 export default function Tt() {
   return "ee";
@@ -139,13 +56,11 @@ export const ColorShiftMaterial = shaderMaterial(
 );
 
 export const WaveShaderMaterial2 = shaderMaterial(
-  // Uniform
   {
     uTime: 0,
     uColor: new THREE.Color(0.0, 0.0, 0.0),
     uTexture: new THREE.Texture(),
   },
-  // Vertex Shader
   GLSL`
       precision mediump float;
    
@@ -202,21 +117,7 @@ export const Wave = () => {
     <mesh>
       <planeGeometry args={[1, 1, 16, 16]} />
       <WaveShaderMaterial2 uColor={"hotpink"} ref={ref} uTexture={image} />
-      {/* <meshBasicMaterial color={"red"} /> */}
     </mesh>
   );
 };
-// gl_FragColor.rgba = vec4(0.5 + 0.3 * sin(vUv.yxx + time) + color, 1.0);
-// export default ColorShiftMaterial;
-// extend({ ColorShiftMaterial });
 
-// in your component
-
-// export default function TTrouttt() {
-//   return (
-//     <mesh>
-//       <sphereGeometry args={[1, 1, 1]} />
-//       <colorShiftMaterial color="hotpink" time={1} />
-//     </mesh>
-//   );
-// }

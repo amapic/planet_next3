@@ -107,7 +107,13 @@ test("Texte centrale", async () => {
   console.log(detections[0].description);
   var distance = levenshtein(
     detections[0].description,
-    "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEHES SOLAIRES ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA CONCERNANT"
+    "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEMES SOLAIRES" +
+      "ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA  " +
+      "CONCERNANT" +
+      "K2-229" +
+      " Age : 5.4 milliard d'année" +
+      "Distance: 100 année lumière" +
+      "Rayon : 0.79 rayon solaire"
   );
 
   expect(distance).toBeLessThanOrEqual(5);
