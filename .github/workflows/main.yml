@@ -22,5 +22,5 @@ jobs:
           script: |
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
             git reset --hard
-            git pull origin3 main
+            git pull origin main
             npm run test
