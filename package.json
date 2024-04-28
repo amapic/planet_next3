@@ -24,11 +24,10 @@
     "eslint-config-next": "14.2.3",
     "gl-react": "^5.2.0",
     "gsap": "^3.12.5",
-    "html-react-parser": "^5.1.10",
-
+    "html-react-parser": "^5.1.10"
   },
   "optionalDependencies": {
-	      "js-levenshtein": "^1.1.6",
+	"js-levenshtein": "^1.1.6",
     "lodash": "^4.17.21",
     "next": "14.2.3",
     "next-unused": "^0.0.6",
@@ -44,7 +43,6 @@
     "three-stdlib": "^2.29.9",
     "typescript": "^5.4.5",
     "zustand": "^4.5.2"
-	  
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
