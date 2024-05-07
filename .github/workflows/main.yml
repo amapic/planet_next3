@@ -21,7 +21,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
           script: |
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
-            git pull origin main
+            git remote add origin2 https://github.com/amaurypichat/planet.git
+            git pull origin2 main
             npm install --omit=optional --legacy-peer-deps
             npm install --include=optional --legacy-peer-deps
             npm run pre_build
