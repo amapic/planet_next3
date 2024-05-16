@@ -9,7 +9,7 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  // distDir: 'planet',
+  distDir: 'planet',
   output:"export"
 
 }
