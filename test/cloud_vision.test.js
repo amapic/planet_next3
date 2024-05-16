@@ -3,7 +3,6 @@
  */
 
 const vision = require("@google-cloud/vision");
-// const {Storage} = require('@google-cloud/storage');
 const projectId = "turing-position-236722";
 const levenshtein = require("js-levenshtein");
 const fs = require("fs").promises;
@@ -13,11 +12,8 @@ import puppeteer from "puppeteer";
 expect.extend({ toMatchImageSnapshot });
 
 import { render, screen, act } from "@testing-library/react";
-// import userEvent from '@testing-library/user-event'
 import "@testing-library/jest-dom";
-// import Home from "../pages/index";
-// import PanelGauche from "../components_planet/PanneauMobile";
-// import React from "react";
+
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -68,7 +64,7 @@ test("Texte centrale", async () => {
   const page = await browser.newPage();
   // problème de timeout uniquement
   await page.setDefaultNavigationTimeout(10000);
-  await page.goto("https://amaurypichat.fr/dev/planet", {
+  await page.goto("https://amaurypichat.fr/planet", {
     // waitUntil: "networkidle0",
   });
 
@@ -101,9 +97,7 @@ test("Texte centrale", async () => {
   //   // Performs text detection on the local file
   const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
-  //   console.log("Text:");
-  //   detections.forEach((text) => console.log(text[0]));
-  //   detections.forEach((text) => console.log(text[0]));
+
   console.log(detections[0].description);
   var distance = levenshtein(
     detections[0].description,

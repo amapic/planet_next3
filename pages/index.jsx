@@ -8,38 +8,23 @@ import React, {
 import dynamic from "next/dynamic";
 import { Canvas, extend } from "@react-three/fiber";
 import * as THREE from "three";
-import PanelGauche, { PanelPlanete } from "../components_planet/PanneauMobile";
+import PanelGauche, { PanelPlanete } from "../components/PanneauMobile";
 import { Stats, OrbitControls, Text, Text3D } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-// import TransitionProvider, {
-//   TransitionLayout,
-//   FadeInOut,
-//   AnimateInOut,
-//   CuubeCanvas,
-// } from "../components_planet/context";
-import { useDeplacementStore } from "../components_planet/store/store";
+
+import { useDeplacementStore } from "../components/store/store";
 import { Physics } from "@react-three/cannon";
 import { Effects, Stars } from "@react-three/drei";
-// import { useMediaQuery } from "react-responsive";
-import Scene from "../components_planet/Scene";
-// import Carousel from "../components_planet/Carousel";
-// import Navv from "../components_planet/Nav";
-// import { create } from "zustand";
+
+import Scene from "../components/Scene";
+import {Fleche,Carre} from "../components/Fleche";
+
 import Head from "next/head";
 export const AppContext = createContext();
 const App = () => {
-  // const [nActive2, setUsers] = useState(0);
+
   const [_isMobile, setMobile] = useState(true);
-  // const isDesktopOrLaptop = useMediaQuery({
-  //   query: "(min-width: 1224px)",
-  // });
-  // const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
-  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
-  // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-  // const dispatchUserEvent = (payload) => {
-  //   setUsers(payload);
-  // };
+
   function useDeviceDetect() {
     const [isTouchDevice, setIsTouchDevice] = React.useState(false);
     React.useEffect(() => {
@@ -216,15 +201,12 @@ const App = () => {
                 position={[0, 1.5, 1.5]}
                 rotation={[Math.PI, 0, 0]}
               />
-              {}
+              
             </Canvas>
           </div>
         </>
       )}
-      {}
-      {}
-      {}
-      {}
+
       {isTabletOrMobile && (
         <div
           style={{
@@ -244,68 +226,6 @@ const App = () => {
     </>
   );
 };
-export function Carre({ position, flecheGauche, flecheDroite }) {
-  const width = 4;
-  const height = 4;
-  const ref = useRef();
-  const ref2 = useRef();
-  const points = [];
-  points.push(new THREE.Vector3(0, 0, 0));
-  points.push(new THREE.Vector3(0, 0, width));
-  points.push(new THREE.Vector3(0, height, width));
-  points.push(new THREE.Vector3(0, height, 0));
-  points.push(new THREE.Vector3(0, 0, 0));
-  const [hovered, setHovered] = useState(false);
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.geometry.setFromPoints(points);
-    }
-  });
-  const {
-    nActive,
-    droite,
-    gauche,
-    gachette,
-    onClickGauche,
-    onClickDroite,
-    updateGachette,
-    stopDroite,
-    stopGauche,
-  } = useDeplacementStore((state) => state);
-  return (
-    <mesh ref={ref2} position={position}>
-      <line ref={ref}>
-        <bufferGeometry />
-        <lineBasicMaterial color={[127, 0, 127]} toneMapped={false} />
-      </line>
-    </mesh>
-  );
-}
-function Fleche({ position, flecheGauche, flecheDroite, rotation }) {
-  const width = 3;
-  const height = 3;
-  const ref = useRef();
-  const ref2 = useRef();
-  const points = [];
-  points.push(new THREE.Vector3(0, 0, 0));
-  points.push(new THREE.Vector3(0, height, 0));
-  points.push(new THREE.Vector3(0, height / 2, width));
-  points.push(new THREE.Vector3(0, 0, 0));
-  const [hovered, setHovered] = useState(false);
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.geometry.setFromPoints(points);
-    }
-  });
-  return (
-    <mesh ref={ref2} position={position} rotation={rotation}>
-      <line ref={ref}>
-        <bufferGeometry />
-        <lineBasicMaterial color={[127, 0, 127]} toneMapped={false} />
-      </line>
-    </mesh>
-  );
-}
 export default dynamic(() => Promise.resolve(App), {
   ssr: false,
 });

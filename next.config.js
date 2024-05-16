@@ -10,6 +10,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   // distDir: 'planet',
+  output:"export"
 
 }
 
