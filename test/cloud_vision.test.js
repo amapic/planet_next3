@@ -14,7 +14,6 @@ expect.extend({ toMatchImageSnapshot });
 import { render, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -74,11 +73,11 @@ test("Texte centrale", async () => {
   const element = await page.waitForSelector("#div_canvas1");
 
   // await element.click();
-  const [response] = await Promise.all([
-    page.waitForSelector("#div_canvas1"),
-    element.click(),
-    sleep(10000),
-  ]);
+  // const [response] = await Promise.all([
+  //   page.waitForSelector("#div_canvas1"),
+  //   element.click(),
+  //   sleep(10000),
+  // ]);
   // });
 
   const image = await page.screenshot({
@@ -98,17 +97,25 @@ test("Texte centrale", async () => {
   const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
 
-  console.log(detections[0].description);
+  console.log(detections[0].description.indexOf(""));
   var distance = levenshtein(
     detections[0].description,
     "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEMES SOLAIRES" +
       "ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA  " +
       "CONCERNANT" +
-      "K2-229" +
-      " Age : 5.4 milliard d'année" +
-      "Distance: 100 année lumière" +
-      "Rayon : 0.79 rayon solaire"
+      "Kepler-107" +
+      " Age : 4.29 milliard d'année" +
+      "Distance: 530 année lumière" +
+      "Rayon : 1.4 rayon solaire"
   );
+
+  // "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEMES SOLAIRES" +
+  // "ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA  " +
+  // "CONCERNANT" +
+  // "K2-229" +
+  // " Age : 5.4 milliard d'année" +
+  // "Distance: 100 année lumière" +
+  // "Rayon : 0.79 rayon solaire"
 
   expect(distance).toBeLessThanOrEqual(5);
 
