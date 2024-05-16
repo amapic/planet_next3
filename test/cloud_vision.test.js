@@ -97,7 +97,7 @@ test("Texte centrale", async () => {
   const [result] = await client.textDetection("image/test_photo1.png");
   const detections = result.textAnnotations;
 
-  console.log(detections[0].description.indexOf(""));
+  console.log(detections[0].description);
   var distance = levenshtein(
     detections[0].description,
     "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEMES SOLAIRES" +
