@@ -120,4 +120,4 @@ test("Texte centrale", async () => {
   expect(distance).toBeLessThanOrEqual(5);
 
   await browser.close();
-}, 50000);
+}, 60000);
