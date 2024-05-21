@@ -101,10 +101,10 @@ test("Texte centrale", async () => {
   var distance = levenshtein(
     detections[0].description,
     "CLIQUEZ SUR LES FLECHES POUR FAIRE DEFILER LES SYSTEMES SOLAIRES" +
-      "ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA  " +
+      "ET CLIQUEZ SUR UNE PLANETE POUR AVOIR DES INFORMATIONS LA" +
       "CONCERNANT" +
       "Kepler-107" +
-      " Age : 4.29 milliard d'année" +
+      "Age : 4.29 milliard d'année" +
       "Distance: 530 année lumière" +
       "Rayon : 1.4 rayon solaire"
   );
