@@ -76,7 +76,7 @@ test("Texte centrale", async () => {
    const [response] = await Promise.all([
      page.waitForSelector("#div_canvas1"),
      element.click(),
-     sleep(10000),
+     sleep(20000),
    ]);
   // });
 
