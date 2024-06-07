@@ -7,7 +7,9 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import TextPlanet from "./TextPlanet";
 import { debounce } from "lodash";
 import { usePlanetStore } from "./store/store";
-export default function Planet({ compteur, image, imageData, ...args }) {
+
+import {Mesh} from "three"
+export default function Planet({ compteur, image, imageData, ...args }:{compteur:number,image:dataPlaneteInt,imageData:dataPlaneteInt}) {
   const colorMap = [
     useLoader(TextureLoader, "/planet/image/earth.jpg"),
     useLoader(TextureLoader, "/planet/image/mars.jpg"),
@@ -38,12 +40,12 @@ export default function Planet({ compteur, image, imageData, ...args }) {
       }
     }, 500);
   }, []);
-  const [sphereRef, sphereApi] = useSphere(() => ({
+  const [sphereRef, sphereApi] = useSphere<Mesh>(() => ({
     type: "Dynamic",
     mass: 0,
     position: [1, 0, 0],
   }));
-  const [cardRef, cardApi] = useSphere(() => ({
+  const [cardRef, cardApi] = useSphere<Mesh>(() => ({
     type: "Dynamic",
     mass: 0,
     position: [1, 0, 0],
@@ -68,14 +70,28 @@ export default function Planet({ compteur, image, imageData, ...args }) {
   const debouncedHandleMouseLeave = debounce(() => hover(false), 500);
   return (
     <>
+     {/* /text = null,
+  text2 = null,
+  text3 = null,
+  text4 = null,
+  /period_orig = null,
+  /mass = null,
+  /rayon = null,
+  /semi_major_axis_orig = null,
+  position,
+  /hoveredd,
+  /clickedd,
+  /image,
+  info,
+  /star = false,
+  centre = false, */}
       <animated.mesh ref={cardRef}>
         <TextPlanet
-          {...args}
           hoveredd={hoveredd}
           clickedd={clickedd.current}
           text={imageData.text}
           mass={imageData.mass}
-          rayon={imageData.rayon}
+          // rayon={imageData.rayon}
           semi_major_axis_orig={image.semi_major_axis}
           period_orig={imageData.period_orig}
           image={imageData}
@@ -98,8 +114,9 @@ export default function Planet({ compteur, image, imageData, ...args }) {
           document.body.style.cursor = "auto";
           debouncedHandleMouseLeave();
         }}
+        castShadow
       >
-        <sphereGeometry args={[image.radius, 32, 32]} />
+        <sphereGeometry args={[image.radius, 32, 32]}  />
         <meshStandardMaterial map={nbMapPlanet.current} />
       </animated.mesh>
       

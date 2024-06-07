@@ -10,7 +10,9 @@ const DynamicPlanet = dynamic(() => import("./Planet"), {
   ssr: false,
 });
 
-const Soleil = ({ info, centre, ...args }) => {
+import * as THREE from "three"
+
+const Soleil = ({ info, centre}:{info:dataPlaneteInt,centre:boolean}):React.ReactElement => {
   return (
     <>
       <TextPlanet
@@ -20,13 +22,13 @@ const Soleil = ({ info, centre, ...args }) => {
         text2={info.star_age}
         text3={info.star_distance}
         text4={info.star_radius}
-        position={[0, 0, 0]}
+        position={new THREE.Vector3(0, 0, 0)}
         star={true}
         centre={centre}
       />
-      <animated.mesh {...args}>
+      <animated.mesh  position={[0,0,0]}>
         <sphereGeometry args={[0.5 * info.star_radius, 32, 32]} />
-        <meshStandardMaterial color={[255, 255, 255]} toneMapped={false} />
+        <meshStandardMaterial transparent color={[255, 255, 255]} toneMapped={true} />
       </animated.mesh>
     </>
   );
@@ -38,8 +40,7 @@ export default function Systeme({
   nActive,
   i,
   gachette,
-  Mmap,
-}) {
+}:{info:dataSystemeInt,position:number[],nActive:number,i:number,gachette:boolean}):React.ReactElement | null {
   const [compteur, setCompteur] = useState(0);
 
   const idSysteme = useRef(Math.ceil(1000 * Math.random()));
@@ -56,7 +57,7 @@ export default function Systeme({
 
   let infoOrig = JSON.parse(JSON.stringify(info));
 
-  info.forEach((x, i) => {
+  info.planetes.forEach((x:dataPlaneteInt, i:number) => {
     if (i == 0) {
       semi_major_axismax = x.semi_major_axis;
       semi_major_axismin = x.semi_major_axis;
@@ -80,8 +81,9 @@ export default function Systeme({
     }
   });
 
-  info.forEach((x, i) => {
-    x.semi_major_axis_orig = infoOrig[i].semi_major_axis;
+  info.planetes.forEach((x:dataPlaneteInt, i:number) => {
+    // x.semi_major_axis_orig=0;
+    x.semi_major_axis_orig = infoOrig.planetes[i].semi_major_axis;
     x.semi_major_axis =
       1 +
       ((x.semi_major_axis - semi_major_axismin) * (8 - 1)) /
@@ -92,27 +94,27 @@ export default function Systeme({
         : x.semi_major_axis_orig;
   });
 
-  info.forEach((x, i) => {
+  info.planetes.forEach((x:dataPlaneteInt, i:number) => {
     x.period_orig = x.period;
     x.period =
       20 + ((x.period - periodemin) * (100 - 20)) / (periodemax - periodemin);
   });
 
   return nActive == i || nActive == i + 1 || nActive == i - 1 ? (
-    <group position={position}>
-      <gridHelper colorCenterLine={[255, 127, 0]} colorGrid={[255, 127, 0]} />
-      <pointLight intensity={1.0} position={[0, 0, 0]} />
-     
+    <group position={new THREE.Vector3(position[0],position[1],position[2])}>
+      <gridHelper   />
+      <pointLight intensity={100.14} position={[0, 0, 0]} />
+      {/* <axesHelper /> */}
 
-      <Soleil info={info[0]} centre={nActive == i} />
+      <Soleil info={info.planetes[1]} centre={nActive == i} />
 
-      {info.map((image, i) => (
+      {info.planetes.map((image:any, i:number) => (
         <>
           <DynamicPlanet
             key={idSysteme.current * i}
             compteur={compteur}
             image={image}
-            imageData={infoOrig[i]}
+            imageData={infoOrig.planetes[i]}
           />
         </>
       ))}

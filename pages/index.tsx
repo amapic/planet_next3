@@ -1,9 +1,9 @@
 import React, {
-  Suspense,
-  useRef,
+  // Suspense,
+  // useRef,
   useEffect,
   useState,
-  createContext,
+  // createContext,
 } from "react";
 import dynamic from "next/dynamic";
 import { Canvas, extend } from "@react-three/fiber";
@@ -18,10 +18,10 @@ import { Effects, Stars } from "@react-three/drei";
 
 import Scene from "../components/Scene";
 import {Fleche,Carre} from "../components/Fleche";
-
+import GUI from "lil-gui";
 import Head from "next/head";
-export const AppContext = createContext();
-const App = () => {
+
+const App = ():React.ReactElement => {
 
   const [_isMobile, setMobile] = useState(true);
 
@@ -47,10 +47,36 @@ const App = () => {
   } = useDeplacementStore((state) => state);
   const intensity = 0.1;
   const radius = 0.9;
-  const luminanceThreshold = 1;
+  const luminanceThreshold:number = 1;
   const luminanceSmoothing = 1;
-  const [isPlaying, setIsPlaying] = useState(false);
-  useEffect(() => {}, []);
+  const gi = new GUI();
+
+  const myObject = {
+    intensity:0.1,
+    radius:0.9,
+    luminanceThreshold: 1,
+    luminanceSmoothing:1,
+    // myFunction: function() { ... },
+    myString: 'lil-gui',
+    myNumber: 1
+  };
+  // gi.add(intensity, 'x', -Math.PI, Math.PI);
+  gi.add( myObject, 'myNumber' );
+  // gui.add(rotation, 'y', -Math.PI, Math.PI).onChange(() => meshRef.current.rotation.y = rotation.y);
+  // gui.add(rotation, 'z', -Math.PI, Math.PI).onChange(() => meshRef.current.rotation.z = rotation.z);
+
+  // useEffect(() => {}, []);
+  useEffect(() => {
+    const gui = new GUI();
+    gui.add(myObject,'intensity', 0, 1)
+    gui.add(myObject,'radius', 0, 1)
+    gui.add(myObject,'luminanceThreshold', 0, 1)
+    gui.add(myObject,'luminanceThreshold', 0, 1)
+    gui.add(myObject,'luminanceSmoothing', 0, 1)
+    return () => {
+      gui.destroy()
+    }
+  }, [])
   return (
     <>
     <Head>
@@ -75,7 +101,7 @@ const App = () => {
                 far: 50,
                 zoom: 1,
                 position: [4, 4, 4],
-                maxPolarAngle: 0.85,
+                // maxPolarAngle: 0.85,
               }}
               onCreated={({ gl, camera }) => {
                 gl.setClearColor("#252934", 0);
@@ -83,6 +109,8 @@ const App = () => {
                 camera.position.set(10, 3, 10);
               }}
             >
+              
+              {/* <ambientLight intensity={1} position={[0, 0, 0]} /> */}
               <EffectComposer>
                 <Bloom
                   luminanceThreshold={luminanceThreshold}
@@ -93,7 +121,7 @@ const App = () => {
                 />
               </EffectComposer>
               <OrbitControls maxDistance={20} />
-              <Stars
+              {/* <Stars
                 radius={100}
                 depth={50}
                 count={5000}
@@ -101,11 +129,10 @@ const App = () => {
                 saturation={0}
                 fade
                 speed={1}
-              />
+              /> */}
               <Physics allowSleep={false} gravity={[0, 0, 0]}>
                 <Scene />
               </Physics>
-              {}
             </Canvas>
           </div>
           <div
@@ -134,6 +161,7 @@ const App = () => {
                 position: [0.2, 0, 0],
               }}
             >
+             
               <EffectComposer>
                 <Bloom
                   luminanceThreshold={luminanceThreshold}

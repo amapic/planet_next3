@@ -8,18 +8,49 @@ import Data from "../public/premierTri.json";
 
 import { useDeplacementStore, usePlanetStore } from "./store/store";
 
-export default function Scene() {
+import {Vector3} from "three"
+
+const EmptyPlanet = (): dataPlaneteInt => ({
+  name: "",
+  mass: 0,
+  radius: 0,
+  semi_major_axis: 0,
+  orbital_period_: 0,
+  semi_major_axis_: 0,
+  semi_major_axis_orig:0,
+  period_orig:0,
+  period: 0,
+  star_radius: 0,
+  star_name: "",
+  star_distance: 0,
+  star_age: 0,
+  text: "",
+  discovered: 0,
+});
+
+const EmptySystem = (): dataSystemeInt => {
+  var tt: dataPlaneteInt = EmptyPlanet();
+
+  return {
+    planetes:[tt],
+    uid: 0,
+  };
+};
+
+export default function Scene():React.ReactElement {
   const { planet, updateData } = usePlanetStore((state) => state);
 
-  var dataSysteme = [];
-  var refDataSystemes = useRef();
+  var dataSysteme : dataSystemeSInt;
+  var refDataSystemes = useRef<dataSystemeSInt>(null!);
   var star_name = "!";
-  var dataPlanetes = [];
-  var dataPlanete = {};
+  var dataPlanetes: dataSystemeInt;
+  dataPlanetes=EmptySystem();
+  dataSysteme=[];
+  var dataPlanete = EmptyPlanet();
 
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  function getRandomInt(min, max) {
+  function getRandomInt(min:number, max:number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
@@ -28,8 +59,8 @@ export default function Scene() {
     Data.forEach((item, i) => {
       if (star_name != item.star_name && star_name != "!") {
         dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
-        dataPlanete = {};
-        dataPlanetes = [];
+        dataPlanete = EmptyPlanet();
+        dataPlanetes= EmptySystem();
       }
 
       star_name = item.star_name;
@@ -56,7 +87,7 @@ export default function Scene() {
       dataPlanete.text = item.name;
       dataPlanete.discovered = item.discovered;
 
-      dataPlanetes.push(JSON.parse(JSON.stringify(dataPlanete)));
+      dataPlanetes.planetes.push(JSON.parse(JSON.stringify(dataPlanete)));
     });
 
     dataSysteme.push(JSON.parse(JSON.stringify(dataPlanetes)));
@@ -65,14 +96,14 @@ export default function Scene() {
       systeme.uid = getRandomInt(1, 1000);
     });
 
-    updateData(dataSysteme[0][0]);
+    updateData(dataSysteme[0].planetes[0]);
 
     refDataSystemes.current = dataSysteme;
 
     setDataLoaded(true);
   }, []);
 
-  const [pos, setPos] = useState([
+  const [pos, setPos] = useState<number[][]>([
     [-40, 0, 40],
     [-20, 0, 20],
     [0, 0, 0],
@@ -87,7 +118,7 @@ export default function Scene() {
 
   const posInit = useRef(0);
 
-  const [pos2, setPos2] = useState([-20, 0, 20]);
+  // const [pos2, setPos2] = useState([-20, 0, 20]);
 
   var cumulDecalage = useRef(0);
 
@@ -103,10 +134,10 @@ export default function Scene() {
     nActiveDown,
   } = useDeplacementStore((state) => state);
 
-  var progress = null;
+  var progress:number|null = null;
 
   useFrame((state, delta) => {
-    progress = progress + delta;
+    progress = progress ?  progress + delta :null;
 
     progress = 0;
 

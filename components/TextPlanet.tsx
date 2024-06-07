@@ -5,11 +5,12 @@ import { useFrame } from "@react-three/fiber";
 
 import * as THREE from "three";
 
+
 export default function TextPlanet({
-  text = null,
-  text2 = null,
-  text3 = null,
-  text4 = null,
+  text ,
+  text2 ,
+  text3 ,
+  text4,
   period_orig = null,
   mass = null,
   rayon = null,
@@ -21,13 +22,17 @@ export default function TextPlanet({
   info,
   star = false,
   centre = false,
-  ...args
+
+}:{text?:number|null|string,text2?:number|string,text3?:number|null,text4?:number|null,period_orig:string|null|number,mass:number |null,rayon?:number |null
+semi_major_axis_orig:number|null,position?:THREE.Vector3,hoveredd:boolean,clickedd:boolean,star:boolean,centre?:boolean
+image:dataPlaneteInt,info?:dataPlaneteInt
 }) {
-  const myMeshText = useRef();
-  const myMeshText2 = useRef();
-  const myMeshText3 = useRef();
-  const myMeshText4 = useRef();
-  const myMesh2 = useRef();
+
+  const myMeshText = useRef<THREE.Mesh>(null);
+  const myMeshText2 = useRef<THREE.Mesh>(null);
+  const myMeshText3 = useRef<THREE.Mesh>(null);
+  const myMeshText4 = useRef<THREE.Mesh>(null);
+  const myMesh2 = useRef<THREE.Mesh>(null);
 
   const prout = useRef();
 
@@ -60,7 +65,7 @@ export default function TextPlanet({
             position={[0, 1.6, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText4}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -68,7 +73,7 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {text4
                 ? "Rayon : " +
@@ -81,15 +86,15 @@ export default function TextPlanet({
             position={[0, 2.2, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText}
-            transparent={clickedd ? false : true}
-            opacity={clickedd ? 1 : 0}
+            // transparent={clickedd ? false : true}
+            // opacity={clickedd ? 1 : 0}
           >
             <Text
               scale={[0.13, 0.13, 0.13]}
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {text3
                 ? "Distance : " +
@@ -102,7 +107,7 @@ export default function TextPlanet({
             position={[0, 2.8, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText2}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -110,7 +115,7 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {text2 ? "Age : " + text2 + " milliard d'année" : ""}
             </Text>
@@ -119,7 +124,7 @@ export default function TextPlanet({
             position={[0, 3.4, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText3}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -127,7 +132,7 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {text}
             </Text>
@@ -142,7 +147,7 @@ export default function TextPlanet({
             position={[0, 1, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText4}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -150,7 +155,7 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {period_orig
                 ? "Période de révolution : " +
@@ -163,7 +168,7 @@ export default function TextPlanet({
             position={[0, 1.5, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -171,7 +176,7 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {semi_major_axis_orig
                 ? "Demi grand-Axe : " +
@@ -184,7 +189,7 @@ export default function TextPlanet({
             position={[0, 2, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText2}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -192,7 +197,7 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // toneMapped={false}
             >
               {mass
                 ? "Masse : " +
@@ -205,7 +210,7 @@ export default function TextPlanet({
             position={[0, 2.5, 0.01]}
             scale={[4, 5, 2]}
             ref={myMeshText3}
-            transparent={clickedd ? false : true}
+            // transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
           >
             <Text
@@ -213,7 +218,8 @@ export default function TextPlanet({
               anchorX="center"
               anchorY="middle"
               color="white"
-              toneMapped={false}
+              // transparent={clickedd ? false : true}
+              // toneMapped={false}
             >
               {text}
             </Text>
@@ -228,7 +234,7 @@ export default function TextPlanet({
           <sphereGeometry args={[0.1, 32, 32]} />
           <meshBasicMaterial
             color={[0, 0, 255]}
-            emissiveIntensity={1}
+            // emissiveIntensity={1}
             transparent={clickedd ? false : true}
             opacity={clickedd ? 1 : 0}
             toneMapped={false}
