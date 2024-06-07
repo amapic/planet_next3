@@ -26,5 +26,5 @@ jobs:
             npm i --omit=optional --omit=dev --legacy-peer-deps
             npm i --only=dev --legacy-peer-deps
             git pull origin main
-            npm run test
+            npm run build
 

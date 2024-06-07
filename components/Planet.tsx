@@ -87,14 +87,14 @@ export default function Planet({ compteur, image, imageData, ...args }:{compteur
   centre = false, */}
       <animated.mesh ref={cardRef}>
         <TextPlanet
-          hoveredd={hoveredd}
+          // hoveredd={hoveredd}
           clickedd={clickedd.current}
           text={imageData.text}
-          mass={imageData.mass}
+          // mass={imageData.mass}
           // rayon={imageData.rayon}
-          semi_major_axis_orig={image.semi_major_axis}
-          period_orig={imageData.period_orig}
-          image={imageData}
+          // semi_major_axis_orig={image.semi_major_axis}
+          // period_orig={imageData.period_orig}
+          // image={imageData}
           star={false}
         />
       </animated.mesh>
