@@ -23,6 +23,9 @@ jobs:
           username: ${{ secrets.USERNAME }} # Your server's username
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm --help
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
             git remote add origin2 https://github.com/amaurypichat/planet.git
             nvm use 20
