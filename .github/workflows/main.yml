@@ -31,6 +31,6 @@ jobs:
             nvm use 20
             NODE_OPTIONS=--max_old_space_size=2000
             npm i --legacy-peer-deps
-            git pull origin main
+            git pull origin ts
             npm run build
 
