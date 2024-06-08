@@ -10,6 +10,10 @@
     "lint": "next lint",
     "test": "jest --forceExit --detectOpenHandles"
   },
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": ">= 1.19.1"
+  },
   "dependencies": {
     "@google-cloud/vision": "^4.2.1",
     "@react-spring/three": "^9.7.3",

@@ -16,7 +16,7 @@ const Soleil = ({ info, centre}:{info:dataPlaneteInt,centre:boolean}):React.Reac
   return (
     <>
       <TextPlanet
-        info={info}
+        image={info}
         clickedd={true}
         text={info.star_name}
         text2={info.star_age}

@@ -11,21 +11,21 @@ export default function TextPlanet({
   text2 ,
   text3 ,
   text4,
-  // period_orig = null,
-  // mass = null,
+  period_orig = null,
+  mass = null,
   // rayon = null,
-  // semi_major_axis_orig = null,
+  semi_major_axis_orig = null,
   // position,
   // hoveredd,
   clickedd,
-  // image,
-  info,
+  image,
+  // info,
   star = false,
   centre = false,
 
 }:{text?:number|null|string,text2?:number|string,text3?:number|null,text4?:number|null,rayon?:number |null
 ,position?:THREE.Vector3,clickedd:boolean,star:boolean,centre?:boolean
-,info?:dataPlaneteInt
+,period_orig?:null|number,image:dataPlaneteInt,semi_major_axis_orig?:null|number,mass?:null|number
 }) {
   // mass, semi_major_axis_orig, hoveredd, image
   const myMeshText = useRef<THREE.Mesh>(null);
