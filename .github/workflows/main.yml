@@ -23,6 +23,7 @@ jobs:
           script: |
             cd /var/www/html/dev/planet # Specify the path to your app directory on the server
             git remote add origin2 https://github.com/amaurypichat/planet.git
+            nvm use 20
             npm i --omit=optional --omit=dev --legacy-peer-deps
             npm i --only=dev --legacy-peer-deps
             git pull origin main
