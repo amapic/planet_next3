@@ -11,8 +11,7 @@
     "test": "jest --forceExit --detectOpenHandles"
   },
   "engines": {
-    "npm": "please-use-yarn",
-    "yarn": ">= 1.19.1"
+    "npm": ">= 20"
   },
   "dependencies": {
     "@google-cloud/vision": "^4.2.1",
