@@ -73,11 +73,11 @@ test("Texte centrale", async () => {
   const element = await page.waitForSelector("#div_canvas1");
 
   // await element.click();
-   const [response] = await Promise.all([
+   // const [response] = await Promise.all([
      page.waitForSelector("#div_canvas1"),
      element.click(),
      sleep(20000),
-   ]);
+   // ]);
   // });
 
   const image = await page.screenshot({
