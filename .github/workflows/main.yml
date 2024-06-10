@@ -32,5 +32,6 @@ jobs:
             NODE_OPTIONS=--max_old_space_size=2000
             npm i --legacy-peer-deps
             git pull origin ts
+            npm run test
             npm run build
 
