@@ -11,7 +11,7 @@
     "test": "jest --forceExit --detectOpenHandles"
   },
   "engines": {
-    "npm": ">= 20"
+    "node": ">= 20"
   },
   "dependencies": {
     "@google-cloud/vision": "^4.2.1",
