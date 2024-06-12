@@ -70,7 +70,7 @@ test("Texte centrale", async () => {
   deleteFile("image/test_photo1.png");
 
   // sleep(30000).then(async () => {
-  const element = await page.waitForSelector("#div_canvas1");
+  // const element = await page.waitForSelector("#div_canvas1");
 
   // await element.click();
    const [response] = await Promise.all([
